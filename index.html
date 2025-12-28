@@ -397,23 +397,8 @@
             </div>
             
             <div class="main-cats">
-                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> All In One</button>
-                <button class="cat-btn" onclick="setCategory('Trending')"><i class="fas fa-fire"></i> Trending 🔥</button>
-                <button class="cat-btn" onclick="setCategory('Market')">Market 🏪</button>
-                <button class="cat-btn" onclick="setCategory('Food')">Food 🍽️</button>
-                <button class="cat-btn" onclick="setCategory('Services')">Services 🔧</button>
-                <button class="cat-btn" onclick="setCategory('Health')">Health 🏥</button>
-                <button class="cat-btn" onclick="setCategory('Education')">Education 📚</button>
-                <button class="cat-btn" onclick="setCategory('Property')">Property 🏠</button>
-                <button class="cat-btn" onclick="setCategory('Special')">Special 🎨</button>
-                <button class="cat-btn" onclick="setCategory('Travel')">Travel ✈️</button>
-                <button class="cat-btn" onclick="setCategory('Khurja Special')">Khurja Special 🏺</button>
-                <button class="cat-btn" onclick="setCategory('Content Creators')">Creators 🎬</button>
-                <button class="cat-btn" onclick="setCategory('Gaming')">Gaming 🎮</button>
-                <button class="cat-btn" onclick="setCategory('Events')">Events 🎉</button>
-                <button class="cat-btn" onclick="setCategory('Emergency & Help')">Emergency 🆘</button>
-                <button class="cat-btn" onclick="setCategory('Religion & Places')">Religion 🙏</button>
-                <button class="cat-btn" onclick="setCategory('Updates')">Updates 📢</button>
+                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> Home</button>
+                <button class="cat-btn" onclick="setCategory('More')"><i class="fas fa-ellipsis-h"></i> More ➕</button>
             </div>
             
             <div class="sub-cats" id="subCatContainer"><small>Showing All Listings</small></div>
@@ -675,6 +660,7 @@
     <script>
         // DATA CATEGORIES
         const subCategories = {
+            'More': ['All Categories', 'Market', 'Food', 'Services', 'Health', 'Education', 'Property', 'Special', 'Travel', 'Khurja Special', 'Content Creators', 'Gaming', 'Events', 'Emergency', 'Religion'],
             'Trending': ['This Week', 'All Time'],
             'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
             'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
@@ -709,6 +695,14 @@
             if (mainCat === 'All') {
                 subContainer.innerHTML = '<small>Showing All Listings</small>';
                 filterGrid('All', 'All');
+            } else if (mainCat === 'More') {
+                subContainer.innerHTML = '<button class="sub-btn active" onclick="setCategory(\'All\')">All Categories</button>';
+                subCategories['More'].forEach(sub => {
+                    if (sub !== 'All Categories') {
+                        subContainer.innerHTML += `<button class="sub-btn" onclick="setCategory('${sub}')">${sub}</button>`;
+                    }
+                });
+                filterGrid('More', 'All');
             } else {
                 if (subCategories[mainCat]) {
                     subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${mainCat}', 'All')">All</button>`;
@@ -735,9 +729,20 @@
             cards.forEach(card => {
                 const cMain = card.getAttribute('data-main');
                 const cSub = card.getAttribute('data-sub');
-                if (main === 'All') card.style.display = 'block';
-                else if (sub === 'All') card.style.display = (cMain === main) ? 'block' : 'none';
-                else card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
+                
+                if (main === 'All') {
+                    // Show all cards
+                    card.style.display = 'block';
+                } else if (main === 'More') {
+                    // For More category, show all cards (browse mode)
+                    card.style.display = 'block';
+                } else if (sub === 'All') {
+                    // Show all cards from main category
+                    card.style.display = (cMain === main) ? 'block' : 'none';
+                } else {
+                    // Show cards matching both main and sub category
+                    card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
+                }
             });
             
             // Hide loading indicator after filtering is complete
