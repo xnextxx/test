@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<        /* Dark mode */
+        html.dark-mode {
+            --primary: #60a5fa;
+            --bg: #0f172a;
+            --text: #e5e7eb;
+            --white: #1e293b;
+            --dark: #e5e7eb;
+        }
+
+        /* Dark mode button & text fixes */
+        html.dark-mode .cat-btn {
+            background: #334155;
+            color: #e5e7eb;
+            border-color: #475569;
+        }
+
+        html.dark-mode .cat-btn.active {
+            background: #60a5fa;
+            color: #0f172a;
+            border-color: #60a5fa;
+        }
+
+        html.dark-mode .cat-btn.all-btn {
+            background: #1e293b;
+            color: #e5e7eb;
+            border-color: #475569;
+        }
+
+        html.dark-mode .sub-btn {
+            background: #334155;
+            color: #e5e7eb;
+        }
+
+        html.dark-mode .sub-btn.active {
+            background: #60a5fa;
+            color: #0f172a;
+        }
+
+        html.dark-mode .controls {
+            background: #1e293b;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        html.dark-mode .search-box {
+            background: #334155;
+            color: #e5e7eb;
+            border-color: #475569;
+        }
+
+        html.dark-mode .search-box:focus {
+            border-color: #60a5fa;
+        }
+
+        html.dark-mode .card {
+            background: #1e293b;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        html.dark-mode .card-title {
+            color: #e5e7eb;
+        }
+
+        html.dark-mode .card-desc {
+            color: #a0aec0;
+        }
+
+        html.dark-mode .related-box {
+            background: #334155;
+        }
+
+        html.dark-mode .related-head {
+            color: #e5e7eb;
+        }g="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming in Khurja - KhurjaX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- GLOBAL CSS --- */
+        :root {
+            --primary: #2563eb;       
+            --bg: #f3f4f6;            
+            --text: #1f2937;          
+            --white: #ffffff;
+            --green: #10b981;         
+            --dark: #0f172a;
+        }
+
+        /* Dark mode */
+        html.dark-mode {
+            --primary: #60a5fa;
+            --bg: #0f172a;
+            --text: #e5e7eb;
+            --white: #1f2937;
+            --dark: #f3f4f6;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg); color: var(--text); padding-bottom: 20px; }
+
+        /* HEADER */
+        header {
+            color: var(--white); 
+            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+            text-align: center;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner-slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .banner-slide.active {
+            opacity: 1;
+        }
+        
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+            filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.4));
+        }
+        
+        .banner-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .banner-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        
+        .banner-indicator.active {
+            background: white;
+        }
+
+        /* THEME TOGGLE */
+        .theme-toggle { position: absolute; top: 15px; right: 15px; z-index: 20; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 1.2rem; transition: all 0.3s; }
+        .theme-toggle:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
+
+        /* HEART ANIMATION */
+        @keyframes floatingHeart {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-60px) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: floatingHeart 0.8s ease-out forwards;
+        }
+
+        /* CONTROLS */
+        .controls {
+            max-width: 1000px; margin: -80px auto 20px auto; padding: 20px;
+            background: var(--white); border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08); position: relative; z-index: 5;
+        }
+        .search-box {
+            width: 100%; padding: 15px; border: 2px solid #e5e7eb; border-radius: 12px;
+            font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .search-box:focus { border-color: var(--primary); }
+
+        /* CATEGORIES SCROLL */
+        .main-cats { display: flex; flex-wrap: wrap; gap: 10px; padding: 15px 0; }
+        .main-cats::-webkit-scrollbar { display: none; }
+        
+        .cat-btn {
+            white-space: nowrap; padding: 10px 20px; border-radius: 30px; border: 1px solid #e5e7eb;
+            background: #f8fafc; font-weight: 600; color: #64748b; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .cat-btn.all-btn { background: var(--dark); color: white; border-color: var(--dark); }
+        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* SUB CATEGORIES */
+        .sub-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e5e7eb; }
+        .sub-btn { padding: 6px 14px; border-radius: 15px; background: #f1f5f9; font-size: 0.85rem; border: none; cursor: pointer; color: #475569; }
+        .sub-btn.active { background: var(--text); color: white; }
+
+        /* GRID */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        /* CARD */
+        .card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; position: relative; }
+        .slider-wrapper { position: relative; height: 200px; width: 100%; overflow: hidden; }
+        .card-slider { display: flex; height: 100%; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .card-slider::-webkit-scrollbar { display: none; }
+        .card-img { min-width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+        
+        .card-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .swipe-hint { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); color: #333; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; pointer-events: none; }
+
+        .card-body { padding: 15px; position: relative; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+        .card-desc { font-size: 0.9rem; color: #64748b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
+        .card-like-btn { position: absolute; bottom: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; }
+        .card-like-btn:hover { transform: scale(1.2); }
+        .card-like-btn.liked { color: #ef4444; }
+
+        /* DETAIL PAGE */
+        #detail-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white); z-index: 100; overflow-y: auto; }
+        .dt-header { position: sticky; top: 0; background: var(--white); padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; z-index: 10; }
+        .back-btn { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--text); }
+        .dt-title-head { font-size: 1.1rem; font-weight: 700; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .dt-content { padding: 0 0 50px 0; }
+        .dt-slider-box { width: 100%; height: 320px; background: #000; }
+        .dt-slider-box img { object-fit: contain; }
+        
+        .dt-info { padding: 20px; }
+        .dt-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; line-height: 1.2; }
+        .dt-meta { color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
+        .dt-desc { font-size: 1rem; line-height: 1.6; color: #4b5563; margin-bottom: 25px; }
+
+        /* SOCIAL BUTTONS GRID */
+        .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 30px; }
+        .soc-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 700; color: white; transition: transform 0.2s; }
+        .soc-btn:active { transform: scale(0.95); }
+
+        .btn-call { background: #333; }
+        .btn-wa   { background: #25D366; }
+        .btn-insta{ background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .btn-fb   { background: #1877F2; }
+        .btn-web  { background: var(--primary); grid-column: span 2; }
+
+        .related-box { background: #f8fafc; padding: 20px; margin-top: 20px; border-radius: 15px;}
+        .related-head { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="home-view">
+        <header>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+            <div class="banner-slider" id="bannerSlider">
+                <div class="banner-slide active">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-slide">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-slide">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-indicators" id="bannerIndicators">
+                    <div class="banner-indicator active" onclick="currentBanner(0)"></div>
+                    <div class="banner-indicator" onclick="currentBanner(1)"></div>
+                    <div class="banner-indicator" onclick="currentBanner(2)"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" id="searchInput" class="search-box" placeholder="Search Gaming..." onkeyup="globalSearch()">
+                <img src="https://i.ibb.co/Rkdm6570/Chat-GPT-Image-Dec-25-2025-11-41-40-PM.png" alt="Khurja X Logo" style="width: 50px; height: 50px; border-radius: 50%;">
+            </div>
+            
+            <div class="main-cats">
+                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> All Gaming</button>
+                <button class="cat-btn" onclick="setCategory('Trending')"><i class="fas fa-fire"></i> Trending 🔥</button>
+                <button class="cat-btn" onclick="setCategory('Gaming')">Gaming 🎮</button>
+                <button class="cat-btn" onclick="setCategory('BGMI')">BGMI 🎯</button>
+                <button class="cat-btn" onclick="setCategory('FREE FIRE')">FREE FIRE 🔥</button>
+            </div>
+            
+            <div class="sub-cats" id="subCatContainer"><small>Showing All Gaming Listings</small></div>
+        </div>
+
+        <div class="container">
+            <div class="grid" id="mainGrid">
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="BGMI"
+                     data-title="ABHINAV YADAV - BGM0000000"
+                     data-desc="Weekly BGMI tournaments with cash prizes. Register now for next tournament."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ef4444;">abhinav</span>
+                        <span class="swipe-hint">← Swipe →</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1538481143235-5d630fd3ab47?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">ABHINAV YADAV </h3><p class="card-desc">Weekly BGMI tournaments with cash prizes. Register now for next tournament.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="FREE FIRE"
+                     data-title="Khurja Free Fire Club"
+                     data-desc="Free Fire gaming club organizing tournaments and practice sessions."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ef4444;">Gaming</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Free Fire Club</h3><p class="card-desc">Free Fire gaming club organizing tournaments and practice sessions.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="BGMI"
+                     data-title="Cyber Zone Gaming Cafe"
+                     data-desc="High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Cafe</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Cyber Zone Gaming Cafe</h3><p class="card-desc">High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="PC Games"
+                     data-title="Game World PC Cafe"
+                     data-desc="PC gaming center with high-end systems, latest games, and esports tournaments."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">PC Gaming</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Game World PC Cafe</h3><p class="card-desc">PC gaming center with high-end systems, latest games, and esports tournaments.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="Mobile Games"
+                     data-title="Mobile Gaming Hub"
+                     data-desc="Mobile gaming center with latest games, tournaments, and charging stations."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Mobile</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Mobile Gaming Hub</h3><p class="card-desc">Mobile gaming center with latest games, tournaments, and charging stations.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="Console Games"
+                     data-title="PlayStation Zone"
+                     data-desc="Console gaming center with PS4, PS5, Xbox, and Nintendo games."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Console</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">PlayStation Zone</h3><p class="card-desc">Console gaming center with PS4, PS5, Xbox, and Nintendo games.</p></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-view">
+        <div class="dt-header">
+            <button class="back-btn" onclick="closeDetail()"><i class="fas fa-arrow-left"></i></button>
+            <div class="dt-title-head" id="dt-head-title">Title</div>
+        </div>
+        
+        <div class="dt-content">
+            <div class="dt-slider-box" id="dt-slider-container"></div>
+            
+            <div class="dt-info">
+                <div class="dt-name" id="dt-title">Title</div>
+                <div class="dt-meta" id="dt-cat">Category</div>
+                <div class="dt-desc" id="dt-desc">Description</div>
+
+                <div class="social-grid">
+                    <a id="lnk-call" href="#" class="soc-btn btn-call"><i class="fas fa-phone"></i> Call</a>
+                    <a id="lnk-wa" href="#" class="soc-btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a id="lnk-insta" href="#" class="soc-btn btn-insta"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a id="lnk-fb" href="#" class="soc-btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a id="lnk-web" href="#" class="soc-btn btn-web"><i class="fas fa-globe"></i> Visit Website</a>
+                </div>
+                
+                <div class="related-box">
+                    <div class="related-head">Explore More Gaming</div>
+                    <div class="grid" id="related-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATA CATEGORIES
+        const subCategories = {
+            'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
+            'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
+            'Services': ['Makeup','Barber/Hair salon','Electrician', 'Plumber', 'ACRepair'],
+            'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
+            'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
+            'Property': ['RentHouse', 'BuySell', 'Plots', 'Rent House', 'Buy/Sell'],
+            'Special': ['Pottery', 'Handicrafts', 'Ceramic Factories', 'Ceramic Wholesale'],
+            'Travel': ['Hotels', 'Restaurants', 'E-Rickshaw'],
+            'Khurja Special': ['Pottery', 'Ceramic Factories', 'Ceramic Wholesale'],
+            'Content Creators': ['YouTubers', 'Instagram Influencers'],
+            'Gaming': ['BGMI', 'FREE FIRE'],
+            'Events': ['Local News', 'Festivals', 'New Openings'],
+            'Emergency & Help': ['Police', 'Fire Station', 'Blood Donors'],
+            'Religion & Places': ['Hindu Temple', 'Islamic Mosque', 'Christian Church', 'Other']
+        };
+
+        // CATEGORY FILTER
+        function setCategory(mainCat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            const subContainer = document.getElementById('subCatContainer');
+            subContainer.innerHTML = '';
+            
+            if (mainCat === 'All') {
+                subContainer.innerHTML = '<small>Showing All Gaming Listings</small>';
+                filterGrid('All', 'All');
+            } else {
+                if (subCategories[mainCat]) {
+                    subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${mainCat}', 'All')">All</button>`;
+                    subCategories[mainCat].forEach(sub => {
+                        subContainer.innerHTML += `<button class="sub-btn" onclick="filterGrid('${mainCat}', '${sub}')">${sub}</button>`;
+                    });
+                }
+                filterGrid(mainCat, 'All');
+            }
+        }
+
+        // GRID FILTER
+        function filterGrid(main, sub) {
+            if (sub !== 'All' && event) {
+                document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cMain = card.getAttribute('data-main');
+                const cSub = card.getAttribute('data-sub');
+                if (main === 'All') card.style.display = 'block';
+                else if (sub === 'All') card.style.display = (cMain === main) ? 'block' : 'none';
+                else card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
+            });
+        }
+
+        // SEARCH
+        function globalSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
+                card.style.display = text.includes(input) ? 'block' : 'none';
+            });
+        }
+
+        // Like button functionality
+        function toggleLike(event) {
+            event.stopPropagation(); // prevent opening detail view when clicking like
+            const btn = event.target.closest('.card-like-btn');
+            if (!btn) return;
+            
+            btn.classList.toggle('liked');
+            if (btn.classList.contains('liked')) {
+                btn.textContent = '❤'; // filled heart
+                // Save to localStorage (optional)
+                const cardTitle = btn.closest('.card').getAttribute('data-title');
+                let likes = JSON.parse(localStorage.getItem('likes') || '{}');
+                likes[cardTitle] = true;
+                localStorage.setItem('likes', JSON.stringify(likes));
+            } else {
+                btn.textContent = '♡'; // empty heart
+                const cardTitle = btn.closest('.card').getAttribute('data-title');
+                let likes = JSON.parse(localStorage.getItem('likes') || '{}');
+                delete likes[cardTitle];
+                localStorage.setItem('likes', JSON.stringify(likes));
+            }
+        }
+
+        // Restore likes from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            let likes = JSON.parse(localStorage.getItem('likes') || '{}');
+            document.querySelectorAll('.card-like-btn').forEach(btn => {
+                const cardTitle = btn.closest('.card').getAttribute('data-title');
+                if (likes[cardTitle]) {
+                    btn.classList.add('liked');
+                    btn.textContent = '❤';
+                }
+            });
+        });
+
+
+        // OPEN DETAIL PAGE
+        function openDetail(card) {
+            const d = {
+                title: card.getAttribute('data-title'),
+                desc: card.getAttribute('data-desc'),
+                phone: card.getAttribute('data-phone'),
+                wa: card.getAttribute('data-whatsapp'),
+                web: card.getAttribute('data-website'),
+                insta: card.getAttribute('data-insta'),
+                fb: card.getAttribute('data-fb'),
+                main: card.getAttribute('data-main'),
+                sub: card.getAttribute('data-sub')
+            };
+            
+            // Image
+            const cardImages = card.querySelector('.card-slider').innerHTML;
+            document.getElementById('dt-slider-container').innerHTML = `<div class="card-slider">${cardImages}</div>`;
+
+            // Text
+            document.getElementById('dt-title').innerText = d.title;
+            document.getElementById('dt-head-title').innerText = d.title;
+            document.getElementById('dt-cat').innerText = `${d.main} > ${d.sub}`;
+            document.getElementById('dt-desc').innerText = d.desc;
+            
+            // Buttons Logic
+            const btnCall = document.getElementById('lnk-call');
+            const btnWa = document.getElementById('lnk-wa');
+            const btnInsta = document.getElementById('lnk-insta');
+            const btnFb = document.getElementById('lnk-fb');
+            const btnWeb = document.getElementById('lnk-web');
+
+            btnCall.href = d.phone ? `tel:${d.phone}` : '#';
+            btnWa.href = d.wa ? `https://wa.me/91${d.wa}` : '#';
+            btnInsta.href = d.insta ? d.insta : '#';
+            btnFb.href = d.fb ? d.fb : '#';
+            btnWeb.href = d.web ? d.web : '#';
+
+            btnCall.style.display = d.phone ? 'flex' : 'none';
+            btnWa.style.display = d.wa ? 'flex' : 'none';
+            btnInsta.style.display = d.insta ? 'flex' : 'none';
+            btnFb.style.display = d.fb ? 'flex' : 'none';
+            btnWeb.style.display = d.web ? 'flex' : 'none';
+
+            // Related
+            const allCardsHTML = document.getElementById('mainGrid').innerHTML;
+            document.getElementById('related-grid').innerHTML = allCardsHTML;
+
+            // Show
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+        }
+        
+        // Banner Slider Functionality
+        let bannerIndex = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        const indicators = document.querySelectorAll('.banner-indicator');
+        
+        function showBanner(n) {
+            bannerIndex += n;
+            if (bannerIndex >= slides.length) { bannerIndex = 0; }
+            if (bannerIndex < 0) { bannerIndex = slides.length - 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[bannerIndex].classList.add('active');
+            indicators[bannerIndex].classList.add('active');
+        }
+        
+        function currentBanner(n) {
+            bannerIndex = n;
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[bannerIndex].classList.add('active');
+            indicators[bannerIndex].classList.add('active');
+        }
+        
+        // Auto slide banner every 5 seconds
+        setInterval(() => {
+            showBanner(1);
+        }, 5000);
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDarkMode = html.classList.toggle('dark-mode');
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Update icon
+            const toggleBtn = document.querySelector('.theme-toggle i');
+            if (toggleBtn) {
+                toggleBtn.classList.toggle('fa-moon');
+                toggleBtn.classList.toggle('fa-sun');
+            }
+        }
+
+        // Restore theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+                const toggleBtn = document.querySelector('.theme-toggle i');
+                if (toggleBtn) {
+                    toggleBtn.classList.remove('fa-moon');
+                    toggleBtn.classList.add('fa-sun');
+                }
+            }
+        });
+    </script>
+    <script>
+        // Hide any h1 elements with text content 'X'
+        document.addEventListener('DOMContentLoaded', function() {
+            const h1Elements = document.querySelectorAll('h1');
+            h1Elements.forEach(function(h1) {
+                if (h1.textContent.trim() === 'X') {
+                    h1.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

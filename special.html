@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special in Khurja - KhurjaX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- GLOBAL CSS --- */
+        :root {
+            --primary: #2563eb;       
+            --bg: #f3f4f6;            
+            --text: #1f2937;          
+            --white: #ffffff;
+            --green: #10b981;         
+            --dark: #0f172a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg); color: var(--text); padding-bottom: 20px; }
+
+        /* HEADER */
+        header {
+            color: var(--white); 
+            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+            text-align: center;
+            height: 250px;
+            position: relative;
+            background-image: url(https://i.ibb.co/k60HjWbG/Chat-GPT-Image-Dec-25-2025-11-58-03-PM.png); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+        }
+        header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 1px; }
+        
+        /* Banner Slider */
+        .banner-slider {
+            position: relative;
+            height: 250px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            overflow: hidden;
+        }
+        
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .banner-slide.active {
+            opacity: 1;
+        }
+        
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        
+        .banner-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .banner-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .banner-indicator.active {
+            background: white;
+        }
+
+        /* CONTROLS */
+        .controls {
+            max-width: 1000px; margin: -80px auto 20px auto; padding: 20px;
+            background: var(--white); border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08); position: relative; z-index: 5;
+        }
+        .search-box {
+            width: 100%; padding: 15px; border: 2px solid #e5e7eb; border-radius: 12px;
+            font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .search-box:focus { border-color: var(--primary); }
+
+        /* CATEGORIES SCROLL */
+        .main-cats { display: flex; flex-wrap: wrap; gap: 10px; padding: 15px 0; }
+        .main-cats::-webkit-scrollbar { display: none; }
+        
+        .cat-btn {
+            white-space: nowrap; padding: 10px 20px; border-radius: 30px; border: 1px solid #e5e7eb;
+            background: #f8fafc; font-weight: 600; color: #64748b; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .cat-btn.all-btn { background: var(--dark); color: white; border-color: var(--dark); }
+        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* SUB CATEGORIES */
+        .sub-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e5e7eb; }
+        .sub-btn { padding: 6px 14px; border-radius: 15px; background: #f1f5f9; font-size: 0.85rem; border: none; cursor: pointer; color: #475569; }
+        .sub-btn.active { background: var(--text); color: white; }
+
+        /* GRID */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        /* CARD */
+        .card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; position: relative; }
+        .slider-wrapper { position: relative; height: 200px; width: 100%; overflow: hidden; }
+        .card-slider { display: flex; height: 100%; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .card-slider::-webkit-scrollbar { display: none; }
+        .card-img { min-width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+        
+        .card-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .swipe-hint { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); color: #333; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; pointer-events: none; }
+
+        .card-body { padding: 15px; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+        .card-desc { font-size: 0.9rem; color: #64748b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* DETAIL PAGE */
+        #detail-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white); z-index: 100; overflow-y: auto; }
+        .dt-header { position: sticky; top: 0; background: var(--white); padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; z-index: 10; }
+        .back-btn { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--text); }
+        .dt-title-head { font-size: 1.1rem; font-weight: 700; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .dt-content { padding: 0 0 50px 0; }
+        .dt-slider-box { width: 100%; height: 320px; background: #000; }
+        .dt-slider-box img { object-fit: contain; }
+        
+        .dt-info { padding: 20px; }
+        .dt-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; line-height: 1.2; }
+        .dt-meta { color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
+        .dt-desc { font-size: 1rem; line-height: 1.6; color: #4b5563; margin-bottom: 25px; }
+
+        /* SOCIAL BUTTONS GRID */
+        .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 30px; }
+        .soc-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 700; color: white; transition: transform 0.2s; }
+        .soc-btn:active { transform: scale(0.95); }
+
+        .btn-call { background: #333; }
+        .btn-wa   { background: #25D366; }
+        .btn-insta{ background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .btn-fb   { background: #1877F2; }
+        .btn-web  { background: var(--primary); grid-column: span 2; }
+
+        .related-box { background: #f8fafc; padding: 20px; margin-top: 20px; border-radius: 15px;}
+        .related-head { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="home-view">
+        <header>
+            <div class="banner-slider">
+                <div class="banner-slide active">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200" alt="Banner 1">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200" alt="Banner 2">
+                    <div class="banner-text">Special</div>
+                </div>
+                <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200" alt="Banner 3">
+                    <div class="banner-text">Khurja Special</div>
+                </div>
+                <div class="banner-indicators">
+                    <span class="banner-indicator active" onclick="currentBanner(0)"></span>
+                    <span class="banner-indicator" onclick="currentBanner(1)"></span>
+                    <span class="banner-indicator" onclick="currentBanner(2)"></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" id="searchInput" class="search-box" placeholder="Search Special..." onkeyup="globalSearch()">
+                <img src="https://i.ibb.co/Rkdm6570/Chat-GPT-Image-Dec-25-2025-11-41-40-PM.png" alt="Khurja X Logo" style="width: 50px; height: 50px; border-radius: 50%;">
+            </div>
+            
+            <div class="main-cats">
+                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> All Special</button>
+                <button class="cat-btn" onclick="setCategory('Special')">Special</button>
+                <button class="cat-btn" onclick="setCategory('Khurja Special')">Khurja Special</button>
+                <button class="cat-btn" onclick="setCategory('Market')">Market</button>
+            </div>
+            
+            <div class="sub-cats" id="subCatContainer"><small>Showing All Special Listings</small></div>
+        </div>
+
+        <div class="container">
+            <div class="grid" id="mainGrid">
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Pottery"
+                     data-title="Khurja Pottery Hub"
+                     data-desc="Authentic Khurja pottery items, handcrafted by local artisans. Online delivery available."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#f97316;">Pottery</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1583391735703-32f12eb9a12d?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Pottery Hub</h3><p class="card-desc">Authentic Khurja pottery items, handcrafted by local artisans. Online delivery available.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Handicrafts"
+                     data-title="Khurja Handicrafts"
+                     data-desc="Traditional handicrafts and decorative items made by skilled craftsmen of Khurja."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#8b5cf6;">Handicrafts</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1596542306882-8d1c6d547742?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Handicrafts</h3><p class="card-desc">Traditional handicrafts and decorative items made by skilled craftsmen of Khurja.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Ceramic Factories"
+                     data-title="Modern Ceramic Industries"
+                     data-desc="Leading ceramic manufacturing unit in Khurja. Bulk orders welcome."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#0ea5e9;">Ceramic</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1595675024853-0f3ec9098ac7?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Modern Ceramic Industries</h3><p class="card-desc">Leading ceramic manufacturing unit in Khurja. Bulk orders welcome.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Ceramic Wholesale"
+                     data-title="Ceramic Wholesale Market"
+                     data-desc="Wholesale ceramic items at factory prices. Direct from manufacturers."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#0ea5e9;">Ceramic</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1581094794329-0d0df6b67c63?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Ceramic Wholesale Market</h3><p class="card-desc">Wholesale ceramic items at factory prices. Direct from manufacturers.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Festivals"
+                     data-title="Khurja Cultural Festival"
+                     data-desc="Annual cultural festival celebrating Khurja's heritage, pottery and traditions."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ec4899;">Festival</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Cultural Festival</h3><p class="card-desc">Annual cultural festival celebrating Khurja's heritage, pottery and traditions.</p></div>
+                </div>
+
+                <div class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Tourism"
+                     data-title="Khurja Heritage Tour"
+                     data-desc="Guided tours of Khurja pottery workshops, historical sites and cultural centers."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#10b981;">Tourism</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Heritage Tour</h3><p class="card-desc">Guided tours of Khurja pottery workshops, historical sites and cultural centers.</p></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-view">
+        <div class="dt-header">
+            <button class="back-btn" onclick="closeDetail()"><i class="fas fa-arrow-left"></i></button>
+            <div class="dt-title-head" id="dt-head-title">Title</div>
+        </div>
+        
+        <div class="dt-content">
+            <div class="dt-slider-box" id="dt-slider-container"></div>
+            
+            <div class="dt-info">
+                <div class="dt-name" id="dt-title">Title</div>
+                <div class="dt-meta" id="dt-cat">Category</div>
+                <div class="dt-desc" id="dt-desc">Description</div>
+
+                <div class="social-grid">
+                    <a id="lnk-call" href="#" class="soc-btn btn-call"><i class="fas fa-phone"></i> Call</a>
+                    <a id="lnk-wa" href="#" class="soc-btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a id="lnk-insta" href="#" class="soc-btn btn-insta"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a id="lnk-fb" href="#" class="soc-btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a id="lnk-web" href="#" class="soc-btn btn-web"><i class="fas fa-globe"></i> Visit Website</a>
+                </div>
+                
+                <div class="related-box">
+                    <div class="related-head">Explore More Special</div>
+                    <div class="grid" id="related-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATA CATEGORIES
+        const subCategories = {
+            'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
+            'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
+            'Services': ['Makeup', 'Electrician', 'Plumber', 'ACRepair'],
+            'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
+            'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
+            'Property': ['RentHouse', 'BuySell', 'Plots', 'Rent House', 'Buy/Sell'],
+            'Special': ['Pottery', 'Handicrafts', 'Ceramic Factories', 'Ceramic Wholesale'],
+            'Travel': ['Hotels', 'Restaurants', 'E-Rickshaw'],
+            'Khurja Special': ['Pottery', 'Ceramic Factories', 'Ceramic Wholesale'],
+            'Content Creators': ['YouTubers', 'Instagram Influencers'],
+            'Gaming': ['BGMI', 'FREE FIRE'],
+            'Events': ['Local News', 'Festivals', 'New Openings'],
+            'Emergency & Help': ['Police', 'Fire Station', 'Blood Donors'],
+            'Religion & Places': ['Hindu Temple', 'Islamic Mosque', 'Christian Church', 'Other']
+        };
+
+        // CATEGORY FILTER
+        function setCategory(mainCat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            const subContainer = document.getElementById('subCatContainer');
+            subContainer.innerHTML = '';
+            
+            if (mainCat === 'All') {
+                subContainer.innerHTML = '<small>Showing All Special Listings</small>';
+                filterGrid('All', 'All');
+            } else {
+                if (subCategories[mainCat]) {
+                    subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${mainCat}', 'All')">All</button>`;
+                    subCategories[mainCat].forEach(sub => {
+                        subContainer.innerHTML += `<button class="sub-btn" onclick="filterGrid('${mainCat}', '${sub}')">${sub}</button>`;
+                    });
+                }
+                filterGrid(mainCat, 'All');
+            }
+        }
+
+        // GRID FILTER
+        function filterGrid(main, sub) {
+            if (sub !== 'All' && event) {
+                document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cMain = card.getAttribute('data-main');
+                const cSub = card.getAttribute('data-sub');
+                if (main === 'All') card.style.display = 'block';
+                else if (sub === 'All') card.style.display = (cMain === main) ? 'block' : 'none';
+                else card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
+            });
+        }
+
+        // SEARCH
+        function globalSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
+                card.style.display = text.includes(input) ? 'block' : 'none';
+            });
+        }
+
+        // OPEN DETAIL PAGE
+        function openDetail(card) {
+            const d = {
+                title: card.getAttribute('data-title'),
+                desc: card.getAttribute('data-desc'),
+                phone: card.getAttribute('data-phone'),
+                wa: card.getAttribute('data-whatsapp'),
+                web: card.getAttribute('data-website'),
+                insta: card.getAttribute('data-insta'),
+                fb: card.getAttribute('data-fb'),
+                main: card.getAttribute('data-main'),
+                sub: card.getAttribute('data-sub')
+            };
+            
+            // Image
+            const cardImages = card.querySelector('.card-slider').innerHTML;
+            document.getElementById('dt-slider-container').innerHTML = `<div class="card-slider">${cardImages}</div>`;
+
+            // Text
+            document.getElementById('dt-title').innerText = d.title;
+            document.getElementById('dt-head-title').innerText = d.title;
+            document.getElementById('dt-cat').innerText = `${d.main} > ${d.sub}`;
+            document.getElementById('dt-desc').innerText = d.desc;
+            
+            // Buttons Logic
+            const btnCall = document.getElementById('lnk-call');
+            const btnWa = document.getElementById('lnk-wa');
+            const btnInsta = document.getElementById('lnk-insta');
+            const btnFb = document.getElementById('lnk-fb');
+            const btnWeb = document.getElementById('lnk-web');
+
+            btnCall.href = d.phone ? `tel:${d.phone}` : '#';
+            btnWa.href = d.wa ? `https://wa.me/91${d.wa}` : '#';
+            btnInsta.href = d.insta ? d.insta : '#';
+            btnFb.href = d.fb ? d.fb : '#';
+            btnWeb.href = d.web ? d.web : '#';
+
+            btnCall.style.display = d.phone ? 'flex' : 'none';
+            btnWa.style.display = d.wa ? 'flex' : 'none';
+            btnInsta.style.display = d.insta ? 'flex' : 'none';
+            btnFb.style.display = d.fb ? 'flex' : 'none';
+            btnWeb.style.display = d.web ? 'flex' : 'none';
+
+            // Related
+            const allCardsHTML = document.getElementById('mainGrid').innerHTML;
+            document.getElementById('related-grid').innerHTML = allCardsHTML;
+
+            // Show
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+        }
+    </script>
+    <script>
+        // Hide any h1 elements with text content 'X'
+        document.addEventListener('DOMContentLoaded', function() {
+            const h1Elements = document.querySelectorAll('h1');
+            h1Elements.forEach(function(h1) {
+                if (h1.textContent.trim() === 'X') {
+                    h1.style.display = 'none';
+                }
+            });
+        });
+        
+        // Banner Slider Functionality
+        let bannerIndex = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        const indicators = document.querySelectorAll('.banner-indicator');
+        
+        function showBanner(n) {
+            bannerIndex += n;
+            if (bannerIndex >= slides.length) { bannerIndex = 0; }
+            if (bannerIndex < 0) { bannerIndex = slides.length - 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[bannerIndex].classList.add('active');
+            indicators[bannerIndex].classList.add('active');
+        }
+        
+        function currentBanner(n) {
+            bannerIndex = n;
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[bannerIndex].classList.add('active');
+            indicators[bannerIndex].classList.add('active');
+        }
+        
+        // Auto slide banner every 5 seconds
+        setInterval(() => {
+            showBanner(1);
+        }, 5000);
+    </script>
+</body>
+</html>

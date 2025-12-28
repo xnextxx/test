@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending - KhurjaX</title>
+</head>
+<body>
+    <div id="cardsContainer"></div>
+    
+    <script>
+        // All available cards data from all categories
+        const allCards = [
+            { title: "Glamour Beauty Parlour", desc: "Bridal Makeup, Party Makeup, Hair Spa, Facial, Mehendi. Ladies Only.", main: "Services", sub: "Makeup", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600" },
+            { title: "Khurja Public School", desc: "CBSE Board School. Nursery to 12th. Smart Classes & Transport.", main: "Education", sub: "Schools", phone: "9876543210", wa: "9876543210", insta: "", fb: "https://facebook.com", web: "https://kps.com", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600" },
+            { title: "The Spicy Bite", desc: "Family AC Restaurant serving Chinese, Pizza, Burger & North Indian.", main: "Food", sub: "Restaurant", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" },
+            { title: "Raju Electrician", desc: "24/7 Home Service for Fan, AC, Wiring, Inverter.", main: "Services", sub: "Electrician", phone: "9876543210", wa: "9876543210", insta: "", fb: "", web: "", img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600" },
+            { title: "Khurja Ceramic Works", desc: "Manufacturer & Exporter of Ceramic Pots, Planters, Mugs. Wholesale prices.", main: "Special", sub: "Pottery", phone: "9876543210", wa: "9876543210", insta: "", fb: "", web: "https://khurjaceramic.com", img: "https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=600" },
+            { title: "Royal Palace Banquet", desc: "Luxury AC Banquet Hall for Weddings, Parties. Big Lawn and Catering available.", main: "Services", sub: "MarriageHall", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600" },
+            { title: "Iron Fitness Gym", desc: "Cardio, Weight Training, Personal Trainer. Ladies Batch Available.", main: "Health", sub: "Gym", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600" },
+            { title: "2 BHK House for Rent", desc: "Semi-furnished house near Bus Stand. 2 Rooms, Kitchen, Bathroom. Rent 6000.", main: "Property", sub: "RentHouse", phone: "9876543210", wa: "9876543210", insta: "", fb: "", web: "", img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600" },
+            { title: "ABHINAV YADAV - BGMI Thuuuuuu", desc: "Weekly BGMI tournaments with cash prizes. Register now for next tournament.", main: "Gaming", sub: "BGMI", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" },
+            { title: "Khurja Free Fire Club", desc: "Free Fire gaming club organizing tournaments and practice sessions.", main: "Gaming", sub: "FREE FIRE", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" },
+            { title: "Cyber Zone Gaming Cafe", desc: "High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi.", main: "Gaming", sub: "Gaming Cafe", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" },
+            { title: "Game World PC Cafe", desc: "PC gaming center with high-end systems, latest games, and esports tournaments.", main: "Gaming", sub: "PC Games", phone: "9876543210", wa: "9876543210", insta: "https://instagram.com", fb: "", web: "", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" }
+        ];
+
+        function getTimeUntilMidnight() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            return tomorrow - now;
+        }
+
+        function generateTrendingItems() {
+            const cacheKey = 'trendingItems';
+            const cacheTimeKey = 'trendingDate';
+            const today = new Date().toDateString();
+
+            let trendingData = null;
+            try {
+                const cached = localStorage.getItem(cacheKey);
+                const cachedDate = localStorage.getItem(cacheTimeKey);
+                
+                if (cached && cachedDate === today) {
+                    trendingData = JSON.parse(cached);
+                    console.log('✅ Using cached trending items');
+                }
+            } catch (e) {
+                console.warn('Could not read trending cache:', e);
+            }
+
+            if (!trendingData) {
+                const shuffled = [...allCards].sort(() => Math.random() - 0.5);
+                trendingData = shuffled.slice(0, 10);
+                
+                try {
+                    localStorage.setItem(cacheKey, JSON.stringify(trendingData));
+                    localStorage.setItem(cacheTimeKey, today);
+                    console.log('✅ Generated new trending items for today');
+                } catch (e) {
+                    console.warn('Could not save trending cache:', e);
+                }
+            }
+
+            return trendingData;
+        }
+
+        function renderTrendingCards() {
+            const items = generateTrendingItems();
+            const container = document.getElementById('cardsContainer');
+            
+            if (!container) return;
+
+            let html = '';
+            items.forEach((item, index) => {
+                html += `
+                    <div class="card" data-main="Trending" data-sub="Trending"
+                         data-title="${item.title.replace(/"/g, '&quot;')}" 
+                         data-desc="${item.desc.replace(/"/g, '&quot;')}"
+                         data-phone="${item.phone}" data-whatsapp="${item.wa}"
+                         data-insta="${item.insta}" data-fb="${item.fb}" data-website="${item.web}"
+                         onclick="openDetail(this)">
+                        <div class="slider-wrapper">
+                            <span class="card-badge" style="background:#ef4444;">🔥 #${index + 1}</span>
+                            <div class="card-slider">
+                                <img src="${item.img}" class="card-img" alt="${item.title}">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">${item.title}</h3>
+                            <p class="card-desc">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            console.log('✅ Rendered ' + items.length + ' trending cards');
+        }
+
+        function setupMidnightRefresh() {
+            const timeUntilMidnight = getTimeUntilMidnight();
+            const minutesLeft = Math.round(timeUntilMidnight / 1000 / 60);
+            console.log('⏰ Next trending refresh in ' + minutesLeft + ' minutes');
+            
+            setTimeout(() => {
+                localStorage.removeItem('trendingItems');
+                localStorage.removeItem('trendingDate');
+                renderTrendingCards();
+                console.log('🔄 Trending refreshed at midnight!');
+                setupMidnightRefresh();
+            }, timeUntilMidnight);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTrendingCards();
+            setupMidnightRefresh();
+        });
+    </script>
+</body>
+</html>

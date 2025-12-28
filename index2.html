@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KhurjaX - Khurja ka Digital Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- GLOBAL CSS --- */
+        :root {
+            --primary: #2563eb;       
+            --bg: #f3f4f6;            
+            --text: #1f2937;          
+            --white: #ffffff;
+            --green: #10b981;         
+            --dark: #0f172a;
+        }
+
+        /* Dark mode */
+        html.dark-mode {
+            --primary: #60a5fa;
+            --bg: #0f172a;
+            --text: #e5e7eb;
+            --white: #1e293b;
+            --dark: #e5e7eb;
+        }
+
+        /* Dark mode button & text fixes */
+        html.dark-mode .cat-btn {
+            background: #334155;
+            color: #e5e7eb;
+            border-color: #475569;
+        }
+
+        html.dark-mode .cat-btn.active {
+            background: #60a5fa;
+            color: #0f172a;
+            border-color: #60a5fa;
+        }
+
+        html.dark-mode .cat-btn.all-btn {
+            background: #1e293b;
+            color: #e5e7eb;
+            border-color: #475569;
+        }
+
+        html.dark-mode .sub-btn {
+            background: #334155;
+            color: #e5e7eb;
+        }
+
+        html.dark-mode .sub-btn.active {
+            background: #60a5fa;
+            color: #0f172a;
+        }
+
+        html.dark-mode .controls {
+            background: #1e293b;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        html.dark-mode .search-box {
+            background: #334155;
+            color: #e5e7eb;
+            border-color: #475569;
+        }
+
+        html.dark-mode .search-box:focus {
+            border-color: #60a5fa;
+        }
+
+        html.dark-mode .card {
+            background: #1e293b;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        html.dark-mode .card-title {
+            color: #e5e7eb;
+        }
+
+        html.dark-mode .card-desc {
+            color: #a0aec0;
+        }
+
+        html.dark-mode .related-box {
+            background: #334155;
+        }
+
+        html.dark-mode .related-head {
+            color: #e5e7eb;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg); color: var(--text); padding-bottom: 20px; }
+
+        /* HEADER */
+        header {
+            color: var(--white); 
+            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+            text-align: center;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner-slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .banner-slide.active {
+            opacity: 1;
+        }
+        
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+            filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.4));
+        }
+        
+        .banner-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .banner-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        
+        .banner-indicator.active {
+            background: white;
+        }
+
+        /* THEME TOGGLE */
+        .theme-toggle { position: absolute; top: 15px; right: 15px; z-index: 20; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 1.2rem; transition: all 0.3s; }
+        .theme-toggle:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
+
+        /* HEART ANIMATION */
+        @keyframes floatingHeart {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-60px) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: floatingHeart 0.8s ease-out forwards;
+        }
+
+        /* CONTROLS */
+        .controls {
+            max-width: 1000px; margin: -80px auto 20px auto; padding: 20px;
+            background: var(--white); border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08); position: relative; z-index: 5;
+        }
+        .search-box {
+            width: 100%; padding: 15px; border: 2px solid #e5e7eb; border-radius: 12px;
+            font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .search-box:focus { border-color: var(--primary); }
+
+        /* CATEGORIES SCROLL */
+        .main-cats { display: flex; flex-wrap: wrap; gap: 10px; padding: 15px 0; }
+        .main-cats::-webkit-scrollbar { display: none; }
+        
+        .cat-btn {
+            white-space: nowrap; padding: 10px 20px; border-radius: 30px; border: 1px solid #e5e7eb;
+            background: #f8fafc; font-weight: 600; color: #64748b; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .cat-btn.all-btn { background: var(--dark); color: white; border-color: var(--dark); }
+        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* SUB CATEGORIES */
+        .sub-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e5e7eb; }
+        .sub-btn { padding: 6px 14px; border-radius: 15px; background: #f1f5f9; font-size: 0.85rem; border: none; cursor: pointer; color: #475569; }
+        .sub-btn.active { background: var(--text); color: white; }
+
+        /* GRID */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        /* CARD */
+        .card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; position: relative; }
+        .slider-wrapper { position: relative; height: 200px; width: 100%; overflow: hidden; }
+        .card-slider { display: flex; height: 100%; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .card-slider::-webkit-scrollbar { display: none; }
+        .card-img { min-width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+        
+        .card-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .swipe-hint { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); color: #333; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; pointer-events: none; }
+
+        .card-body { padding: 15px; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+    .card-desc { font-size: 0.9rem; color: #64748b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
+
+        /* DETAIL PAGE */
+        #detail-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white); z-index: 100; overflow-y: auto; }
+        .dt-header { position: sticky; top: 0; background: var(--white); padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; z-index: 10; }
+        .back-btn { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--text); }
+        .dt-title-head { font-size: 1.1rem; font-weight: 700; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .dt-content { padding: 0 0 50px 0; }
+        .dt-slider-box { width: 100%; height: 320px; background: #000; position: relative; overflow: hidden; }
+        .dt-slider-box .card-slider { display: flex; flex-wrap: wrap; height: 100%; width: 100%; overflow: hidden; scroll-snap-type: both mandatory; scrollbar-width: none; }
+        .dt-slider-box .card-slider::-webkit-scrollbar { display: none; }
+        .dt-slider-box img { width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; flex-shrink: 0; }
+        .dt-arrow-btn { position: absolute; width: 50px; height: 50px; background: rgba(255,255,255,0.3); color: white; border: none; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; }
+        .dt-arrow-btn:hover { background: rgba(255,255,255,0.6); }
+        .dt-arrow-left { left: 10px; top: 50%; transform: translateY(-50%); }
+        .dt-arrow-right { right: 10px; top: 50%; transform: translateY(-50%); }
+        .dt-arrow-up { top: 10px; left: 50%; transform: translateX(-50%); }
+        .dt-arrow-down { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .dt-swipe-hint { position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.2); color: white; padding: 8px 12px; border-radius: 10px; font-size: 0.9rem; pointer-events: none; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); z-index: 5; }
+        
+        .dt-info { padding: 20px; }
+        .dt-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; line-height: 1.2; }
+        .dt-meta { color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
+        .dt-desc { font-size: 1rem; line-height: 1.6; color: #4b5563; margin-bottom: 25px; }
+
+        /* SOCIAL BUTTONS GRID */
+        .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 30px; }
+        .soc-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 700; color: white; transition: transform 0.2s; }
+        .soc-btn:active { transform: scale(0.95); }
+
+        .btn-call { background: #333; }
+        .btn-wa   { background: #25D366; }
+        .btn-insta{ background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .btn-fb   { background: #1877F2; }
+        .btn-web  { background: var(--primary); grid-column: span 2; }
+        .btn-like { background: #ef4444 !important; grid-column: span 2; }
+
+        .related-box { background: #f8fafc; padding: 20px; margin-top: 20px; border-radius: 15px;}
+        .related-head { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; }
+        /* Mobile tweaks: make social buttons (eg. Instagram) more prominent on small screens */
+        @media (max-width: 600px) {
+            .soc-btn { font-size: 1.1rem; padding: 10px; }
+            .soc-btn i { font-size: 1.1rem; }
+            /* Slightly larger card titles on small devices for readability */
+            .card-title { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="home-view">
+        <header>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+            <div class="banner-slider" id="bannerSlider">
+                <div class="banner-slide active">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-slide">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-slide">
+                    <div class="banner-text">KhurjaX</div>
+                </div>
+                <div class="banner-indicators" id="bannerIndicators">
+                    <div class="banner-indicator active" onclick="currentBanner(0)"></div>
+                    <div class="banner-indicator" onclick="currentBanner(1)"></div>
+                    <div class="banner-indicator" onclick="currentBanner(2)"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" id="searchInput" class="search-box" placeholder="Search Shop, Job, Place..." onkeyup="globalSearch()">
+                <img src="https://i.ibb.co/Rkdm6570/Chat-GPT-Image-Dec-25-2025-11-41-40-PM.png" alt="Khurja X Logo" style="width: 50px; height: 50px; border-radius: 50%;">
+            </div>
+            
+            <div class="main-cats">
+                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> All In One</button>
+                <button class="cat-btn" onclick="setCategory('Trending')"><i class="fas fa-fire"></i> Trending 🔥</button>
+                <button class="cat-btn" onclick="setCategory('Market')">Market 🏪</button>
+                <button class="cat-btn" onclick="setCategory('Food')">Food 🍽️</button>
+                <button class="cat-btn" onclick="setCategory('Services')">Services 🔧</button>
+                <button class="cat-btn" onclick="setCategory('Health')">Health 🏥</button>
+                <button class="cat-btn" onclick="setCategory('Education')">Education 📚</button>
+                <button class="cat-btn" onclick="setCategory('Property')">Property 🏠</button>
+                <button class="cat-btn" onclick="setCategory('Special')">Special 🎨</button>
+                <button class="cat-btn" onclick="setCategory('Travel')">Travel ✈️</button>
+                <button class="cat-btn" onclick="setCategory('Khurja Special')">Khurja Special 🏺</button>
+                <button class="cat-btn" onclick="setCategory('Content Creators')">Creators 🎬</button>
+                <button class="cat-btn" onclick="setCategory('Gaming')">Gaming 🎮</button>
+                <button class="cat-btn" onclick="setCategory('Events')">Events 🎉</button>
+                <button class="cat-btn" onclick="setCategory('Emergency & Help')">Emergency 🆘</button>
+                <button class="cat-btn" onclick="setCategory('Religion & Places')">Religion 🙏</button>
+                <button class="cat-btn" onclick="setCategory('Updates')">Updates 📢</button>
+            </div>
+            
+            <div class="sub-cats" id="subCatContainer"><small>Showing All Listings</small></div>
+        </div>
+
+        <div class="container">
+            <div class="grid" id="mainGrid">
+
+             <div id="card-1" class="card" onclick="openDetail(this)"
+                     data-main="Services" data-sub="Makeup"
+                     data-title="Glamour Beauty Parlour"
+                     data-desc="Bridal Makeup, Party Makeup, Hair Spa, Facial, Mehendi. Ladies Only."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#db2777;">Makeup</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Glamour Beauty Parlour</h3><p class="card-desc">Bridal Makeup & Spa.</p></div>
+                </div>
+
+             <div id="card-2" class="card" onclick="openDetail(this)"
+                     data-main="Education" data-sub="Schools"
+                     data-title="Khurja Public School"
+                     data-desc="CBSE Board School. Nursery to 12th. Smart Classes & Transport."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="https://facebook.com" data-website="https://kps.com">
+                    <div class="slider-wrapper">
+                        <span class="card-badge">School</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Public School</h3><p class="card-desc">CBSE Board, Nursery to 12th.</p></div>
+                </div>
+
+             <div id="card-3" class="card" onclick="openDetail(this)"
+                     data-main="Food" data-sub="Restaurant"
+                     data-title="The Spicy Bite"
+                     data-desc="Family AC Restaurant serving Chinese, Pizza, Burger & North Indian."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">The Spicy Bite</h3><p class="card-desc">Family AC Restaurant.</p></div>
+                </div>
+
+             <div id="card-4" class="card" onclick="openDetail(this)"
+                     data-main="Services" data-sub="Electrician"
+                     data-title="Raju Electrician"
+                     data-desc="24/7 Home Service for Fan, AC, Wiring, Inverter."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Service</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Raju Electrician</h3><p class="card-desc">Home Repair Service.</p></div>
+                </div>
+
+             <div id="card-5" class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Pottery"
+                     data-title="Khurja Ceramic Works"
+                     data-desc="Manufacturer & Exporter of Ceramic Pots, Planters, Mugs. Wholesale prices."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="https://khurjaceramic.com">
+                    <div class="slider-wrapper">
+                        <span class="card-badge">Pottery</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Ceramic Works</h3><p class="card-desc">Factory Outlet.</p></div>
+                </div>
+
+             <div id="card-6" class="card" onclick="openDetail(this)"
+                     data-main="Special" data-sub="Pottery"
+                     data-title="Khurja Ceramic Works"
+                     data-desc="Wholesale Ceramic Items."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge">Pottery</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Ceramic Works</h3><p class="card-desc">Wholesale Ceramic Items.</p></div>
+                </div>
+
+             <div id="card-7" class="card" onclick="openDetail(this)"
+                     data-main="Updates" data-sub="Jobs"
+                     data-title="Salesman Required"
+                     data-desc="Need Salesman for Cloth Shop in Gandhi Market. Salary 10k-15k. Full Time."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:red;">Hiring</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Salesman Required</h3><p class="card-desc">Urgent Job Vacancy.</p></div>
+                </div>
+
+             <div id="card-8" class="card" onclick="openDetail(this)"
+                     data-main="Services" data-sub="MarriageHall"
+                     data-title="Royal Palace Banquet"
+                     data-desc="Luxury AC Banquet Hall for Weddings, Parties. Big Lawn and Catering available."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#8b5cf6;">Banquet</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Royal Palace Banquet</h3><p class="card-desc">Wedding Hall & Lawn.</p></div>
+                </div>
+
+             <div id="card-9" class="card" onclick="openDetail(this)"
+                     data-main="Services" data-sub="Transport"
+                     data-title="Sonu E-Rickshaw"
+                     data-desc="Available for City Ride, Railway Station drop, Market visit. Call for booking."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Transport</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1596525996025-a134a6259468?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Sonu E-Rickshaw</h3><p class="card-desc">Call for City Ride.</p></div>
+                </div>
+
+             <div id="card-10" class="card" onclick="openDetail(this)"
+                     data-main="Health" data-sub="Gym"
+                     data-title="Iron Fitness Gym"
+                     data-desc="Cardio, Weight Training, Personal Trainer. Ladies Batch Available."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#10b981;">Gym</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Iron Fitness Gym</h3><p class="card-desc">Unisex Gym & Cardio.</p></div>
+                </div>
+
+             <div id="card-11" class="card" onclick="openDetail(this)"
+                     data-main="Property" data-sub="RentHouse"
+                     data-title="2 BHK House for Rent"
+                     data-desc="Semi-furnished house near Bus Stand. 2 Rooms, Kitchen, Bathroom. Rent 6000."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#10b981;">To Let</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">2 BHK House</h3><p class="card-desc">Rent: ₹6000/month.</p></div>
+                </div>
+
+             <div id="card-12" class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="BGMI"
+                     data-title="ABHINAV YADAV - BGMI Thuuuuuu"
+                     data-desc="Weekly BGMI tournaments with cash prizes. Register now for next tournament."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ef4444;">Tournament</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">ABHINAV YADAV - BGMI Thuuuuuu</h3><p class="card-desc">Weekly BGMI tournaments with cash prizes. Register now for next tournament.</p></div>
+                </div>
+
+             <div id="card-13" class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="FREE FIRE"
+                     data-title="Khurja Free Fire Club"
+                     data-desc="Free Fire gaming club organizing tournaments and practice sessions."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ef4444;">Gaming</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Khurja Free Fire Club</h3><p class="card-desc">Free Fire gaming club organizing tournaments and practice sessions.</p></div>
+                </div>
+
+             <div id="card-14" class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="Gaming Cafe"
+                     data-title="Cyber Zone Gaming Cafe"
+                     data-desc="High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Cafe</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Cyber Zone Gaming Cafe</h3><p class="card-desc">High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi.</p></div>
+                </div>
+
+             <div id="card-15" class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="PC Games"
+                     data-title="Game World PC Cafe"
+                     data-desc="PC gaming center with high-end systems, latest games, and esports tournaments."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">PC Gaming</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Game World PC Cafe</h3><p class="card-desc">PC gaming center with high-end systems, latest games, and esports tournaments.</p></div>
+                </div>
+
+             <div id="card-16" class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="Mobile Games"
+                     data-title="Mobile Gaming Hub"
+                     data-desc="Mobile gaming center with latest games, tournaments, and charging stations."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Mobile</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">Mobile Gaming Hub</h3><p class="card-desc">Mobile gaming center with latest games, tournaments, and charging stations.</p></div>
+                </div>
+
+             <div id="card-17" class="card" onclick="openDetail(this)"
+                     data-main="Gaming" data-sub="Console Games"
+                     data-title="PlayStation Zone"
+                     data-desc="Console gaming center with PS4, PS5, Xbox, and Nintendo games."
+                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#333;">Console</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600" class="card-img"></div>
+                    </div>
+                    <div class="card-body"><h3 class="card-title">PlayStation Zone</h3><p class="card-desc">Console gaming center with PS4, PS5, Xbox, and Nintendo games.</p></div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-view">
+        <div class="dt-header">
+            <button class="back-btn" onclick="closeDetail()"><i class="fas fa-arrow-left"></i></button>
+            <div class="dt-title-head" id="dt-head-title">Title</div>
+        </div>
+        
+        <div class="dt-content">
+            <div class="dt-slider-box" id="dt-slider-container">
+                <button class="dt-arrow-btn dt-arrow-left" onclick="moveDetailImage(-1)">‹</button>
+                <button class="dt-arrow-btn dt-arrow-right" onclick="moveDetailImage(1)">›</button>
+            </div>
+            
+            <div class="dt-info">
+                <div class="dt-name" id="dt-title">Title</div>
+                <div class="dt-meta" id="dt-cat">Category</div>
+                <div class="dt-desc" id="dt-desc">Description</div>
+
+                <div class="social-grid">
+                    <a id="lnk-call" href="#" class="soc-btn btn-call"><i class="fas fa-phone"></i> Call</a>
+                    <a id="lnk-wa" href="#" class="soc-btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a id="lnk-insta" href="#" class="soc-btn btn-insta"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a id="lnk-fb" href="#" class="soc-btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a id="lnk-web" href="#" class="soc-btn btn-web"><i class="fas fa-globe"></i> Visit Website</a>
+                    <button id="lnk-like" class="soc-btn btn-like" onclick="toggleDetailLike(event)"><i class="fas fa-heart"></i> <span id="like-text">Like</span></button>
+                </div>
+                
+                <div class="related-box">
+                    <div class="related-head">Explore More</div>
+                    <div class="grid" id="related-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATA CATEGORIES
+        const subCategories = {
+            'Trending': ['This Week', 'All Time'],
+            'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
+            'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
+            'Services': ['Makeup','Barber/Hair salon','Electrician', 'Plumber', 'ACRepair'],
+            'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
+            'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
+            'Property': ['RentHouse', 'BuySell', 'Plots', 'Rent House', 'Buy/Sell'],
+            'Special': ['Pottery', 'Handicrafts', 'Ceramic Factories', 'Ceramic Wholesale'],
+            'Travel': ['Hotels', 'Restaurants', 'E-Rickshaw'],
+            'Khurja Special': ['Pottery', 'Ceramic Factories', 'Ceramic Wholesale'],
+            'Content Creators': ['YouTubers', 'Instagram Influencers'],
+            'Gaming': ['BGMI', 'FREE FIRE'],
+            'Events': ['Local News', 'Festivals', 'New Openings'],
+            'Emergency & Help': ['Police', 'Fire Station', 'Blood Donors'],
+            'Religion & Places': ['Hindu Temple', 'Islamic Mosque', 'Christian Church', 'Other']
+        };
+
+        // CATEGORY FILTER
+        function setCategory(mainCat) {
+            // Clear previous active state
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            // Try to set active button robustly (don't rely on global `event` which may be undefined)
+            const btns = Array.from(document.querySelectorAll('.cat-btn'));
+            const matchedBtn = btns.find(b => b.textContent.trim().toLowerCase().includes(mainCat.toLowerCase()));
+            if (matchedBtn) matchedBtn.classList.add('active');
+            const subContainer = document.getElementById('subCatContainer');
+            subContainer.innerHTML = '';
+            
+            if (mainCat === 'All') {
+                subContainer.innerHTML = '<small>Showing All Listings</small>';
+                filterGrid('All', 'All');
+            } else {
+                if (subCategories[mainCat]) {
+                    subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${mainCat}', 'All')">All</button>`;
+                    subCategories[mainCat].forEach(sub => {
+                        subContainer.innerHTML += `<button class="sub-btn" onclick="filterGrid('${mainCat}', '${sub}')">${sub}</button>`;
+                    });
+                }
+                filterGrid(mainCat, 'All');
+            }
+        }
+
+        // GRID FILTER
+        function filterGrid(main, sub) {
+            // Manage sub-button active states without relying on global `event`.
+            if (sub !== 'All') {
+                document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
+                // find a sub button whose text matches the requested sub
+                const subBtns = Array.from(document.querySelectorAll('.sub-btn'));
+                const matched = subBtns.find(b => b.textContent.trim().toLowerCase() === String(sub).toLowerCase());
+                if (matched) matched.classList.add('active');
+            }
+            
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cMain = card.getAttribute('data-main');
+                const cSub = card.getAttribute('data-sub');
+                if (main === 'All') card.style.display = 'block';
+                else if (sub === 'All') card.style.display = (cMain === main) ? 'block' : 'none';
+                else card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
+            });
+        }
+        
+
+        // SEARCH
+        function globalSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(card => {
+                const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
+                card.style.display = text.includes(input) ? 'block' : 'none';
+            });
+        }
+
+        // Shuffle the main grid so the order changes on each refresh (Fisher-Yates)
+        function shuffleMainGrid(){
+            const grid = document.getElementById('mainGrid');
+            if (!grid) return;
+            // collect only direct card elements
+            const cards = Array.from(grid.querySelectorAll('.card'));
+            if (cards.length <= 1) return;
+
+            // Fisher-Yates shuffle
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const tmp = cards[i];
+                cards[i] = cards[j];
+                cards[j] = tmp;
+            }
+
+            // append in shuffled order
+            cards.forEach(c => grid.appendChild(c));
+        }
+
+        // OPEN DETAIL PAGE
+        function openDetail(card) {
+            const d = {
+                title: card.getAttribute('data-title'),
+                desc: card.getAttribute('data-desc'),
+                phone: card.getAttribute('data-phone'),
+                wa: card.getAttribute('data-whatsapp'),
+                web: card.getAttribute('data-website'),
+                insta: card.getAttribute('data-insta'),
+                fb: card.getAttribute('data-fb'),
+                main: card.getAttribute('data-main'),
+                sub: card.getAttribute('data-sub')
+            };
+            
+            // Image
+            const cardImages = card.querySelector('.card-slider').innerHTML;
+            const sliderContainer = document.getElementById('dt-slider-container');
+            sliderContainer.innerHTML = `<div class="card-slider">${cardImages}</div><div class="dt-swipe-hint">← Swipe →</div>`;
+            // re-attach arrow buttons (they were cleared)
+            sliderContainer.innerHTML += `
+                <button class="dt-arrow-btn dt-arrow-left" onclick="moveDetailImage(-1)">‹</button>
+                <button class="dt-arrow-btn dt-arrow-right" onclick="moveDetailImage(1)">›</button>
+            `;
+
+            // Text
+            document.getElementById('dt-title').innerText = d.title;
+            document.getElementById('dt-head-title').innerText = d.title;
+            document.getElementById('dt-cat').innerText = `${d.main} > ${d.sub}`;
+            document.getElementById('dt-desc').innerText = d.desc;
+            
+            // Buttons Logic
+            const btnCall = document.getElementById('lnk-call');
+            const btnWa = document.getElementById('lnk-wa');
+            const btnInsta = document.getElementById('lnk-insta');
+            const btnFb = document.getElementById('lnk-fb');
+            const btnWeb = document.getElementById('lnk-web');
+
+            btnCall.href = d.phone ? `tel:${d.phone}` : '#';
+            btnWa.href = d.wa ? `https://wa.me/91${d.wa}` : '#';
+            btnInsta.href = d.insta ? d.insta : '#';
+            btnFb.href = d.fb ? d.fb : '#';
+            btnWeb.href = d.web ? d.web : '#';
+
+            btnCall.style.display = d.phone ? 'flex' : 'none';
+            btnWa.style.display = d.wa ? 'flex' : 'none';
+            btnInsta.style.display = d.insta ? 'flex' : 'none';
+            btnFb.style.display = d.fb ? 'flex' : 'none';
+            btnWeb.style.display = d.web ? 'flex' : 'none';
+
+            // Related: clone current main grid into related grid and initialize carousel
+            const allCardsHTML = document.getElementById('mainGrid').innerHTML;
+            document.getElementById('related-grid').innerHTML = allCardsHTML;
+            // initialize carousel; pass current title so it's highlighted
+            initRelatedCarousel(d.title);
+
+            // Show
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            window.scrollTo(0,0);
+            // start autoplay countdown for 'Up next' behavior
+            try { startRelatedAutoplay(d.title); } catch(e){ /* ignore */ }
+            // setup gesture handling for multi-directional image swipe
+            try { currentImageIndex = 0; setupDetailSliderGestures(); } catch(e){ /* ignore */ }
+            // update like button state
+            try { updateDetailLikeButton(); } catch(e){ /* ignore */ }
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+        }
+
+        // Toggle like in detail view
+        function toggleDetailLike(event) {
+            event.preventDefault();
+            const likeBtn = document.getElementById('lnk-like');
+            const likeText = document.getElementById('like-text');
+            const detailView = document.getElementById('detail-view');
+            
+            // Use a unique key: combination of main category + title
+            const mainAttr = detailView.querySelector('[data-main]')?.getAttribute('data-main') || 'Unknown';
+            const currentTitle = document.getElementById('dt-title').innerText;
+            const uniqueKey = `${mainAttr}::${currentTitle}`;
+            
+            let likes = JSON.parse(localStorage.getItem('likes') || '{}');
+            
+            if (likes[uniqueKey]) {
+                delete likes[uniqueKey];
+                likeBtn.style.opacity = '0.8';
+                likeText.textContent = 'Like';
+            } else {
+                likes[uniqueKey] = true;
+                likeBtn.style.opacity = '1';
+                likeText.textContent = 'Liked ✓';
+                // Play heart animation
+                createFloatingHeart(event);
+            }
+            
+            localStorage.setItem('likes', JSON.stringify(likes));
+        }
+
+        // Create floating heart animation
+        function createFloatingHeart(event) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.textContent = '❤';
+            
+            // Position at button location
+            const btn = document.getElementById('lnk-like');
+            const rect = btn.getBoundingClientRect();
+            heart.style.left = (rect.left + rect.width / 2) + 'px';
+            heart.style.top = rect.top + 'px';
+            heart.style.color = '#ef4444';
+            
+            document.body.appendChild(heart);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 800);
+        }
+
+        // Check if current detail is liked and update button
+        function updateDetailLikeButton() {
+            const detailView = document.getElementById('detail-view');
+            const mainAttr = detailView.querySelector('[data-main]')?.getAttribute('data-main') || 'Unknown';
+            const currentTitle = document.getElementById('dt-title').innerText;
+            const uniqueKey = `${mainAttr}::${currentTitle}`;
+            
+            let likes = JSON.parse(localStorage.getItem('likes') || '{}');
+            const likeBtn = document.getElementById('lnk-like');
+            const likeText = document.getElementById('like-text');
+            
+            if (likes[uniqueKey]) {
+                likeBtn.style.opacity = '1';
+                likeText.textContent = 'Liked ✓';
+            } else {
+                likeBtn.style.opacity = '0.8';
+                likeText.textContent = 'Like';
+            }
+        }
+
+        // Handle swipe gestures in detail view slider (all 4 directions)
+        let touchStartX = 0, touchStartY = 0;
+        let currentImageIndex = 0;
+
+        // Move to next/prev image in detail view
+        function moveDetailImage(direction) {
+            const slider = document.querySelector('.dt-slider-box .card-slider');
+            if (!slider) return;
+            
+            const images = slider.querySelectorAll('img');
+            const totalImages = images.length;
+            if (totalImages === 0) return;
+
+            currentImageIndex = (currentImageIndex + direction + totalImages) % totalImages;
+            
+            // Scroll to the selected image
+            if (images[currentImageIndex]) {
+                images[currentImageIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+            }
+        }
+
+        function handleDetailSliderSwipe(e) {
+            const slider = e.currentTarget;
+            if (!slider) return;
+
+            const touchEndX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            const touchEndY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+
+            const images = slider.querySelectorAll('img');
+            const totalImages = images.length;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Horizontal swipe
+                if (diffX > 50) {
+                    // Swipe left → next image
+                    currentImageIndex = (currentImageIndex + 1) % totalImages;
+                } else if (diffX < -50) {
+                    // Swipe right → prev image
+                    currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+                }
+            } else {
+                // Vertical swipe
+                if (diffY > 50) {
+                    // Swipe up → next image
+                    currentImageIndex = (currentImageIndex + 1) % totalImages;
+                } else if (diffY < -50) {
+                    // Swipe down → prev image
+                    currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+                }
+            }
+
+            // Scroll to the selected image
+            if (images[currentImageIndex]) {
+                images[currentImageIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+            }
+        }
+
+        function setupDetailSliderGestures() {
+            const slider = document.querySelector('.dt-slider-box .card-slider');
+            if (!slider) return;
+            
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            });
+            slider.addEventListener('touchend', handleDetailSliderSwipe);
+            
+            // Optional: support mouse drag on desktop
+            slider.addEventListener('mousedown', (e) => {
+                touchStartX = e.clientX;
+                touchStartY = e.clientY;
+            });
+            slider.addEventListener('mouseup', handleDetailSliderSwipe);
+        }
+                // stop autoscroll when closing detail
+                const originalCloseDetail = closeDetail;
+                window.closeDetail = function(){
+                    stopRelatedAutoscroll();
+                    stopRelatedAutoplay();
+                    try { originalCloseDetail(); } catch(e) { /* ignore */ }
+                }
+
+        // RELATED SCROLL: autoplay vertically (like YouTube feed) and click-to-open behavior
+        let relatedAutoScrollInterval = null;
+
+        function initRelatedCarousel(currentTitle) {
+            const grid = document.getElementById('related-grid');
+            if (!grid) return;
+
+            // Make it a vertical stack so full cards are visible and the page can scroll naturally
+            grid.style.display = 'block';
+            // Let the page handle vertical scrolling so full shop details are visible
+            grid.style.overflowY = 'visible';
+            grid.style.maxHeight = '';
+            grid.style.gap = '';
+            grid.style.padding = '8px 0';
+
+            // Ensure cards stack vertically and take full width
+            const cards = grid.querySelectorAll('.card');
+            cards.forEach(c => {
+                c.style.minWidth = '';
+                c.style.width = '100%';
+                c.style.flex = '';
+                c.style.margin = '0 0 12px 0';
+                // Highlight the currently opened item (optional)
+                if (currentTitle && c.getAttribute('data-title') === currentTitle) {
+                    c.style.outline = '3px solid rgba(37,99,235,0.12)';
+                } else {
+                    c.style.outline = 'none';
+                }
+            });
+
+            // Delegate click: open related card in detail view (and enter fullscreen)
+            grid.removeEventListener('click', relatedClickHandler);
+            grid.addEventListener('click', relatedClickHandler);
+
+            // We will not auto-scroll here to allow users to scroll the full list naturally.
+            stopRelatedAutoscroll();
+        }
+
+        function stopRelatedAutoscroll(){
+            if (relatedAutoScrollInterval) { clearInterval(relatedAutoScrollInterval); relatedAutoScrollInterval = null; }
+        }
+
+        function relatedClickHandler(e){
+            const card = e.target.closest('.card');
+            if (!card) return;
+            // open detail for this card
+            stopRelatedAutoscroll();
+            openDetail(card);
+            // attempt to go fullscreen for the detail view (like opening a video)
+            const dv = document.getElementById('detail-view');
+            try {
+                if (dv.requestFullscreen) dv.requestFullscreen();
+            } catch (err) {
+                // ignore if fullscreen fails
+            }
+        }
+
+        // === Up-next / Autoplay (YouTube-like) ===
+        let relatedAutoplayTimer = null;
+        let relatedAutoplayCountdown = 0;
+        let relatedAutoplayOverlay = null;
+        const AUTOPLAY_DELAY_SECONDS = 8; // countdown duration before auto-opening next item
+
+        function ensureAutoplayOverlay(){
+            if (relatedAutoplayOverlay) return relatedAutoplayOverlay;
+            relatedAutoplayOverlay = document.createElement('div');
+            relatedAutoplayOverlay.id = 'upnext-overlay';
+            relatedAutoplayOverlay.style.position = 'fixed';
+            relatedAutoplayOverlay.style.right = '16px';
+            relatedAutoplayOverlay.style.top = '80px';
+            relatedAutoplayOverlay.style.background = 'rgba(0,0,0,0.7)';
+            relatedAutoplayOverlay.style.color = '#fff';
+            relatedAutoplayOverlay.style.padding = '10px 12px';
+            relatedAutoplayOverlay.style.borderRadius = '8px';
+            relatedAutoplayOverlay.style.zIndex = 12000;
+            relatedAutoplayOverlay.style.fontSize = '0.95rem';
+            relatedAutoplayOverlay.style.display = 'none';
+
+            relatedAutoplayOverlay.innerHTML = `
+                <div style="display:flex;align-items:center;gap:10px;max-width:260px;">
+                    <div style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" id="upnext-title">Up next</div>
+                    <div id="upnext-count" style="font-weight:700;min-width:28px;text-align:right"></div>
+                    <button id="upnext-cancel" style="background:#ef4444;border:0;color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer">Cancel</button>
+                </div>
+            `;
+            document.body.appendChild(relatedAutoplayOverlay);
+            document.getElementById('upnext-cancel').addEventListener('click', stopRelatedAutoplay);
+            return relatedAutoplayOverlay;
+        }
+
+        function startRelatedAutoplay(currentTitle){
+            stopRelatedAutoplay();
+            const grid = document.getElementById('related-grid');
+            if (!grid) return;
+            // find current card element inside related-grid
+            const cards = Array.from(grid.querySelectorAll('.card'));
+            let idx = cards.findIndex(c => c.getAttribute('data-title') === currentTitle);
+            if (idx === -1) idx = 0; // fallback
+
+            // pick next index (loop)
+            const nextIndex = (idx + 1) % cards.length;
+            const nextCard = cards[nextIndex];
+            if (!nextCard) return;
+
+            const overlay = ensureAutoplayOverlay();
+            document.getElementById('upnext-title').textContent = 'Up next: ' + (nextCard.getAttribute('data-title') || '—');
+            relatedAutoplayCountdown = AUTOPLAY_DELAY_SECONDS;
+            document.getElementById('upnext-count').textContent = relatedAutoplayCountdown + 's';
+            overlay.style.display = 'block';
+
+            relatedAutoplayTimer = setInterval(()=>{
+                relatedAutoplayCountdown -= 1;
+                if (relatedAutoplayCountdown <= 0){
+                    stopRelatedAutoplay();
+                    // open the next card in detail view
+                    openDetail(nextCard);
+                    // try fullscreen like YouTube's immersive mode
+                    try { document.getElementById('detail-view').requestFullscreen && document.getElementById('detail-view').requestFullscreen(); } catch(e){}
+                } else {
+                    const el = document.getElementById('upnext-count');
+                    if (el) el.textContent = relatedAutoplayCountdown + 's';
+                }
+            }, 1000);
+        }
+
+        function stopRelatedAutoplay(){
+            if (relatedAutoplayTimer){ clearInterval(relatedAutoplayTimer); relatedAutoplayTimer = null; }
+            if (relatedAutoplayOverlay) relatedAutoplayOverlay.style.display = 'none';
+        }
+        
+        // Banner Slider Functionality
+        let bannerIndex = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        const indicators = document.querySelectorAll('.banner-indicator');
+        
+        function showBanner(n) {
+            bannerIndex += n;
+            if (bannerIndex >= slides.length) { bannerIndex = 0; }
+            if (bannerIndex < 0) { bannerIndex = slides.length - 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[bannerIndex].classList.add('active');
+            indicators[bannerIndex].classList.add('active');
+        }
+        
+        function currentBanner(n) {
+            bannerIndex = n;
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[bannerIndex].classList.add('active');
+            indicators[bannerIndex].classList.add('active');
+        }
+        
+        // Auto slide banner every 5 seconds
+        setInterval(() => {
+            showBanner(1);
+        }, 5000);
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDarkMode = html.classList.toggle('dark-mode');
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Update icon
+            const toggleBtn = document.querySelector('.theme-toggle i');
+            if (toggleBtn) {
+                toggleBtn.classList.toggle('fa-moon');
+                toggleBtn.classList.toggle('fa-sun');
+            }
+        }
+
+        // Restore theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+                const toggleBtn = document.querySelector('.theme-toggle i');
+                if (toggleBtn) {
+                    toggleBtn.classList.remove('fa-moon');
+                    toggleBtn.classList.add('fa-sun');
+                }
+            }
+        });
+    </script>
+    <script>
+        // Hide any h1 elements with text content 'X'
+        document.addEventListener('DOMContentLoaded', function() {
+            const h1Elements = document.querySelectorAll('h1');
+            h1Elements.forEach(function(h1) {
+                if (h1.textContent.trim() === 'X') {
+                    h1.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script>
+        /*
+         Dynamic external section loader
+         - Attempts to fetch an external HTML file (e.g. gaming.html)
+         - Parses its .card elements and injects them into this page's #mainGrid
+         - Removes existing cards with the same data-main attribute to avoid duplicates
+         - Falls back to embedding an iframe if fetch is blocked (common when opening files with file://)
+        */
+        (function(){
+            async function loadExternalCards(url, mainAttr = 'Gaming'){
+                const mainGrid = document.getElementById('mainGrid');
+                if (!mainGrid) return;
+
+                // Remove existing cards for this category to avoid duplicates
+                document.querySelectorAll('#mainGrid .card').forEach(c => {
+                    if (c.getAttribute('data-main') === mainAttr) c.remove();
+                });
+
+                try {
+                    // add cache-buster to avoid stale cached file when testing local edits
+                    const fetchUrl = url + ((url.indexOf('?') === -1) ? '?_=' + Date.now() : '&_=' + Date.now());
+                    const res = await fetch(fetchUrl);
+                    if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+                    const text = await res.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+
+                    // Try to find cards inside the external page
+                    const externalCards = doc.querySelectorAll('.card');
+                    if (!externalCards || externalCards.length === 0) {
+                        console.warn('No .card elements found in', url);
+                        return true;
+                    }
+
+                    externalCards.forEach(ec => {
+                        // Only import cards belonging to the specified main category
+                        if (ec.getAttribute('data-main') === mainAttr) {
+                            // Import node into current document
+                            const imported = document.importNode(ec, true);
+                            mainGrid.appendChild(imported);
+                        }
+                    });
+
+                    // showLoadStatus('Loaded content from ' + url, true); // hide success message
+                    console.log('Loaded external cards from', url);
+                    return true;
+                } catch (err) {
+                    console.warn('Could not fetch', url, err);
+                    // Fallback: embed the external page with an iframe so user still sees latest content
+                    // This fallback is mainly for local file:// usage where fetch() is blocked by the browser.
+                    const fallbackId = 'external-fallback-iframe';
+                    if (!document.getElementById(fallbackId)){
+                        const wrapper = document.createElement('div');
+                        wrapper.style.marginTop = '20px';
+                        wrapper.innerHTML = `
+                            <div style="background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
+                                <div style="font-weight:700;margin-bottom:8px;">Live section (fallback)</div>
+                                <iframe id="${fallbackId}" src="${url}" style="width:100%;height:700px;border:0;border-radius:8px;"></iframe>
+                                <div style="font-size:12px;color:#666;margin-top:8px;">Tip: For best results enable a local web server and open the site via http:// (eg. run <code>python -m http.server</code> in your project folder).</div>
+                            </div>
+                        `;
+                        mainGrid.parentNode.insertBefore(wrapper, mainGrid.nextSibling);
+                    }
+                    // show failure message
+                    showLoadStatus('Could not load ' + url + ' — opening raw page instead', false);
+                    // rethrow so callers (eg. category click) can react (redirect to full page)
+                    throw err;
+                }
+            }
+
+            // Small visual status indicator so user sees live loader results
+            function showLoadStatus(message, ok){
+                let el = document.getElementById('loader-status');
+                if (!el){
+                    el = document.createElement('div');
+                    el.id = 'loader-status';
+                    el.style.position = 'fixed';
+                    el.style.right = '16px';
+                    el.style.bottom = '16px';
+                    el.style.padding = '8px 12px';
+                    el.style.borderRadius = '8px';
+                    el.style.boxShadow = '0 6px 18px rgba(0,0,0,0.08)';
+                    el.style.fontSize = '0.9rem';
+                    el.style.zIndex = '9999';
+                    document.body.appendChild(el);
+                }
+                el.textContent = message;
+                el.style.background = ok ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)';
+                el.style.color = ok ? '#065f46' : '#7f1d1d';
+                // auto-hide after 4s
+                clearTimeout(el._hideT);
+                el._hideT = setTimeout(()=>{ el.style.display = 'none'; }, 4000);
+                el.style.display = 'block';
+            }
+
+            // Expose loader to global scope so other scripts can call it (e.g., category click handler)
+            window.loadExternalCards = loadExternalCards;
+
+            // Run on DOMContentLoaded to ensure #mainGrid exists
+            document.addEventListener('DOMContentLoaded', function(){
+                // Try to load gaming.html and replace/append Gaming cards (best-effort; ignore errors)
+                if (window.loadExternalCards) {
+                    // load external cards first, then shuffle so imported cards are included in the random order
+                    window.loadExternalCards('gaming.html', 'Gaming').catch(()=>{}).finally(()=>{
+                        try { shuffleMainGrid(); } catch(e){}
+                    });
+                } else {
+                    try { shuffleMainGrid(); } catch(e){}
+                }
+            });
+        })();
+    </script>
+        <script>
+            // Enhance category switching: when user selects the 'Gaming' category, fetch live cards on-demand.
+            (function(){
+                // Wrap existing setCategory by replacing the global function reference
+                const originalSetCategory = window.setCategory;
+                window.setCategory = function(mainCat){
+                    // call original to update UI immediately
+                    try { originalSetCategory(mainCat); } catch(e){ console.warn(e); }
+
+                    // mapping from category label used in setCategory(...) to a standalone HTML file
+                    const categoryToFile = {
+                        'Trending': 'trending.html',
+                        'Gaming': 'gaming.html',
+                        'Content Creators': 'content-creators.html',
+                        'Market': 'market.html',
+                        'Food': 'food.html',
+                        'Services': 'services.html',
+                        'Health': 'health.html',
+                        'Education': 'education.html',
+                        'Property': 'property.html',
+                        'Special': 'special.html',
+                        'Travel': 'travel.html',
+                        'Khurja Special': 'khurja-special.html',
+                        'Events': 'events.html',
+                        'Emergency & Help': 'emergency.html',
+                        'Religion & Places': 'religion.html',
+                        // convenience keys in case file names differ
+                        'Businesses': 'businesses.html',
+                        'Creators': 'creators.html'
+                    };
+
+                    const file = categoryToFile[mainCat];
+                    if (file && window.loadExternalCards){
+                        // remove any existing cards for this category to avoid duplicates
+                        document.querySelectorAll('#mainGrid .card').forEach(c => {
+                            if (c.getAttribute('data-main') === mainCat) c.remove();
+                        });
+
+                        window.loadExternalCards(file, mainCat)
+                            .then(() => filterGrid(mainCat,'All'))
+                            .catch(() => {
+                                // If fetch fails (likely due to file:// restrictions), redirect to the raw page so user sees latest edits
+                                window.location.href = file;
+                            });
+                    }
+                };
+            })();
+        </script>
+</body>
+</html>
