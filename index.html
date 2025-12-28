@@ -851,11 +851,18 @@
                 btnCall.innerHTML = `<i class="fas fa-phone"></i> Call`;
             }
 
-            // Related: clone current main grid into related grid and initialize carousel
-            const allCardsHTML = document.getElementById('mainGrid').innerHTML;
-            document.getElementById('related-grid').innerHTML = allCardsHTML;
-            // initialize carousel; pass current title so it's highlighted
-            initRelatedCarousel(d.title);
+            // Related: DON'T clone entire grid - only show related items by filtering
+            const relatedGrid = document.getElementById('related-grid');
+            relatedGrid.innerHTML = ''; // Clear first
+            
+            // Only add cards that match the same main category
+            const mainGridCards = document.querySelectorAll('#mainGrid .card');
+            mainGridCards.forEach(c => {
+                if (c.getAttribute('data-main') === d.main) {
+                    const clone = c.cloneNode(true);
+                    relatedGrid.appendChild(clone);
+                }
+            });
 
             // Hide detail loading indicator
             setTimeout(() => {
@@ -1014,18 +1021,23 @@
             const slider = document.querySelector('.dt-slider-box .card-slider');
             if (!slider) return;
             
-            slider.addEventListener('touchstart', (e) => {
+            // Remove old listeners first to prevent duplicates
+            const newSlider = slider.cloneNode(true);
+            slider.parentNode.replaceChild(newSlider, slider);
+            
+            const updatedSlider = document.querySelector('.dt-slider-box .card-slider');
+            updatedSlider.addEventListener('touchstart', (e) => {
                 touchStartX = e.touches[0].clientX;
                 touchStartY = e.touches[0].clientY;
             });
-            slider.addEventListener('touchend', handleDetailSliderSwipe);
+            updatedSlider.addEventListener('touchend', handleDetailSliderSwipe);
             
             // Optional: support mouse drag on desktop
-            slider.addEventListener('mousedown', (e) => {
+            updatedSlider.addEventListener('mousedown', (e) => {
                 touchStartX = e.clientX;
                 touchStartY = e.clientY;
             });
-            slider.addEventListener('mouseup', handleDetailSliderSwipe);
+            updatedSlider.addEventListener('mouseup', handleDetailSliderSwipe);
         }
                 // stop autoscroll when closing detail
                 const originalCloseDetail = closeDetail;
