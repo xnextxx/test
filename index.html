@@ -285,12 +285,85 @@
 
         .related-box { background: #f8fafc; padding: 20px; margin-top: 20px; border-radius: 15px;}
         .related-head { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; }
+        
+        /* LOADING INDICATOR */
+        .loading-indicator {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 15px;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1rem;
+        }
         /* Mobile tweaks: make social buttons (eg. Instagram) more prominent on small screens */
         @media (max-width: 600px) {
             .soc-btn { font-size: 1.1rem; padding: 10px; }
             .soc-btn i { font-size: 1.1rem; }
             /* Slightly larger card titles on small devices for readability */
             .card-title { font-size: 1.05rem; }
+        }
+        
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container { padding: 0 10px; }
+            .grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+            .controls { margin: -60px auto 15px auto; padding: 15px; }
+            .main-cats { gap: 8px; }
+            .cat-btn { padding: 8px 15px; font-size: 0.9rem; }
+            .sub-btn { padding: 5px 12px; font-size: 0.8rem; }
+            .card { border-radius: 12px; }
+            .card-slider { height: 180px; }
+            .card-body { padding: 12px; }
+            .card-title { font-size: 1.1rem; }
+            .dt-name { font-size: 1.5rem; }
+            .dt-meta { font-size: 0.85rem; }
+            .dt-desc { font-size: 0.95rem; }
+            .social-grid { grid-template-columns: 1fr; gap: 10px; }
+            .btn-web { grid-column: span 1; }
+            .theme-toggle { top: 10px; right: 10px; padding: 6px 10px; font-size: 1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .grid { grid-template-columns: 1fr; }
+            .main-cats { flex-direction: column; align-items: flex-start; }
+            .cat-btn { width: 100%; justify-content: flex-start; }
+            .sub-cats { flex-wrap: wrap; }
+            .sub-btn { padding: 4px 10px; font-size: 0.75rem; }
+            .card-slider { height: 160px; }
+            .card-title { font-size: 1rem; }
+            .card-desc { font-size: 0.85rem; }
+            .dt-name { font-size: 1.3rem; }
+            .dt-desc { font-size: 0.9rem; }
+            .dt-slider-box { height: 250px; }
+            .soc-btn { padding: 8px; font-size: 1rem; }
+        }
+        
+        /* Touch-friendly adjustments */
+        @media (hover: none) and (pointer: coarse) {
+            .card { transition: transform 0.2s; }
+            .card:active { transform: scale(0.98); }
+            .cat-btn, .sub-btn, .soc-btn { padding: 12px 16px; min-height: 44px; /* Minimum touch target size */ }
         }
     </style>
 </head>
@@ -348,6 +421,12 @@
 
         <div class="container">
             <div class="grid" id="mainGrid">
+
+                <!-- Loading Indicator -->
+                <div class="loading-indicator" id="loadingIndicator">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">Loading content...</div>
+                </div>
 
              <div id="card-1" class="card" onclick="openDetail(this)"
                      data-main="Services" data-sub="Makeup"
@@ -615,6 +694,9 @@
 
         // CATEGORY FILTER
         function setCategory(mainCat) {
+            // Show loading indicator
+            document.getElementById('loadingIndicator').style.display = 'flex';
+            
             // Clear previous active state
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
             // Try to set active button robustly (don't rely on global `event` which may be undefined)
@@ -657,16 +739,34 @@
                 else if (sub === 'All') card.style.display = (cMain === main) ? 'block' : 'none';
                 else card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
             });
+            
+            // Hide loading indicator after filtering is complete
+            setTimeout(() => {
+                document.getElementById('loadingIndicator').style.display = 'none';
+            }, 100); // Small delay to make the loading indicator visible
         }
         
 
         // SEARCH
         function globalSearch() {
+            // Show loading indicator during search
+            document.getElementById('loadingIndicator').style.display = 'flex';
+            
             const input = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(card => {
-                const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
-                card.style.display = text.includes(input) ? 'block' : 'none';
-            });
+            
+            // Add delay to avoid too frequent updates during typing
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                document.querySelectorAll('.card').forEach(card => {
+                    const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
+                    card.style.display = text.includes(input) ? 'block' : 'none';
+                });
+                
+                // Hide loading indicator after search is complete
+                setTimeout(() => {
+                    document.getElementById('loadingIndicator').style.display = 'none';
+                }, 100);
+            }, 300); // 300ms delay to allow for typing
         }
 
         // Shuffle the main grid so the order changes on each refresh (Fisher-Yates)
@@ -691,6 +791,12 @@
 
         // OPEN DETAIL PAGE
         function openDetail(card) {
+            // Show loading indicator for detail view
+            const detailLoadingIndicator = document.getElementById('detailLoadingIndicator');
+            if (detailLoadingIndicator) {
+                detailLoadingIndicator.style.display = 'flex';
+            }
+            
             const d = {
                 title: card.getAttribute('data-title'),
                 desc: card.getAttribute('data-desc'),
@@ -737,6 +843,13 @@
             btnInsta.style.display = d.insta ? 'flex' : 'none';
             btnFb.style.display = d.fb ? 'flex' : 'none';
             btnWeb.style.display = d.web ? 'flex' : 'none';
+            
+            // Update phone button text to show the actual phone number
+            if (d.phone) {
+                btnCall.innerHTML = `<i class="fas fa-phone"></i> Call ${d.phone}`;
+            } else {
+                btnCall.innerHTML = `<i class="fas fa-phone"></i> Call`;
+            }
 
             // Related: clone current main grid into related grid and initialize carousel
             const allCardsHTML = document.getElementById('mainGrid').innerHTML;
@@ -744,12 +857,18 @@
             // initialize carousel; pass current title so it's highlighted
             initRelatedCarousel(d.title);
 
+            // Hide detail loading indicator
+            setTimeout(() => {
+                const detailLoadingIndicator = document.getElementById('detailLoadingIndicator');
+                if (detailLoadingIndicator) {
+                    detailLoadingIndicator.style.display = 'none';
+                }
+            }, 100);
+            
             // Show
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('detail-view').style.display = 'block';
             window.scrollTo(0,0);
-            // start autoplay countdown for 'Up next' behavior
-            try { startRelatedAutoplay(d.title); } catch(e){ /* ignore */ }
             // setup gesture handling for multi-directional image swipe
             try { currentImageIndex = 0; setupDetailSliderGestures(); } catch(e){ /* ignore */ }
             // update like button state
@@ -912,7 +1031,6 @@
                 const originalCloseDetail = closeDetail;
                 window.closeDetail = function(){
                     stopRelatedAutoscroll();
-                    stopRelatedAutoplay();
                     try { originalCloseDetail(); } catch(e) { /* ignore */ }
                 }
 
@@ -973,78 +1091,7 @@
             }
         }
 
-        // === Up-next / Autoplay (YouTube-like) ===
-        let relatedAutoplayTimer = null;
-        let relatedAutoplayCountdown = 0;
-        let relatedAutoplayOverlay = null;
-        const AUTOPLAY_DELAY_SECONDS = 8; // countdown duration before auto-opening next item
 
-        function ensureAutoplayOverlay(){
-            if (relatedAutoplayOverlay) return relatedAutoplayOverlay;
-            relatedAutoplayOverlay = document.createElement('div');
-            relatedAutoplayOverlay.id = 'upnext-overlay';
-            relatedAutoplayOverlay.style.position = 'fixed';
-            relatedAutoplayOverlay.style.right = '16px';
-            relatedAutoplayOverlay.style.top = '80px';
-            relatedAutoplayOverlay.style.background = 'rgba(0,0,0,0.7)';
-            relatedAutoplayOverlay.style.color = '#fff';
-            relatedAutoplayOverlay.style.padding = '10px 12px';
-            relatedAutoplayOverlay.style.borderRadius = '8px';
-            relatedAutoplayOverlay.style.zIndex = 12000;
-            relatedAutoplayOverlay.style.fontSize = '0.95rem';
-            relatedAutoplayOverlay.style.display = 'none';
-
-            relatedAutoplayOverlay.innerHTML = `
-                <div style="display:flex;align-items:center;gap:10px;max-width:260px;">
-                    <div style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" id="upnext-title">Up next</div>
-                    <div id="upnext-count" style="font-weight:700;min-width:28px;text-align:right"></div>
-                    <button id="upnext-cancel" style="background:#ef4444;border:0;color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer">Cancel</button>
-                </div>
-            `;
-            document.body.appendChild(relatedAutoplayOverlay);
-            document.getElementById('upnext-cancel').addEventListener('click', stopRelatedAutoplay);
-            return relatedAutoplayOverlay;
-        }
-
-        function startRelatedAutoplay(currentTitle){
-            stopRelatedAutoplay();
-            const grid = document.getElementById('related-grid');
-            if (!grid) return;
-            // find current card element inside related-grid
-            const cards = Array.from(grid.querySelectorAll('.card'));
-            let idx = cards.findIndex(c => c.getAttribute('data-title') === currentTitle);
-            if (idx === -1) idx = 0; // fallback
-
-            // pick next index (loop)
-            const nextIndex = (idx + 1) % cards.length;
-            const nextCard = cards[nextIndex];
-            if (!nextCard) return;
-
-            const overlay = ensureAutoplayOverlay();
-            document.getElementById('upnext-title').textContent = 'Up next: ' + (nextCard.getAttribute('data-title') || '—');
-            relatedAutoplayCountdown = AUTOPLAY_DELAY_SECONDS;
-            document.getElementById('upnext-count').textContent = relatedAutoplayCountdown + 's';
-            overlay.style.display = 'block';
-
-            relatedAutoplayTimer = setInterval(()=>{
-                relatedAutoplayCountdown -= 1;
-                if (relatedAutoplayCountdown <= 0){
-                    stopRelatedAutoplay();
-                    // open the next card in detail view
-                    openDetail(nextCard);
-                    // try fullscreen like YouTube's immersive mode
-                    try { document.getElementById('detail-view').requestFullscreen && document.getElementById('detail-view').requestFullscreen(); } catch(e){}
-                } else {
-                    const el = document.getElementById('upnext-count');
-                    if (el) el.textContent = relatedAutoplayCountdown + 's';
-                }
-            }, 1000);
-        }
-
-        function stopRelatedAutoplay(){
-            if (relatedAutoplayTimer){ clearInterval(relatedAutoplayTimer); relatedAutoplayTimer = null; }
-            if (relatedAutoplayOverlay) relatedAutoplayOverlay.style.display = 'none';
-        }
         
         // Banner Slider Functionality
         let bannerIndex = 0;
