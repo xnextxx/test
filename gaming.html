@@ -1,77 +1,5 @@
 <!DOCTYPE html>
-<        /* Dark mode */
-        html.dark-mode {
-            --primary: #60a5fa;
-            --bg: #0f172a;
-            --text: #e5e7eb;
-            --white: #1e293b;
-            --dark: #e5e7eb;
-        }
-
-        /* Dark mode button & text fixes */
-        html.dark-mode .cat-btn {
-            background: #334155;
-            color: #e5e7eb;
-            border-color: #475569;
-        }
-
-        html.dark-mode .cat-btn.active {
-            background: #60a5fa;
-            color: #0f172a;
-            border-color: #60a5fa;
-        }
-
-        html.dark-mode .cat-btn.all-btn {
-            background: #1e293b;
-            color: #e5e7eb;
-            border-color: #475569;
-        }
-
-        html.dark-mode .sub-btn {
-            background: #334155;
-            color: #e5e7eb;
-        }
-
-        html.dark-mode .sub-btn.active {
-            background: #60a5fa;
-            color: #0f172a;
-        }
-
-        html.dark-mode .controls {
-            background: #1e293b;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        html.dark-mode .search-box {
-            background: #334155;
-            color: #e5e7eb;
-            border-color: #475569;
-        }
-
-        html.dark-mode .search-box:focus {
-            border-color: #60a5fa;
-        }
-
-        html.dark-mode .card {
-            background: #1e293b;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        html.dark-mode .card-title {
-            color: #e5e7eb;
-        }
-
-        html.dark-mode .card-desc {
-            color: #a0aec0;
-        }
-
-        html.dark-mode .related-box {
-            background: #334155;
-        }
-
-        html.dark-mode .related-head {
-            color: #e5e7eb;
-        }g="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,15 +14,6 @@
             --white: #ffffff;
             --green: #10b981;         
             --dark: #0f172a;
-        }
-
-        /* Dark mode */
-        html.dark-mode {
-            --primary: #60a5fa;
-            --bg: #0f172a;
-            --text: #e5e7eb;
-            --white: #1f2937;
-            --dark: #f3f4f6;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -146,15 +65,11 @@
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 2;
-            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 50%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
-            filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.4));
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
         
         .banner-indicators {
@@ -177,34 +92,6 @@
         
         .banner-indicator.active {
             background: white;
-        }
-
-        /* THEME TOGGLE */
-        .theme-toggle { position: absolute; top: 15px; right: 15px; z-index: 20; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 1.2rem; transition: all 0.3s; }
-        .theme-toggle:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
-
-        /* HEART ANIMATION */
-        @keyframes floatingHeart {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-60px) scale(1.2);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 0;
-            }
-        }
-
-        .floating-heart {
-            position: fixed;
-            font-size: 2rem;
-            pointer-events: none;
-            z-index: 9999;
-            animation: floatingHeart 0.8s ease-out forwards;
         }
 
         /* CONTROLS */
@@ -250,12 +137,9 @@
         .card-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
         .swipe-hint { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); color: #333; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; pointer-events: none; }
 
-        .card-body { padding: 15px; position: relative; }
+        .card-body { padding: 15px; }
         .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
-        .card-desc { font-size: 0.9rem; color: #64748b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
-        .card-like-btn { position: absolute; bottom: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; }
-        .card-like-btn:hover { transform: scale(1.2); }
-        .card-like-btn.liked { color: #ef4444; }
+    .card-desc { font-size: 0.9rem; color: #64748b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 2; }
 
         /* DETAIL PAGE */
         #detail-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white); z-index: 100; overflow-y: auto; }
@@ -291,15 +175,17 @@
 
     <div id="home-view">
         <header>
-            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
             <div class="banner-slider" id="bannerSlider">
                 <div class="banner-slide active">
+                    <img src="https://i.ibb.co/k60HjWbG/Chat-GPT-Image-Dec-25-2025-11-58-03-PM.png" alt="Banner 1">
                     <div class="banner-text">KhurjaX</div>
                 </div>
                 <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=1200" alt="Banner 2">
                     <div class="banner-text">KhurjaX</div>
                 </div>
                 <div class="banner-slide">
+                    <img src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=1200" alt="Banner 3">
                     <div class="banner-text">KhurjaX</div>
                 </div>
                 <div class="banner-indicators" id="bannerIndicators">
@@ -318,10 +204,9 @@
             
             <div class="main-cats">
                 <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> All Gaming</button>
-                <button class="cat-btn" onclick="setCategory('Trending')"><i class="fas fa-fire"></i> Trending 🔥</button>
-                <button class="cat-btn" onclick="setCategory('Gaming')">Gaming 🎮</button>
-                <button class="cat-btn" onclick="setCategory('BGMI')">BGMI 🎯</button>
-                <button class="cat-btn" onclick="setCategory('FREE FIRE')">FREE FIRE 🔥</button>
+                <button class="cat-btn" onclick="setCategory('Gaming')">Gaming</button>
+                <button class="cat-btn" onclick="setCategory('BGMI')">BGMI</button>
+                <button class="cat-btn" onclick="setCategory('FREE FIRE')">FREE FIRE</button>
             </div>
             
             <div class="sub-cats" id="subCatContainer"><small>Showing All Gaming Listings</small></div>
@@ -332,13 +217,12 @@
 
                 <div class="card" onclick="openDetail(this)"
                      data-main="Gaming" data-sub="BGMI"
-                     data-title="ABHINAV YADAV - BGM0000000"
+                     data-title="ABHINAV YADAV "
                      data-desc="Weekly BGMI tournaments with cash prizes. Register now for next tournament."
                      data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#ef4444;">abhinav</span>
-                        <span class="swipe-hint">← Swipe →</span>
-                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img"><img src="https://images.unsplash.com/photo-1538481143235-5d630fd3ab47?w=600" class="card-img"></div>
+                        <span class="card-badge" style="background:#ef4444;">ABHINAV</span>
+                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"></div>
                     </div>
                     <div class="card-body"><h3 class="card-title">ABHINAV YADAV </h3><p class="card-desc">Weekly BGMI tournaments with cash prizes. Register now for next tournament.</p></div>
                 </div>
@@ -350,33 +234,33 @@
                      data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
                     <div class="slider-wrapper">
                         <span class="card-badge" style="background:#ef4444;">Gaming</span>
-                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600" class="card-img"></div>
+                        <div class="card-slider"><img src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg" class="card-img"></div>
                     </div>
                     <div class="card-body"><h3 class="card-title">Khurja Free Fire Club</h3><p class="card-desc">Free Fire gaming club organizing tournaments and practice sessions.</p></div>
                 </div>
 
                 <div class="card" onclick="openDetail(this)"
                      data-main="Gaming" data-sub="BGMI"
-                     data-title="Cyber Zone Gaming Cafe"
-                     data-desc="High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi."
+                     data-title="ABHINAV YADAV"
+                     data-desc="GAME ID 55613751771, GAME NAME A7ALLGAME"
                      data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
                     <div class="slider-wrapper">
                         <span class="card-badge" style="background:#333;">Cafe</span>
-                        <div class="card-slider"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img"></div>
+                        <div class="card-slider"><img src="https://i.ibb.co/B2TgMmHT/4.jpg" class="card-img"><img src="https://i.ibb.co/bg31vk89/5.jpg" class="card-img"><img src="https://i.ibb.co/vCKbj9pb/6.jpg" class="card-img"></div>
                     </div>
-                    <div class="card-body"><h3 class="card-title">Cyber Zone Gaming Cafe</h3><p class="card-desc">High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi.</p></div>
+                    <div class="card-body"><h3 class="card-title">ABHINAV YADAV</h3><p class="card-desc">GAME ID 55613751771, GAME NAME A7ALLGAME</p></div>
                 </div>
 
                 <div class="card" onclick="openDetail(this)"
-                     data-main="Gaming" data-sub="PC Games"
-                     data-title="Game World PC Cafe"
-                     data-desc="PC gaming center with high-end systems, latest games, and esports tournaments."
-                     data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
+                     data-main="Gaming" data-sub="BGMI"
+                     data-title="DEVA RAGHAV"
+                     data-desc="GAME ID 55726767538 , GAME NAME DevRaghav13"
+                     data-phone="not available" data-whatsapp="" data-insta="https://www.instagram.com/devv__raghavv?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" data-fb="" data-website="">
                     <div class="slider-wrapper">
                         <span class="card-badge" style="background:#333;">PC Gaming</span>
                         <div class="card-slider"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img"></div>
                     </div>
-                    <div class="card-body"><h3 class="card-title">Game World PC Cafe</h3><p class="card-desc">PC gaming center with high-end systems, latest games, and esports tournaments.</p></div>
+                    <div class="card-body"><h3 class="card-title">DEVA RAGHAV</h3><p class="card-desc">GAME ID 55726767538 , GAME NAME DevRaghav13</p></div>
                 </div>
 
                 <div class="card" onclick="openDetail(this)"
@@ -442,7 +326,7 @@
         const subCategories = {
             'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
             'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
-            'Services': ['Makeup','Barber/Hair salon','Electrician', 'Plumber', 'ACRepair'],
+            'Services': ['Makeup', 'Electrician', 'Plumber', 'ACRepair'],
             'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
             'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
             'Property': ['RentHouse', 'BuySell', 'Plots', 'Rent House', 'Buy/Sell'],
@@ -501,42 +385,6 @@
                 card.style.display = text.includes(input) ? 'block' : 'none';
             });
         }
-
-        // Like button functionality
-        function toggleLike(event) {
-            event.stopPropagation(); // prevent opening detail view when clicking like
-            const btn = event.target.closest('.card-like-btn');
-            if (!btn) return;
-            
-            btn.classList.toggle('liked');
-            if (btn.classList.contains('liked')) {
-                btn.textContent = '❤'; // filled heart
-                // Save to localStorage (optional)
-                const cardTitle = btn.closest('.card').getAttribute('data-title');
-                let likes = JSON.parse(localStorage.getItem('likes') || '{}');
-                likes[cardTitle] = true;
-                localStorage.setItem('likes', JSON.stringify(likes));
-            } else {
-                btn.textContent = '♡'; // empty heart
-                const cardTitle = btn.closest('.card').getAttribute('data-title');
-                let likes = JSON.parse(localStorage.getItem('likes') || '{}');
-                delete likes[cardTitle];
-                localStorage.setItem('likes', JSON.stringify(likes));
-            }
-        }
-
-        // Restore likes from localStorage on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            let likes = JSON.parse(localStorage.getItem('likes') || '{}');
-            document.querySelectorAll('.card-like-btn').forEach(btn => {
-                const cardTitle = btn.closest('.card').getAttribute('data-title');
-                if (likes[cardTitle]) {
-                    btn.classList.add('liked');
-                    btn.textContent = '❤';
-                }
-            });
-        });
-
 
         // OPEN DETAIL PAGE
         function openDetail(card) {
@@ -626,35 +474,6 @@
         setInterval(() => {
             showBanner(1);
         }, 5000);
-
-        // Theme toggle functionality
-        function toggleTheme() {
-            const html = document.documentElement;
-            const isDarkMode = html.classList.toggle('dark-mode');
-            
-            // Save preference to localStorage
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            
-            // Update icon
-            const toggleBtn = document.querySelector('.theme-toggle i');
-            if (toggleBtn) {
-                toggleBtn.classList.toggle('fa-moon');
-                toggleBtn.classList.toggle('fa-sun');
-            }
-        }
-
-        // Restore theme on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark-mode');
-                const toggleBtn = document.querySelector('.theme-toggle i');
-                if (toggleBtn) {
-                    toggleBtn.classList.remove('fa-moon');
-                    toggleBtn.classList.add('fa-sun');
-                }
-            }
-        });
     </script>
     <script>
         // Hide any h1 elements with text content 'X'
