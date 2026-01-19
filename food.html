@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KhurjaX - Khurja ka Digital Hub</title>
+    <title>Food in Khurja - KhurjaX</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- GLOBAL CSS --- */
         :root {
@@ -16,80 +15,6 @@
             --white: #ffffff;
             --green: #10b981;
             --dark: #0f172a;
-        }
-
-        /* Dark mode */
-        html.dark-mode {
-            --primary: #60a5fa;
-            --bg: #0f172a;
-            --text: #e5e7eb;
-            --white: #1e293b;
-            --dark: #e5e7eb;
-        }
-
-        /* Dark mode button & text fixes */
-        html.dark-mode .cat-btn {
-            background: #334155;
-            color: #e5e7eb;
-            border-color: #475569;
-        }
-
-        html.dark-mode .cat-btn.active {
-            background: #60a5fa;
-            color: #0f172a;
-            border-color: #60a5fa;
-        }
-
-        html.dark-mode .cat-btn.all-btn {
-            background: #1e293b;
-            color: #e5e7eb;
-            border-color: #475569;
-        }
-
-        html.dark-mode .sub-btn {
-            background: #334155;
-            color: #e5e7eb;
-        }
-
-        html.dark-mode .sub-btn.active {
-            background: #60a5fa;
-            color: #0f172a;
-        }
-
-        html.dark-mode .controls {
-            background: #1e293b;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        html.dark-mode .search-box {
-            background: #334155;
-            color: #e5e7eb;
-            border-color: #475569;
-        }
-
-        html.dark-mode .search-box:focus {
-            border-color: #60a5fa;
-        }
-
-        html.dark-mode .card {
-            background: #1e293b;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        html.dark-mode .card-title {
-            color: #e5e7eb;
-        }
-
-        html.dark-mode .card-desc {
-            color: #a0aec0;
-        }
-
-        html.dark-mode .related-box {
-            background: #334155;
-        }
-
-        html.dark-mode .related-head {
-            color: #e5e7eb;
         }
 
         * {
@@ -114,13 +39,25 @@
             text-align: center;
             height: 250px;
             position: relative;
-            overflow: hidden;
+            background-image: url(https://i.ibb.co/k60HjWbG/Chat-GPT-Image-Dec-25-2025-11-58-03-PM.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* Banner Slider */
         .banner-slider {
-            width: 100%;
-            height: 100%;
             position: relative;
+            height: 250px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            overflow: hidden;
         }
 
         .banner-slide {
@@ -131,9 +68,6 @@
             height: 100%;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
         }
 
         .banner-slide.active {
@@ -149,25 +83,25 @@
         .banner-text {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            left: 0;
+            width: 100%;
             text-align: center;
-            z-index: 2;
+            transform: translateY(-50%);
             color: white;
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .banner-indicators {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 3;
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            z-index: 10;
         }
 
         .banner-indicator {
@@ -176,57 +110,11 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
+            transition: background 0.3s;
         }
 
         .banner-indicator.active {
             background: white;
-        }
-
-        /* THEME TOGGLE */
-        .theme-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-
-        /* HEART ANIMATION */
-        @keyframes floatingHeart {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: translateY(-60px) scale(1.2);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 0;
-            }
-        }
-
-        .floating-heart {
-            position: fixed;
-            font-size: 2rem;
-            pointer-events: none;
-            z-index: 9999;
-            animation: floatingHeart 0.8s ease-out forwards;
         }
 
         /* CONTROLS */
@@ -240,71 +128,6 @@
             position: relative;
             z-index: 5;
         }
-
-        /* YOUTUBE-LIKE SHELVES START */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 0 10px 0;
-            margin-top: 10px;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .section-header h2 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-header .view-all-btn {
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .scroll-tray {
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 85%;
-            /* Shows part of next card to encourage scroll */
-            gap: 15px;
-            overflow-x: auto;
-            overscroll-behavior-inline: contain;
-            padding: 10px 5px 20px 5px;
-            /* Bottom padding for shadow */
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            /* Firefox */
-        }
-
-        .scroll-tray::-webkit-scrollbar {
-            display: none;
-            /* Chrome/Safari */
-        }
-
-        .scroll-tray .card {
-            scroll-snap-align: start;
-            width: 100%;
-            /* Fill the grid column */
-            margin: 0;
-        }
-
-        /* Tablet/Desktop tweaks */
-        @media (min-width: 600px) {
-            .scroll-tray {
-                grid-auto-columns: 300px;
-            }
-        }
-
-        /* YOUTUBE-LIKE SHELVES END */
 
         .search-box {
             width: 100%;
@@ -475,7 +298,6 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-clamp: 2;
         }
 
         /* DETAIL PAGE */
@@ -486,9 +308,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--white);
-            z-index: 100;
+            background: #fff;
+            z-index: 1000;
             overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
         }
 
         .dt-header {
@@ -526,90 +359,16 @@
 
         .dt-slider-box {
             width: 100%;
-            height: 320px;
-            background: #000;
+            height: 300px;
+            background: #f3f4f6;
             position: relative;
             overflow: hidden;
-        }
-
-        .dt-slider-box .card-slider {
-            display: flex;
-            flex-wrap: wrap;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            scroll-snap-type: both mandatory;
-            scrollbar-width: none;
-        }
-
-        .dt-slider-box .card-slider::-webkit-scrollbar {
-            display: none;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         .dt-slider-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            scroll-snap-align: start;
-            flex-shrink: 0;
-        }
-
-        .dt-arrow-btn {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: background 0.2s;
-        }
-
-        .dt-arrow-btn:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        .dt-arrow-left {
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .dt-arrow-right {
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .dt-arrow-up {
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .dt-arrow-down {
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .dt-swipe-hint {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            pointer-events: none;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            z-index: 5;
+            object-fit: contain;
         }
 
         .dt-info {
@@ -683,11 +442,6 @@
             grid-column: span 2;
         }
 
-        .btn-like {
-            background: #ef4444 !important;
-            grid-column: span 2;
-        }
-
         .related-box {
             background: #f8fafc;
             padding: 20px;
@@ -700,652 +454,6 @@
             font-weight: 700;
             margin-bottom: 15px;
         }
-
-        /* LOADING INDICATOR */
-        .loading-indicator {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
-            margin-top: 15px;
-            color: var(--text);
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        /* Mobile tweaks: make social buttons (eg. Instagram) more prominent on small screens */
-        @media (max-width: 600px) {
-            .soc-btn {
-                font-size: 1.1rem;
-                padding: 10px;
-            }
-
-            .soc-btn i {
-                font-size: 1.1rem;
-            }
-
-            /* Slightly larger card titles on small devices for readability */
-            .card-title {
-                font-size: 1.05rem;
-            }
-        }
-
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 10px;
-            }
-
-            .grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 15px;
-            }
-
-            .controls {
-                margin: -60px auto 15px auto;
-                padding: 15px;
-            }
-
-            .main-cats {
-                gap: 8px;
-            }
-
-            .cat-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-
-            .sub-btn {
-                padding: 5px 12px;
-                font-size: 0.8rem;
-            }
-
-            .card {
-                border-radius: 12px;
-            }
-
-            .card-slider {
-                height: 180px;
-            }
-
-            .card-body {
-                padding: 12px;
-            }
-
-            .card-title {
-                font-size: 1.1rem;
-            }
-
-            .dt-name {
-                font-size: 1.5rem;
-            }
-
-            .dt-meta {
-                font-size: 0.85rem;
-            }
-
-            .dt-desc {
-                font-size: 0.95rem;
-            }
-
-            .social-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .btn-web {
-                grid-column: span 1;
-            }
-
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 6px 10px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .main-cats {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .cat-btn {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .sub-cats {
-                flex-wrap: wrap;
-            }
-
-            .sub-btn {
-                padding: 4px 10px;
-                font-size: 0.75rem;
-            }
-
-            .card-slider {
-                height: 160px;
-            }
-
-            .card-title {
-                font-size: 1rem;
-            }
-
-            .card-desc {
-                font-size: 0.85rem;
-            }
-
-            .dt-name {
-                font-size: 1.3rem;
-            }
-
-            .dt-desc {
-                font-size: 0.9rem;
-            }
-
-            .dt-slider-box {
-                height: 250px;
-            }
-
-            .soc-btn {
-                padding: 8px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Touch-friendly adjustments */
-        @media (hover: none) and (pointer: coarse) {
-            .card {
-                transition: transform 0.2s;
-            }
-
-            .card:active {
-                transform: scale(0.98);
-            }
-
-            .cat-btn,
-            .sub-btn,
-            .soc-btn {
-                padding: 12px 16px;
-                min-height: 44px;
-                /* Minimum touch target size */
-            }
-        }
-
-        /* --- SPIN & WIN CSS --- */
-        .spin-trigger-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ff4d4d, #ffcc00);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
-            z-index: 99;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .spin-trigger-btn:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-
-        #spin-win-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #f8fafc;
-            font-family: 'Outfit', sans-serif;
-            overflow: hidden;
-        }
-
-        #spin-win-modal.show {
-            display: flex;
-        }
-
-        .sw-container {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .sw-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(to right, #ff4d4d, #ffcc00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 800;
-        }
-
-        .sw-wheel-wrapper {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            margin: 0 auto 2rem;
-        }
-
-        .sw-pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 50px;
-            background: #f8fafc;
-            clip-path: polygon(50% 100%, 0 0, 100% 0);
-            z-index: 10;
-        }
-
-        .sw-wheel {
-            width: 380px;
-            height: 380px;
-            margin: 0 auto 2.5rem;
-            border-radius: 50%;
-            border: 10px solid #1e293b;
-            background: #0f172a;
-            box-shadow: 0 0 100px rgba(251, 191, 36, 0.2),
-                0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            padding: 10px;
-        }
-
-        /* --- ULTIMATE LUXURY SPIN & WIN (REWRITTEN) --- */
-        #spin-win-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(4, 9, 20, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 2000;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-family: 'Outfit', sans-serif;
-            overflow: hidden;
-            animation: sw-modal-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes sw-modal-pop {
-            0% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        #spin-win-modal.show {
-            display: flex;
-        }
-
-        .sw-container {
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .sw-title {
-            font-size: 2.8rem;
-            margin-bottom: 2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            background: linear-gradient(to bottom, #fff 0%, #fbbf24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .sw-wheel-wrapper {
-            position: relative;
-            width: 380px;
-            height: 380px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
-            padding: 10px;
-            background: #1e293b;
-            box-shadow: 0 0 50px rgba(251, 191, 36, 0.2), 0 20px 40px rgba(0, 0, 0, 0.5);
-            border: 8px solid #334155;
-        }
-
-        /* LED Lights */
-        .sw-led-rim {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .sw-led {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            top: 5px;
-            left: 50%;
-            transform-origin: 50% 173px;
-            box-shadow: 0 0 10px #fff;
-            animation: sw-led-flicker 1s var(--delay) infinite alternate;
-        }
-
-        @keyframes sw-led-flicker {
-            0% {
-                opacity: 0.4;
-                transform: scale(0.8);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1.1);
-                box-shadow: 0 0 15px #fbbf24;
-            }
-        }
-
-        .sw-pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 45px;
-            height: 60px;
-            background: #f8fafc;
-            clip-path: polygon(50% 100%, 0 0, 100% 0);
-            z-index: 30;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
-            transition: transform 0.1s;
-        }
-
-        .sw-pointer.ticking {
-            transform: translateX(-50%) rotate(-15deg);
-        }
-
-        .sw-wheel-canvas {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-            transition: transform 6s cubic-bezier(0.15, 0, 0, 1);
-            border: 5px solid #0f172a;
-        }
-
-        .sw-segment {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            transform-origin: 100% 100%;
-            left: 0;
-            top: 0;
-            background: var(--bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .sw-segment:nth-child(1) {
-            --bg: #ef4444;
-            transform: rotate(0deg);
-        }
-
-        .sw-segment:nth-child(2) {
-            --bg: #3b82f6;
-            transform: rotate(90deg);
-        }
-
-        .sw-segment:nth-child(3) {
-            --bg: #f59e0b;
-            transform: rotate(180deg);
-        }
-
-        .sw-segment:nth-child(4) {
-            --bg: #10b981;
-            transform: rotate(270deg);
-        }
-
-        .sw-labels {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 20;
-        }
-
-        .sw-label-item {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 50px;
-            transform: rotate(calc(var(--idx) * 90deg + 45deg));
-            pointer-events: none;
-        }
-
-        .sw-label-item span {
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-            font-size: 0.8rem;
-            text-align: center;
-            max-width: 80px;
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-
-        .sw-hub {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle at 30% 30%, #475569, #0f172a);
-            border: 4px solid #1e293b;
-            border-radius: 50%;
-            z-index: 25;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ACTIONS */
-        .sw-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .sw-code-input {
-            background: rgba(15, 23, 42, 0.7);
-            border: 2px solid rgba(251, 191, 36, 0.2);
-            color: #fff;
-            padding: 14px 20px;
-            border-radius: 12px;
-            width: 250px;
-            text-align: center;
-            font-size: 1.1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .sw-code-input:focus {
-            border-color: #fbbf24;
-            background: rgba(15, 23, 42, 0.9);
-        }
-
-        .sw-spin-btn {
-            background: linear-gradient(135deg, #fbbf24, #d97706);
-            color: #000;
-            font-weight: 900;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
-            transition: all 0.3s;
-        }
-
-        .sw-spin-btn:disabled {
-            background: #334155;
-            color: #64748b;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .sw-spin-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4);
-        }
-
-        .sw-close-x {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 30px;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: 0.3s;
-        }
-
-        .sw-close-x:hover {
-            opacity: 1;
-            transform: rotate(90deg);
-        }
-
-        /* WIN POPUP */
-        .sw-result-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2500;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .sw-result-overlay.active {
-            display: flex;
-            animation: sw-fade-in 0.3s;
-        }
-
-        @keyframes sw-fade-in {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .sw-result-card {
-            background: #1e293b;
-            padding: 40px;
-            border-radius: 24px;
-            border: 2px solid #fbbf24;
-            max-width: 400px;
-            width: 90%;
-            transform: scale(0.8);
-            animation: sw-card-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes sw-card-pop {
-            to {
-                transform: scale(1);
-            }
-        }
-
-        .sw-res-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .sw-res-title {
-            font-size: 2rem;
-            color: #fbbf24;
-            margin-bottom: 15px;
-            font-weight: 900;
-        }
-
-        .sw-res-text {
-            font-size: 1.2rem;
-            color: #f8fafc;
-            margin-bottom: 30px;
-        }
     </style>
 </head>
 
@@ -1353,585 +461,273 @@
 
     <div id="home-view">
         <header>
-            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"><i
-                    class="fas fa-moon"></i></button>
-            <div class="banner-slider" id="bannerSlider">
+            <div class="banner-slider">
                 <div class="banner-slide active">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200" alt="Banner 1">
                     <div class="banner-text">KhurjaX</div>
                 </div>
                 <div class="banner-slide">
-                    <div class="banner-text">KhurjaX</div>
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200" alt="Banner 2">
+                    <div class="banner-text">Food</div>
                 </div>
                 <div class="banner-slide">
-                    <div class="banner-text">KhurjaX</div>
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200" alt="Banner 3">
+                    <div class="banner-text">Restaurants</div>
                 </div>
-                <div class="banner-indicators" id="bannerIndicators">
-                    <div class="banner-indicator active" onclick="currentBanner(0)"></div>
-                    <div class="banner-indicator" onclick="currentBanner(1)"></div>
-                    <div class="banner-indicator" onclick="currentBanner(2)"></div>
+                <div class="banner-indicators">
+                    <span class="banner-indicator active" onclick="currentBanner(0)"></span>
+                    <span class="banner-indicator" onclick="currentBanner(1)"></span>
+                    <span class="banner-indicator" onclick="currentBanner(2)"></span>
                 </div>
             </div>
         </header>
 
         <div class="controls">
             <div style="display: flex; align-items: center; gap: 10px;">
-                <input type="text" id="searchInput" class="search-box" placeholder="Search Shop, Job, Place..."
+                <input type="text" id="searchInput" class="search-box" placeholder="Search Food..."
                     onkeyup="globalSearch()">
                 <img src="https://i.ibb.co/Rkdm6570/Chat-GPT-Image-Dec-25-2025-11-41-40-PM.png" alt="Khurja X Logo"
                     style="width: 50px; height: 50px; border-radius: 50%;">
             </div>
 
             <div class="main-cats">
-                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i>
-                    Home</button>
-                <button class="cat-btn" onclick="setCategory('More')"><i class="fas fa-ellipsis-h"></i> More ➕</button>
+                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i> All
+                    Food</button>
+                <button class="cat-btn" onclick="setCategory('Food')">Food</button>
+                <button class="cat-btn" onclick="setCategory('Market')">Market</button>
+                <button class="cat-btn" onclick="setCategory('Services')">Services</button>
             </div>
 
-            <div class="sub-cats" id="subCatContainer"><small>Showing All Listings</small></div>
+            <div class="sub-cats" id="subCatContainer"><small>Showing All Food Listings</small></div>
         </div>
 
         <div class="container">
             <div class="grid" id="mainGrid">
 
-
-                <!-- Loading Indicator -->
-                <div class="loading-indicator" id="loadingIndicator">
-                    <div class="loading-spinner"></div>
-                    <div class="loading-text">Loading content...</div>
-                </div>
-
-                <!-- SPIN & WIN CARD -->
-                <div class="card" onclick="openSpinWin()" data-main="Special" data-sub="Rewards" data-pin="on"
-                    data-title="Spin & Win"
-                    data-desc="Spin the wheel and win exciting rewards like FREE BILL and Discounts!">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:linear-gradient(135deg, #ff4d4d, #ffcc00);">LIVE
-                            EVENT</span>
-                        <div class="card-slider">
-                            <img src="https://freefood.com.ng/logo.png" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">🎡 Spin & Win!</h3>
-                        <p class="card-desc">WIN FREE FOOD</p>
-                    </div>
-                </div>
-
-                <div id="card-abhinav" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="BGMI"
-                    data-pin="on" data-title="ABHINAV YADAV" data-desc="GAME ID 55613751771, GAME NAME A7ALLGAME"
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">BGMI</span>
-                        <div class="card-slider"><img src="https://i.ibb.co/B2TgMmHT/4.jpg" class="card-img"><img
-                                src="https://i.ibb.co/bg31vk89/5.jpg" class="card-img"><img
-                                src="https://i.ibb.co/vCKbj9pb/6.jpg" class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">ABHINAV YADAV</h3>
-                        <p class="card-desc">GAME ID 55613751771, GAME NAME A7ALLGAME</p>
-                    </div>
-                </div>
-
-
-                <div id="card-1" class="card" onclick="openDetail(this)" data-main="Services" data-sub="Makeup"
-                    data-pin="on" data-title="Glamour Beauty Parlour"
-                    data-desc="Bridal Makeup, Party Makeup, Hair Spa, Facial, Mehendi. Ladies Only."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#db2777;">Makeup</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600"
-                                class="card-img"><img
-                                src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Glamour Beauty Parlour</h3>
-                        <p class="card-desc">Bridal Makeup & Spa.</p>
-                    </div>
-                </div>
-
-                <div id="card-2" class="card" onclick="openDetail(this)" data-main="Education" data-sub="Schools"
-                    data-pin="" data-title="Khurja Public School"
-                    data-desc="CBSE Board School. Nursery to 12th. Smart Classes & Transport." data-phone="9876543210"
-                    data-whatsapp="9876543210" data-insta="" data-fb="https://facebook.com"
-                    data-website="https://kps.com">
-                    <div class="slider-wrapper">
-                        <span class="card-badge">School</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja Public School</h3>
-                        <p class="card-desc">CBSE Board, Nursery to 12th.</p>
-                    </div>
-                </div>
-
-                <div id="card-3" class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
-                    data-pin="" data-title="The Spicy Bite"
-                    data-desc="Family AC Restaurant serving Chinese, Pizza, Burger & North Indian."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
+                <!-- Zaika Restaurant -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="Zaika Restaurant"
+                    data-desc="All you can eat · Happy-hour food · Vegan options. ADD= College Road, Khurja, Uttar Pradesh 203131"
+                    data-phone="084750 60708" data-whatsapp="084750 60708" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
                         <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600"
+                                src="https://lh3.googleusercontent.com/p/AF1QipOqfnalRbjNV9Wlm_tsWvqmDL1I6CANg-hHQVPY=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">The Spicy Bite</h3>
-                        <p class="card-desc">Family AC Restaurant.</p>
+                        <h3 class="card-title">Zaika Restaurant</h3>
+                        <p class="card-desc">All you can eat · Happy-hour food · Vegan options. ADD= College Road,
+                            Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-4" class="card" onclick="openDetail(this)" data-main="Services" data-sub="Electrician"
-                    data-pin="" data-title="Raju Electrician"
-                    data-desc="24/7 Home Service for Fan, AC, Wiring, Inverter." data-phone="9876543210"
-                    data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                <!-- Amar restaurant -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="Amar restaurant"
+                    data-desc="All you can eat · Does not accept reservations · Vegan options. ADD= Amar restaurant, Kakrala - Budaun Rd, Khurja, Uttar Pradesh 203131"
+                    data-phone="081919 22202" data-whatsapp="081919 22202" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Service</span>
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600"
+                                src="https://lh3.googleusercontent.com/p/AF1QipMSZ3jcFNfgTZ0hGlkr6-7WAxELV2wdeFBHpl1Z=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Raju Electrician</h3>
-                        <p class="card-desc">Home Repair Service.</p>
+                        <h3 class="card-title">Amar restaurant</h3>
+                        <p class="card-desc">All you can eat · Does not accept reservations · Vegan options. ADD= Amar
+                            restaurant, Kakrala - Budaun Rd, Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-5" class="card" onclick="openDetail(this)" data-main="Special" data-sub="Pottery"
-                    data-pin="" data-title="Khurja Ceramic Works"
-                    data-desc="Manufacturer & Exporter of Ceramic Pots, Planters, Mugs. Wholesale prices."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb=""
-                    data-website="https://khurjaceramic.com">
+                <!-- KANHA FAMILY RESTAURANT -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="KANHA FAMILY RESTAURANT"
+                    data-desc="All you can eat · Happy-hour food · Private dining room. ADD=Ashirawad Bhawan, Hospital Road, Khurja, Uttar Pradesh 203131"
+                    data-phone="09720881882" data-whatsapp="09720881882" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge">Pottery</span>
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=600"
+                                src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzglYz-JZMByRcX4s5VRIcKQ-Rf7GN5cm5NdqotF_1Nt5OSw0l2ZlASqflYGf008cS9S_nJqa3cWTKRTWSIERVzsY61iMdwqAPdQp2W1ColWZcM0wWgAGrVowoVakmRb_T3KnvK62OFny-J=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Khurja Ceramic Works</h3>
-                        <p class="card-desc">Factory Outlet.</p>
+                        <h3 class="card-title">KANHA FAMILY RESTAURANT</h3>
+                        <p class="card-desc">All you can eat · Happy-hour food · Private dining room. ADD=Ashirawad
+                            Bhawan, Hospital Road, Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-6" class="card" onclick="openDetail(this)" data-main="Special" data-sub="Pottery"
-                    data-pin="" data-title="Khurja Ceramic Works" data-desc="Wholesale Ceramic Items."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                <!-- Highway Chaupal -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="Highway Chaupal"
+                    data-desc="All you can eat · Outdoor seating · Vegan options. ADD=NH 91 Dharpa, Mod, Khurja, Uttar Pradesh 203131"
+                    data-phone="097203 62605" data-whatsapp="097203 62605" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge">Pottery</span>
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=600"
+                                src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwDdjpQmeaqBVCQBO_m3DRDjDWbYi0Pos1fyFJjyG3CWo599GUZb1GsGNviXq5HW6sdOzoI8Ek2NwOu8jvb2Gqsqj8J9BGkshH3N514aOGGE2zXVY1S7MbxWoMPfqLwAIuG-i_4=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Khurja Ceramic Works</h3>
-                        <p class="card-desc">Wholesale Ceramic Items.</p>
+                        <h3 class="card-title">Highway Chaupal</h3>
+                        <p class="card-desc">All you can eat · Outdoor seating · Vegan options. ADD=NH 91 Dharpa, Mod,
+                            Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-7" class="card" onclick="openDetail(this)" data-main="Updates" data-sub="Jobs" data-pin=""
-                    data-title="Salesman Required"
-                    data-desc="Need Salesman for Cloth Shop in Gandhi Market. Salary 10k-15k. Full Time."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                <!-- The Great Viraj family Restaurant -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="The Great Viraj family Restaurant"
+                    data-desc="All you can eat · Vegan options. ADD=1st floor, hanuman complex, near, college road, Khurja, Uttar Pradesh 203131"
+                    data-phone="086500 59255" data-whatsapp="086500 59255" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge" style="background:red;">Hiring</span>
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600"
+                                src="https://lh3.googleusercontent.com/p/AF1QipOkulJG44Na8eu0rRTGWtzYTUOY47NJAv6LnvCU=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Salesman Required</h3>
-                        <p class="card-desc">Urgent Job Vacancy.</p>
+                        <h3 class="card-title">The Great Viraj family Restaurant</h3>
+                        <p class="card-desc">All you can eat · Vegan options. ADD=1st floor, hanuman complex, near,
+                            college road, Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-8" class="card" onclick="openDetail(this)" data-main="Services" data-sub="MarriageHall"
-                    data-pin="" data-title="Royal Palace Banquet"
-                    data-desc="Luxury AC Banquet Hall for Weddings, Parties. Big Lawn and Catering available."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
+                <!-- Balaji hungry house -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="Balaji hungry house"
+                    data-desc="All you can eat · Happy-hour food · Vegan options. ADD=6VW8+7XX, Khurja - Shikarpur Rd, Murari Nagar, Khurja, Uttar Pradesh 203131"
+                    data-phone="095288 32754" data-whatsapp="095288 32754" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#8b5cf6;">Banquet</span>
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600"
+                                src="https://lh3.googleusercontent.com/p/AF1QipNnAd2Akw1de6SCnnDM90o6L7txjUZiyAL1Jkru=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Royal Palace Banquet</h3>
-                        <p class="card-desc">Wedding Hall & Lawn.</p>
+                        <h3 class="card-title">Balaji hungry house</h3>
+                        <p class="card-desc">All you can eat · Happy-hour food · Vegan options. ADD=6VW8+7XX, Khurja -
+                            Shikarpur Rd, Murari Nagar, Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-9" class="card" onclick="openDetail(this)" data-main="Services" data-sub="Transport"
-                    data-pin="" data-title="Sonu E-Rickshaw"
-                    data-desc="Available for City Ride, Railway Station drop, Market visit. Call for booking."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                <!-- Om Family Restaurant -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="Om Family Restaurant"
+                    data-desc="All you can eat · Rooftop seating · Private dining room. ADD=Gandhi Road, Khurja, Bulandshahr, Uttar Pradesh 203131"
+                    data-phone="097600 47119" data-whatsapp="097600 47119" data-insta="" data-fb="" data-website="">
                     <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Transport</span>
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1596525996025-a134a6259468?w=600"
+                                src="https://lh3.googleusercontent.com/p/AF1QipPQY0-56mUNXnpI9VmXaJbbBr7MB6JVlil26L2O=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Sonu E-Rickshaw</h3>
-                        <p class="card-desc">Call for City Ride.</p>
+                        <h3 class="card-title">Om Family Restaurant</h3>
+                        <p class="card-desc">All you can eat · Rooftop seating · Private dining room. ADD=Gandhi Road,
+                            Khurja, Bulandshahr, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div id="card-10" class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="Iron Fitness Gym"
-                    data-desc="Cardio, Weight Training, Personal Trainer. Ladies Batch Available."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Iron Fitness Gym</h3>
-                        <p class="card-desc">Unisex Gym & Cardio.</p>
-                    </div>
-                </div>
-
-                <div id="card-11" class="card" onclick="openDetail(this)" data-main="Property" data-sub="RentHouse"
-                    data-pin="" data-title="2 BHK House for Rent"
-                    data-desc="Semi-furnished house near Bus Stand. 2 Rooms, Kitchen, Bathroom. Rent 6000."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#10b981;">To Let</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">2 BHK House</h3>
-                        <p class="card-desc">Rent: ₹6000/month.</p>
-                    </div>
-                </div>
-
-                <div id="card-12" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="BGMI" data-pin=""
-                    data-title="ABHINAV YADAV - BGMI Thuuuuuu"
-                    data-desc="Weekly BGMI tournaments with cash prizes. Register now for next tournament."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#ef4444;">Tournament</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">ABHINAV YADAV - BGMI Thuuuuuu</h3>
-                        <p class="card-desc">Weekly BGMI tournaments with cash prizes. Register now for next tournament.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-13" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="FREE FIRE"
-                    data-pin="" data-title="Khurja Free Fire Club"
-                    data-desc="Free Fire gaming club organizing tournaments and practice sessions."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#ef4444;">Gaming</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja Free Fire Club</h3>
-                        <p class="card-desc">Free Fire gaming club organizing tournaments and practice sessions.</p>
-                    </div>
-                </div>
-
-                <div id="card-14" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="Gaming Cafe"
-                    data-pin="" data-title="Cyber Zone Gaming Cafe"
-                    data-desc="High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Cafe</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Cyber Zone Gaming Cafe</h3>
-                        <p class="card-desc">High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-15" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="PC Games"
-                    data-pin="" data-title="Game World PC Cafe"
-                    data-desc="PC gaming center with high-end systems, latest games, and esports tournaments."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">PC Gaming</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Game World PC Cafe</h3>
-                        <p class="card-desc">PC gaming center with high-end systems, latest games, and esports
-                            tournaments.</p>
-                    </div>
-                </div>
-
-                <div id="card-16" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="Mobile Games"
-                    data-pin="" data-title="Mobile Gaming Hub"
-                    data-desc="Mobile gaming center with latest games, tournaments, and charging stations."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Mobile</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Mobile Gaming Hub</h3>
-                        <p class="card-desc">Mobile gaming center with latest games, tournaments, and charging stations.
-                        </p>
-                    </div>
-                </div>
-
-                <div id="card-17" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="Console Games"
-                    data-pin="" data-title="PlayStation Zone"
-                    data-desc="Console gaming center with PS4, PS5, Xbox, and Nintendo games." data-phone="9876543210"
-                    data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Console</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">PlayStation Zone</h3>
-                        <p class="card-desc">Console gaming center with PS4, PS5, Xbox, and Nintendo games.</p>
-                    </div>
-                </div>
-
-
-
-                <!-- JOBS & CAREERS -->
-                <div class="card" onclick="openDetail(this)" data-main="Market" data-sub="Jobs" data-pin=""
-                    data-title="Factory Worker"
-                    data-desc="Pottery factory worker position. Experience preferred. Salary ₹12,000 - ₹15,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#333;">Factory</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Factory Worker</h3>
-                        <p class="card-desc">Pottery factory worker. ₹12,000 - ₹15,000/month.</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Market" data-sub="Jobs" data-pin=""
-                    data-title="Accountant"
-                    data-desc="ABC Trading Company looking for accountant. Experience required. Salary ₹18,000 - ₹25,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Office</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Accountant</h3>
-                        <p class="card-desc">ABC Trading Company. ₹18,000 - ₹25,000/month.</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="Delivery Boy"
-                    data-desc="Local Kirana Store hiring delivery boy. Own vehicle required. Salary ₹8,000 - ₹10,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#f59e0b;">Delivery</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1596525912800-158092104704?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Delivery Boy</h3>
-                        <p class="card-desc">Local Kirana Store. ₹8,000 - ₹10,000/month.</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="General Helper"
-                    data-desc="Hardware Store looking for general helper. Flexible hours. Salary ₹9,000 - ₹12,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#333;">Helper</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">General Helper</h3>
-                        <p class="card-desc">Hardware Store. ₹9,000 - ₹12,000/month.</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="Marketing Executive"
-                    data-desc="Local Business Group hiring marketing executive. Experience preferred. Salary ₹15,000 - ₹20,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Marketing</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Marketing Executive</h3>
-                        <p class="card-desc">Local Business Group. ₹15,000 - ₹20,000/month.</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="Freelance Designer"
-                    data-desc="Creative Solutions looking for freelance designer. Project basis. ₹500 - ₹1000 per project."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#db2777;">Freelance</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Freelance Designer</h3>
-                        <p class="card-desc">Creative Solutions. ₹500 - ₹1000 per project.</p>
-                    </div>
-                </div>
-
-                <!-- HEALTH & FITNESS -->
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Hospitals" data-pin=""
-                    data-title="Khurja District Hospital"
-                    data-desc="Government hospital providing general and specialized medical care."
-                    data-phone="9876543210" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Hospital</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja District Hospital</h3>
-                        <p class="card-desc">Government hospital providing general and specialized medical care.</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Clinics" data-pin=""
-                    data-title="MediCare Clinic"
-                    data-desc="Multi-specialty clinic with experienced doctors and diagnostic services."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Clinic</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">MediCare Clinic</h3>
-                        <p class="card-desc">Multi-specialty clinic with experienced doctors and diagnostic services.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="Fitness 52"
-                    data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga. Trainer Available."
-                    data-phone="08971400663" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Fitness 52</h3>
-                        <p class="card-desc">Fit raho, strong bano daily! • Yamunapuram</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="ICONIQ Gym"
-                    data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga. Modern gym."
-                    data-phone="09008403170" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">ICONIQ Gym</h3>
-                        <p class="card-desc">Modern gym, top results! • DM Colony</p>
-                    </div>
-                </div>
-
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="The Royal Gym" data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga."
+                <!-- Bilal hotel -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
+                    data-title="Bilal hotel"
+                    data-desc="All you can eat · Does not accept reservations. ADD=7V35+JJM masjid, Tarinan Rd, Khurja, Uttar Pradesh 203131"
                     data-phone="" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#f59e0b;">Restaurant</span>
                         <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
+                                src="https://lh3.googleusercontent.com/p/AF1QipOvCUbqHtudGoRzpNx3kdrMpO0IQ1TjtUemUKnT=s1360-w1360-h1020-rw"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">The Royal Gym</h3>
-                        <p class="card-desc">Royal fitness, royal body! • Balmiki Chowk</p>
+                        <h3 class="card-title">Bilal hotel</h3>
+                        <p class="card-desc">All you can eat · Does not accept reservations. ADD=7V35+JJM masjid,
+                            Tarinan Rd, Khurja, Uttar Pradesh 203131</p>
                     </div>
                 </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="Fit X Gym" data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga."
-                    data-phone="" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
+                <!-- Khurja Sweets -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Sweets"
+                    data-title="Khurja Sweets"
+                    data-desc="Traditional Indian sweets and mithai shop. Famous for khurja ki mithai."
+                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ec4899;">Sweets</span>
                         <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
+                                src="https://images.unsplash.com/photo-1563729784416-3d30a88d4a5a?w=600"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Fit X Gym</h3>
-                        <p class="card-desc">Fit body, X-tra power! • GT Road</p>
+                        <h3 class="card-title">Khurja Sweets</h3>
+                        <p class="card-desc">Traditional Indian sweets and mithai shop. Famous for khurja ki mithai.</p>
                     </div>
                 </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Pharmacy" data-pin=""
-                    data-title="Sunrise Pharmacy"
-                    data-desc="Pharmacy providing prescription medicines and general medical items."
-                    data-phone="09897139397" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Pharmacy</span>
+                <!-- Cafe Delight -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Cafe" data-title="Cafe Delight"
+                    data-desc="Modern cafe serving coffee, sandwiches, pastries and light snacks."
+                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
+                    data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#a855f7;">Cafe</span>
                         <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
+                                src="https://images.unsplash.com/photo-1495433324511-bbb5b3eb063f?w=600"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Sunrise Pharmacy</h3>
-                        <p class="card-desc">Medical Store • GT Road, Khurja</p>
+                        <h3 class="card-title">Cafe Delight</h3>
+                        <p class="card-desc">Modern cafe serving coffee, sandwiches, pastries and light snacks.</p>
                     </div>
                 </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Pharmacy" data-pin=""
-                    data-title="New Singhal Medical Store"
-                    data-desc="Medical store with medicines and healthcare products." data-phone="09045190250"
-                    data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Pharmacy</span>
+                <!-- Fresh Bakes Bakery -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Bakery"
+                    data-title="Fresh Bakes Bakery"
+                    data-desc="Bakery offering fresh bread, cakes, pastries and custom cake orders."
+                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#f97316;">Bakery</span>
                         <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
+                                src="https://images.unsplash.com/photo-1509440159973-b5b052fbda3d?w=600"
                                 class="card-img"></div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">New Singhal Medical Store</h3>
-                        <p class="card-desc">Medical Store • Jewar Adda Chauraha</p>
+                        <h3 class="card-title">Fresh Bakes Bakery</h3>
+                        <p class="card-desc">Bakery offering fresh bread, cakes, pastries and custom cake orders.</p>
+                    </div>
+                </div>
+
+                <!-- MAYRA'S HUT -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Fast Food"
+                    data-title="MAYRA'S HUT (Anil Crazy)" data-desc="MAYRA'S HUT (Anil Crazy)" data-phone="9719490201"
+                    data-whatsapp="9719490201" data-insta="" data-fb=""
+                    data-website="https://x-abhi-team.github.io/KhurjaX/shop-1.html?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPNTY3MDY3MzQzMzUyNDI3AAGnJPikIianGdJ44kyyTzsnO1gjdRkn749nyHbK1uBADOA60NLFVZD31enDhlE_aem_bpDU8dDLxKIMk7AFcr8rPw">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ef4444;">Fast Food</span>
+                        <div class="card-slider"><img src="https://i.ibb.co/XZsh4nGf/3.jpg" class="card-img"></div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">MAYRA'S HUT (Anil Crazy)</h3>
+                        <p class="card-desc">FAST FOOD </p>
+                    </div>
+                </div>
+
+                <!-- Gulab Sweets -->
+                <div class="card" onclick="openDetail(this)" data-main="Food" data-sub="Sweet Shop"
+                    data-title="Gulab Sweets"
+                    data-desc="Specialty sweet shop offering traditional Indian sweets and dry fruits."
+                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
+                    <div class="slider-wrapper">
+                        <span class="card-badge" style="background:#ec4899;">Sweet Shop</span>
+                        <div class="card-slider"><img
+                                src="https://images.unsplash.com/photo-1563729784416-3d30a88d4a5a?w=600"
+                                class="card-img"></div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Gulab Sweets</h3>
+                        <p class="card-desc">Specialty sweet shop offering traditional Indian sweets and dry fruits.</p>
                     </div>
                 </div>
 
@@ -1946,10 +742,7 @@
         </div>
 
         <div class="dt-content">
-            <div class="dt-slider-box" id="dt-slider-container">
-                <button class="dt-arrow-btn dt-arrow-left" onclick="moveDetailImage(-1)">‹</button>
-                <button class="dt-arrow-btn dt-arrow-right" onclick="moveDetailImage(1)">›</button>
-            </div>
+            <div class="dt-slider-box" id="dt-slider-container"></div>
 
             <div class="dt-info">
                 <div class="dt-name" id="dt-title">Title</div>
@@ -1962,12 +755,10 @@
                     <a id="lnk-insta" href="#" class="soc-btn btn-insta"><i class="fab fa-instagram"></i> Instagram</a>
                     <a id="lnk-fb" href="#" class="soc-btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
                     <a id="lnk-web" href="#" class="soc-btn btn-web"><i class="fas fa-globe"></i> Visit Website</a>
-                    <button id="lnk-like" class="soc-btn btn-like" onclick="toggleDetailLike(event)"><i
-                            class="fas fa-heart"></i> <span id="like-text">Like</span></button>
                 </div>
 
                 <div class="related-box">
-                    <div class="related-head">Explore More</div>
+                    <div class="related-head">Explore More Food</div>
                     <div class="grid" id="related-grid"></div>
                 </div>
             </div>
@@ -1977,11 +768,9 @@
     <script>
         // DATA CATEGORIES
         const subCategories = {
-            'More': ['All Categories', 'Market', 'Food', 'Services', 'Health', 'Education', 'Property', 'Special', 'Travel', 'Khurja Special', 'Content Creators', 'Gaming', 'Events', 'Emergency', 'Religion'],
-            'Trending': ['This Week', 'All Time'],
             'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
             'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
-            'Services': ['Makeup', 'Barber/Hair salon', 'Electrician', 'Plumber', 'ACRepair'],
+            'Services': ['Makeup', 'Electrician', 'Plumber', 'ACRepair'],
             'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
             'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
             'Property': ['RentHouse', 'BuySell', 'Plots', 'Rent House', 'Buy/Sell'],
@@ -1997,29 +786,14 @@
 
         // CATEGORY FILTER
         function setCategory(mainCat) {
-            // Show loading indicator
-            document.getElementById('loadingIndicator').style.display = 'flex';
-
-            // Clear previous active state
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-            // Try to set active button robustly (don't rely on global `event` which may be undefined)
-            const btns = Array.from(document.querySelectorAll('.cat-btn'));
-            const matchedBtn = btns.find(b => b.textContent.trim().toLowerCase().includes(mainCat.toLowerCase()));
-            if (matchedBtn) matchedBtn.classList.add('active');
+            if (event) event.target.classList.add('active');
             const subContainer = document.getElementById('subCatContainer');
             subContainer.innerHTML = '';
 
             if (mainCat === 'All') {
-                subContainer.innerHTML = '<small>Showing All Listings</small>';
+                subContainer.innerHTML = '<small>Showing All Food Listings</small>';
                 filterGrid('All', 'All');
-            } else if (mainCat === 'More') {
-                subContainer.innerHTML = '<button class="sub-btn active" onclick="setCategory(\'All\')">All Categories</button>';
-                subCategories['More'].forEach(sub => {
-                    if (sub !== 'All Categories') {
-                        subContainer.innerHTML += `<button class="sub-btn" onclick="setCategory('${sub}')">${sub}</button>`;
-                    }
-                });
-                filterGrid('More', 'All');
             } else {
                 if (subCategories[mainCat]) {
                     subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${mainCat}', 'All')">All</button>`;
@@ -2033,107 +807,31 @@
 
         // GRID FILTER
         function filterGrid(main, sub) {
-            // Manage sub-button active states without relying on global `event`.
-            if (sub !== 'All') {
+            if (sub !== 'All' && event) {
                 document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
-                // find a sub button whose text matches the requested sub
-                const subBtns = Array.from(document.querySelectorAll('.sub-btn'));
-                const matched = subBtns.find(b => b.textContent.trim().toLowerCase() === String(sub).toLowerCase());
-                if (matched) matched.classList.add('active');
+                event.target.classList.add('active');
             }
-
-            const cards = document.querySelectorAll('.card');
+            const cards = document.querySelectorAll('#mainGrid .card');
             cards.forEach(card => {
                 const cMain = card.getAttribute('data-main');
                 const cSub = card.getAttribute('data-sub');
-
-                if (main === 'All') {
-                    // Show all cards
-                    card.style.display = 'block';
-                } else if (main === 'More') {
-                    // For More category, show all cards (browse mode)
-                    card.style.display = 'block';
-                } else if (sub === 'All') {
-                    // Show all cards from main category
-                    card.style.display = (cMain === main) ? 'block' : 'none';
-                } else {
-                    // Show cards matching both main and sub category
-                    card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
-                }
+                if (main === 'All') card.style.display = 'block';
+                else if (sub === 'All') card.style.display = (cMain === main) ? 'block' : 'none';
+                else card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
             });
-
-            // Hide loading indicator after filtering is complete
-            setTimeout(() => {
-                document.getElementById('loadingIndicator').style.display = 'none';
-            }, 100); // Small delay to make the loading indicator visible
         }
-
 
         // SEARCH
         function globalSearch() {
-            // Show loading indicator during search
-            document.getElementById('loadingIndicator').style.display = 'flex';
-
             const input = document.getElementById('searchInput').value.toLowerCase();
-
-            // Add delay to avoid too frequent updates during typing
-            clearTimeout(window.searchTimeout);
-            window.searchTimeout = setTimeout(() => {
-                document.querySelectorAll('.card').forEach(card => {
-                    const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
-                    card.style.display = text.includes(input) ? 'block' : 'none';
-                });
-
-                // Hide loading indicator after search is complete
-                setTimeout(() => {
-                    document.getElementById('loadingIndicator').style.display = 'none';
-                }, 100);
-            }, 300); // 300ms delay to allow for typing
-        }
-
-        // Shuffle the main grid but keep specific items at the top
-        function shuffleMainGrid() {
-            const grid = document.getElementById('mainGrid');
-            if (!grid) return;
-
-            // collect only direct card elements
-            const cards = Array.from(grid.querySelectorAll('.card'));
-            if (cards.length <= 1) return;
-
-            // Separate pinned and non-pinned logic based on data-pin="on"
-            const pinned = [];
-            const others = [];
-
-            cards.forEach(card => {
-                const pinStatus = card.getAttribute('data-pin');
-                if (pinStatus === 'on') {
-                    pinned.push(card);
-                } else {
-                    others.push(card);
-                }
+            document.querySelectorAll('#mainGrid .card').forEach(card => {
+                const text = (card.innerText || "").toLowerCase() + (card.getAttribute('data-desc') || "").toLowerCase();
+                card.style.display = text.includes(input) ? 'block' : 'none';
             });
-
-            // Fisher-Yates shuffle for 'others' only
-            for (let i = others.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                const tmp = others[i];
-                others[i] = others[j];
-                others[j] = tmp;
-            }
-
-            // Append in order: Pinned items first, then Shuffled others
-            pinned.forEach(c => grid.appendChild(c));
-            others.forEach(c => grid.appendChild(c));
         }
 
         // OPEN DETAIL PAGE
         function openDetail(card) {
-            // Show loading indicator for detail view
-            const detailLoadingIndicator = document.getElementById('detailLoadingIndicator');
-            if (detailLoadingIndicator) {
-                detailLoadingIndicator.style.display = 'flex';
-            }
-
             const d = {
                 title: card.getAttribute('data-title'),
                 desc: card.getAttribute('data-desc'),
@@ -2147,14 +845,10 @@
             };
 
             // Image
-            const cardImages = card.querySelector('.card-slider').innerHTML;
-            const sliderContainer = document.getElementById('dt-slider-container');
-            sliderContainer.innerHTML = `<div class="card-slider">${cardImages}</div><div class="dt-swipe-hint">← Swipe →</div>`;
-            // re-attach arrow buttons (they were cleared)
-            sliderContainer.innerHTML += `
-                <button class="dt-arrow-btn dt-arrow-left" onclick="moveDetailImage(-1)">‹</button>
-                <button class="dt-arrow-btn dt-arrow-right" onclick="moveDetailImage(1)">›</button>
-            `;
+            const slider = card.querySelector('.card-slider');
+            if (slider) {
+                document.getElementById('dt-slider-container').innerHTML = `<div class="card-slider">${slider.innerHTML}</div>`;
+            }
 
             // Text
             document.getElementById('dt-title').innerText = d.title;
@@ -2170,89 +864,27 @@
             const btnWeb = document.getElementById('lnk-web');
 
             btnCall.href = d.phone ? `tel:${d.phone}` : '#';
-            btnWa.href = d.wa ? `https://wa.me/91${d.wa}` : '#';
-            btnInsta.href = d.insta && d.insta !== 'https://instagram.com' ? d.insta : 'https://www.instagram.com/xloyalteam?igsh=MWY3OTI0b2xlazV4dA==';
+            btnWa.href = d.wa ? `https://wa.me/91${d.wa.replace(/\s+/g, '')}` : '#';
+            btnInsta.href = d.insta ? d.insta : '#';
             btnFb.href = d.fb ? d.fb : '#';
             btnWeb.href = d.web ? d.web : '#';
 
             btnCall.style.display = d.phone ? 'flex' : 'none';
-            btnWa.style.display = d.wa ? 'flex' : 'none';
+            btnWa.style.display = (d.wa && d.wa.trim() !== "") ? 'flex' : 'none';
             btnInsta.style.display = d.insta ? 'flex' : 'none';
             btnFb.style.display = d.fb ? 'flex' : 'none';
             btnWeb.style.display = d.web ? 'flex' : 'none';
 
-            // Update phone button text to show the actual phone number and add copy functionality
-            if (d.phone) {
-                btnCall.innerHTML = `<i class="fas fa-phone"></i> Call ${d.phone}`;
-                btnCall.onclick = function (e) {
-                    e.preventDefault();
-                    navigator.clipboard.writeText(d.phone).then(() => {
-                        // Show visual feedback
-                        const originalText = btnCall.innerHTML;
-                        btnCall.innerHTML = `<i class="fas fa-check"></i> Copied!`;
-                        setTimeout(() => {
-                            btnCall.innerHTML = `<i class="fas fa-phone"></i> Call ${d.phone}`;
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Failed to copy phone number: ', err);
-                    });
-                };
-            } else {
-                btnCall.innerHTML = `<i class="fas fa-phone"></i> Call`;
-            }
-
-            // Update WhatsApp button to show the actual number and add copy functionality
-            if (d.wa) {
-                btnWa.innerHTML = `<i class="fab fa-whatsapp"></i> WhatsApp ${d.wa}`;
-                btnWa.onclick = function (e) {
-                    e.preventDefault();
-                    navigator.clipboard.writeText(d.wa).then(() => {
-                        // Show visual feedback
-                        const originalText = btnWa.innerHTML;
-                        btnWa.innerHTML = `<i class="fas fa-check"></i> Copied!`;
-                        setTimeout(() => {
-                            btnWa.innerHTML = `<i class="fab fa-whatsapp"></i> WhatsApp ${d.wa}`;
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Failed to copy WhatsApp number: ', err);
-                    });
-                };
-            } else {
-                btnWa.onclick = function (e) {
-                    e.preventDefault();
-                    window.open(btnWa.href, '_blank');
-                };
-            }
-
-            // Related: DON'T clone entire grid - only show related items by filtering
+            // Related
+            const allCardsHTML = document.getElementById('mainGrid').innerHTML;
             const relatedGrid = document.getElementById('related-grid');
-            relatedGrid.innerHTML = ''; // Clear first
-
-            // Only add cards that match the same main category
-            const mainGridCards = document.querySelectorAll('#mainGrid .card');
-            mainGridCards.forEach(c => {
-                if (c.getAttribute('data-main') === d.main) {
-                    const clone = c.cloneNode(true);
-                    relatedGrid.appendChild(clone);
-                }
-            });
-
-            // Hide detail loading indicator
-            setTimeout(() => {
-                const detailLoadingIndicator = document.getElementById('detailLoadingIndicator');
-                if (detailLoadingIndicator) {
-                    detailLoadingIndicator.style.display = 'none';
-                }
-            }, 100);
+            relatedGrid.innerHTML = allCardsHTML;
+            relatedGrid.querySelectorAll('.card').forEach(c => c.onclick = function () { openDetail(this); });
 
             // Show
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('detail-view').style.display = 'block';
             window.scrollTo(0, 0);
-            // setup gesture handling for multi-directional image swipe
-            try { currentImageIndex = 0; setupDetailSliderGestures(); } catch (e) { /* ignore */ }
-            // update like button state
-            try { updateDetailLikeButton(); } catch (e) { /* ignore */ }
         }
 
         function closeDetail() {
@@ -2260,225 +892,7 @@
             document.getElementById('home-view').style.display = 'block';
         }
 
-        // Toggle like in detail view
-        function toggleDetailLike(event) {
-            event.preventDefault();
-            const likeBtn = document.getElementById('lnk-like');
-            const likeText = document.getElementById('like-text');
-            const detailView = document.getElementById('detail-view');
-
-            // Use a unique key: combination of main category + title
-            const mainAttr = detailView.querySelector('[data-main]')?.getAttribute('data-main') || 'Unknown';
-            const currentTitle = document.getElementById('dt-title').innerText;
-            const uniqueKey = `${mainAttr}::${currentTitle}`;
-
-            let likes = JSON.parse(localStorage.getItem('likes') || '{}');
-
-            if (likes[uniqueKey]) {
-                delete likes[uniqueKey];
-                likeBtn.style.opacity = '0.8';
-                likeText.textContent = 'Like';
-            } else {
-                likes[uniqueKey] = true;
-                likeBtn.style.opacity = '1';
-                likeText.textContent = 'Liked ✓';
-                // Play heart animation
-                createFloatingHeart(event);
-            }
-
-            localStorage.setItem('likes', JSON.stringify(likes));
-        }
-
-        // Create floating heart animation
-        function createFloatingHeart(event) {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.textContent = '❤';
-
-            // Position at button location
-            const btn = document.getElementById('lnk-like');
-            const rect = btn.getBoundingClientRect();
-            heart.style.left = (rect.left + rect.width / 2) + 'px';
-            heart.style.top = rect.top + 'px';
-            heart.style.color = '#ef4444';
-
-            document.body.appendChild(heart);
-
-            // Remove after animation completes
-            setTimeout(() => {
-                heart.remove();
-            }, 800);
-        }
-
-        // Check if current detail is liked and update button
-        function updateDetailLikeButton() {
-            const detailView = document.getElementById('detail-view');
-            const mainAttr = detailView.querySelector('[data-main]')?.getAttribute('data-main') || 'Unknown';
-            const currentTitle = document.getElementById('dt-title').innerText;
-            const uniqueKey = `${mainAttr}::${currentTitle}`;
-
-            let likes = JSON.parse(localStorage.getItem('likes') || '{}');
-            const likeBtn = document.getElementById('lnk-like');
-            const likeText = document.getElementById('like-text');
-
-            if (likes[uniqueKey]) {
-                likeBtn.style.opacity = '1';
-                likeText.textContent = 'Liked ✓';
-            } else {
-                likeBtn.style.opacity = '0.8';
-                likeText.textContent = 'Like';
-            }
-        }
-
-        // Handle swipe gestures in detail view slider (all 4 directions)
-        let touchStartX = 0, touchStartY = 0;
-        let currentImageIndex = 0;
-
-        // Move to next/prev image in detail view
-        function moveDetailImage(direction) {
-            const slider = document.querySelector('.dt-slider-box .card-slider');
-            if (!slider) return;
-
-            const images = slider.querySelectorAll('img');
-            const totalImages = images.length;
-            if (totalImages === 0) return;
-
-            currentImageIndex = (currentImageIndex + direction + totalImages) % totalImages;
-
-            // Scroll to the selected image
-            if (images[currentImageIndex]) {
-                images[currentImageIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-            }
-        }
-
-        function handleDetailSliderSwipe(e) {
-            const slider = e.currentTarget;
-            if (!slider) return;
-
-            const touchEndX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-            const touchEndY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-
-            const diffX = touchStartX - touchEndX;
-            const diffY = touchStartY - touchEndY;
-
-            const images = slider.querySelectorAll('img');
-            const totalImages = images.length;
-
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                // Horizontal swipe
-                if (diffX > 50) {
-                    // Swipe left → next image
-                    currentImageIndex = (currentImageIndex + 1) % totalImages;
-                } else if (diffX < -50) {
-                    // Swipe right → prev image
-                    currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
-                }
-            } else {
-                // Vertical swipe
-                if (diffY > 50) {
-                    // Swipe up → next image
-                    currentImageIndex = (currentImageIndex + 1) % totalImages;
-                } else if (diffY < -50) {
-                    // Swipe down → prev image
-                    currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
-                }
-            }
-
-            // Scroll to the selected image
-            if (images[currentImageIndex]) {
-                images[currentImageIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-            }
-        }
-
-        function setupDetailSliderGestures() {
-            const slider = document.querySelector('.dt-slider-box .card-slider');
-            if (!slider) return;
-
-            // Remove old listeners first to prevent duplicates
-            const newSlider = slider.cloneNode(true);
-            slider.parentNode.replaceChild(newSlider, slider);
-
-            const updatedSlider = document.querySelector('.dt-slider-box .card-slider');
-            updatedSlider.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            });
-            updatedSlider.addEventListener('touchend', handleDetailSliderSwipe);
-
-            // Optional: support mouse drag on desktop
-            updatedSlider.addEventListener('mousedown', (e) => {
-                touchStartX = e.clientX;
-                touchStartY = e.clientY;
-            });
-            updatedSlider.addEventListener('mouseup', handleDetailSliderSwipe);
-        }
-        // stop autoscroll when closing detail
-        const originalCloseDetail = closeDetail;
-        window.closeDetail = function () {
-            stopRelatedAutoscroll();
-            try { originalCloseDetail(); } catch (e) { /* ignore */ }
-        }
-
-        // RELATED SCROLL: autoplay vertically (like YouTube feed) and click-to-open behavior
-        let relatedAutoScrollInterval = null;
-
-        function initRelatedCarousel(currentTitle) {
-            const grid = document.getElementById('related-grid');
-            if (!grid) return;
-
-            // Make it a vertical stack so full cards are visible and the page can scroll naturally
-            grid.style.display = 'block';
-            // Let the page handle vertical scrolling so full shop details are visible
-            grid.style.overflowY = 'visible';
-            grid.style.maxHeight = '';
-            grid.style.gap = '';
-            grid.style.padding = '8px 0';
-
-            // Ensure cards stack vertically and take full width
-            const cards = grid.querySelectorAll('.card');
-            cards.forEach(c => {
-                c.style.minWidth = '';
-                c.style.width = '100%';
-                c.style.flex = '';
-                c.style.margin = '0 0 12px 0';
-                // Highlight the currently opened item (optional)
-                if (currentTitle && c.getAttribute('data-title') === currentTitle) {
-                    c.style.outline = '3px solid rgba(37,99,235,0.12)';
-                } else {
-                    c.style.outline = 'none';
-                }
-            });
-
-            // Delegate click: open related card in detail view (and enter fullscreen)
-            grid.removeEventListener('click', relatedClickHandler);
-            grid.addEventListener('click', relatedClickHandler);
-
-            // We will not auto-scroll here to allow users to scroll the full list naturally.
-            stopRelatedAutoscroll();
-        }
-
-        function stopRelatedAutoscroll() {
-            if (relatedAutoScrollInterval) { clearInterval(relatedAutoScrollInterval); relatedAutoScrollInterval = null; }
-        }
-
-        function relatedClickHandler(e) {
-            const card = e.target.closest('.card');
-            if (!card) return;
-            // open detail for this card
-            stopRelatedAutoscroll();
-            openDetail(card);
-            // attempt to go fullscreen for the detail view (like opening a video)
-            const dv = document.getElementById('detail-view');
-            try {
-                if (dv.requestFullscreen) dv.requestFullscreen();
-            } catch (err) {
-                // ignore if fullscreen fails
-            }
-        }
-
-
-
-        // Banner Slider Functionality
+        // Banner Slider Logic
         let bannerIndex = 0;
         const slides = document.querySelectorAll('.banner-slide');
         const indicators = document.querySelectorAll('.banner-indicator');
@@ -2504,42 +918,8 @@
             indicators[bannerIndex].classList.add('active');
         }
 
-        // Auto slide banner every 5 seconds
-        setInterval(() => {
-            showBanner(1);
-        }, 5000);
+        setInterval(() => { showBanner(1); }, 5000);
 
-        // Theme toggle functionality
-        function toggleTheme() {
-            const html = document.documentElement;
-            const isDarkMode = html.classList.toggle('dark-mode');
-
-            // Save preference to localStorage
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-
-            // Update icon
-            const toggleBtn = document.querySelector('.theme-toggle i');
-            if (toggleBtn) {
-                toggleBtn.classList.toggle('fa-moon');
-                toggleBtn.classList.toggle('fa-sun');
-            }
-        }
-
-        // Restore theme on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark-mode');
-                const toggleBtn = document.querySelector('.theme-toggle i');
-                if (toggleBtn) {
-                    toggleBtn.classList.remove('fa-moon');
-                    toggleBtn.classList.add('fa-sun');
-                }
-            }
-        });
-    </script>
-    <script>
-        // Hide any h1 elements with text content 'X'
         document.addEventListener('DOMContentLoaded', function () {
             const h1Elements = document.querySelectorAll('h1');
             h1Elements.forEach(function (h1) {
@@ -2549,305 +929,6 @@
             });
         });
     </script>
-    <script>
-        /*
-         Dynamic external section loader
-         - Attempts to fetch an external HTML file (e.g. gaming.html)
-         - Parses its .card elements and injects them into this page's #mainGrid
-         - Removes existing cards with the same data-main attribute to avoid duplicates
-         - Falls back to embedding an iframe if fetch is blocked (common when opening files with file://)
-        */
-
-        /*
-         Dynamic external section loader
-         - Attempts to fetch an external HTML file (e.g. gaming.html)
-         - Parses its .card elements and injects them into this page's #mainGrid
-         - Falls back to embedding an iframe if fetch is blocked
-        */
-
-
-
-
-
-
-
-
-        (function () {
-            async function loadExternalCards(url, mainAttr = 'Gaming') {
-                const mainGrid = document.getElementById('mainGrid');
-                if (!mainGrid) return;
-
-                // Note: We do NOT clear existing cards in '*' wildcard mode, to allow aggregation.
-
-                try {
-                    const fetchUrl = url + ((url.indexOf('?') === -1) ? '?_=' + Date.now() : '&_=' + Date.now());
-                    const res = await fetch(fetchUrl);
-                    if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-                    const text = await res.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-
-                    const externalCards = doc.querySelectorAll('.card');
-                    if (!externalCards || externalCards.length === 0) return true;
-
-                    externalCards.forEach(ec => {
-                        if (mainAttr === '*' || ec.getAttribute('data-main') === mainAttr) {
-                            if (mainAttr === '*') {
-                                const title = ec.getAttribute('data-title');
-                                const exists = Array.from(mainGrid.querySelectorAll('.card')).some(existing => existing.getAttribute('data-title') === title);
-                                if (exists) return; // avoid duplicates
-                            }
-
-                            // Ensure data-pin schema
-                            if (!ec.hasAttribute('data-pin')) ec.setAttribute('data-pin', '');
-
-                            const imported = document.importNode(ec, true);
-                            mainGrid.appendChild(imported);
-                        }
-                    });
-                    return true;
-                } catch (err) {
-                    // console.warn('Could not fetch', url);
-                    return false;
-                }
-            }
-            window.loadExternalCards = loadExternalCards;
-
-            document.addEventListener('DOMContentLoaded', async function () {
-                // List of ALL external files
-                const allContentFiles = [
-                    'trending.html', 'gaming.html', 'content-creators.html', 'market.html',
-                    'food.html', 'services.html', 'health.html', 'education.html',
-                    'property.html', 'special.html', 'travel.html', 'khurja-special.html',
-                    'events.html', 'emergency.html', 'religion.html', 'businesses.html', 'jobs.html'
-                ];
-
-                if (window.loadExternalCards) {
-                    try {
-                        const promises = allContentFiles.map(file =>
-                            window.loadExternalCards(file, '*').catch(e => { })
-                        );
-                        await Promise.all(promises);
-                    } catch (err) {
-                        console.warn('Major error aggregating content:', err);
-                    } finally {
-                        // Shuffle AFTER all loads
-                        try { if (window.shuffleMainGrid) window.shuffleMainGrid(); } catch (e) { }
-                    }
-                }
-            });
-        })();
-
-        // --- PREMIUM SPIN & WIN SYSTEM ---
-        (function () {
-            let spinModal, resultOverlay, wheel, spinBtn, pointer;
-            const rewards = [
-                { text: "FREE BILL", type: "win", icon: "☕" },
-                { text: "10% OFF", type: "win", icon: "🏷️" },
-                { text: "20% OFF", type: "win", icon: "🔥" },
-                { text: "TRY AGAIN", type: "lose", icon: "🍀" }
-            ];
-
-            let rotation = 0;
-            let spinning = false;
-            let isVerified = false;
-
-            function initVars() {
-                spinModal = document.getElementById('spin-win-modal');
-                resultOverlay = document.getElementById('sw-result-overlay');
-                wheel = document.getElementById('sw-wheel-canvas');
-                spinBtn = document.getElementById('sw-spin-btn');
-                pointer = document.querySelector('.sw-pointer');
-            }
-
-            function getRemainingCooldown() {
-                const last = localStorage.getItem('sw_last_spin_v2');
-                if (!last) return 0;
-                const diff = Date.now() - parseInt(last);
-                return Math.max(0, (5 * 60 * 1000) - diff);
-            }
-
-            function updateUI() {
-                const remaining = getRemainingCooldown();
-                const authBox = document.getElementById('sw-auth-box');
-
-                if (remaining > 0) {
-                    spinBtn.disabled = true;
-                    authBox.style.display = 'none';
-                    const mins = Math.floor(remaining / 60000);
-                    const secs = Math.floor((remaining % 60000) / 1000);
-                    spinBtn.innerText = `WAIT ${mins}:${secs < 10 ? '0' : ''}${secs}`;
-                    setTimeout(updateUI, 1000);
-                } else {
-                    if (isVerified) {
-                        spinBtn.disabled = false;
-                        spinBtn.innerText = "SPIN NOW";
-                        authBox.style.display = 'none';
-                    } else {
-                        spinBtn.disabled = true;
-                        spinBtn.innerText = "ENTER CODE";
-                        authBox.style.display = 'flex';
-                    }
-                }
-            }
-
-            window.verifySWCode = () => {
-                const input = document.getElementById('sw-luxury-input');
-                const valid = ['KHURJA123', 'SHOP786', 'WINBIG', 'FREEFOOD'];
-                if (valid.includes(input.value.toUpperCase())) {
-                    isVerified = true;
-                    updateUI();
-                } else {
-                    input.style.borderColor = '#ef4444';
-                    setTimeout(() => input.style.borderColor = 'rgba(251,191,36,0.2)', 1000);
-                }
-            };
-
-            window.swSpin = () => {
-                if (spinning) return;
-                spinning = true;
-                spinBtn.disabled = true;
-                isVerified = false;
-
-                const winIdx = 3; // RESULT: TRY AGAIN
-                const extraSpins = 10 + Math.floor(Math.random() * 5); // More spins for momentum
-
-                // Target: Index 3 (Center is 315deg on wheel)
-                // Rot to index calculation: (360 - 315) = 45
-                const targetDeg = 45;
-
-                const curActual = rotation % 360;
-                let add = (targetDeg - curActual + 360) % 360;
-                add += (extraSpins * 360);
-                rotation += add;
-
-                // Slow down duration for 'Near Miss' effect
-                const finalDuration = 10000; // 10 seconds spin
-                wheel.style.transition = `transform ${finalDuration}ms cubic-bezier(0.15, 0, 0, 1)`;
-
-                // Physics Sync: Tick animation
-                let start = null;
-                function tick(timestamp) {
-                    if (!start) start = timestamp;
-                    const progress = timestamp - start;
-                    if (progress < finalDuration) {
-                        const eased = 1 - Math.pow(1 - progress / finalDuration, 4);
-                        const curRot = rotation - add + (add * eased);
-                        if (Math.floor(curRot / 90) !== Math.floor((curRot - 2) / 90)) {
-                            pointer.classList.add('ticking');
-                            setTimeout(() => pointer.classList.remove('ticking'), 50);
-                        }
-                        requestAnimationFrame(tick);
-                    }
-                }
-                requestAnimationFrame(tick);
-
-                localStorage.setItem('sw_last_spin_v2', Date.now().toString());
-                wheel.style.transform = `rotate(${rotation}deg)`;
-
-                setTimeout(() => {
-                    const win = rewards[winIdx];
-                    document.getElementById('sw-res-icon').innerText = win.icon;
-                    document.getElementById('sw-res-title').innerText = win.type === 'win' ? "CONGRATULATIONS!" : "BETTER luck next time!";
-                    document.getElementById('sw-res-text').innerText = win.type === 'win' ? `YOU WON: ${win.text}` : "DON'T GIVE UP!";
-
-                    resultOverlay.classList.add('active');
-                    if (win.type === 'win') createSWConfetti();
-                    spinning = false;
-                    updateUI();
-                }, finalDuration + 100);
-            };
-
-            function createSWConfetti() {
-                const wrap = document.getElementById('sw-confetti-v3');
-                wrap.innerHTML = '';
-                for (let i = 0; i < 80; i++) {
-                    const c = document.createElement('div');
-                    c.style.cssText = `position:absolute; width:8px; height:8px; background:${['#fbbf24', '#ef4444', '#3b82f6', '#fff'][Math.floor(Math.random() * 4)]}; left:${Math.random() * 100}%; top:-10px; border-radius:2px; animation:sw-fall ${2 + Math.random() * 2}s linear forwards; animation-delay:${Math.random()}s;`;
-                    wrap.appendChild(c);
-                }
-            }
-
-            window.openSpinWin = () => { if (!spinModal) initVars(); spinModal.classList.add('show'); updateUI(); };
-            window.closeSpinWin = () => { spinModal.classList.remove('show'); resultOverlay.classList.remove('active'); };
-            window.closeWinModal = () => { resultOverlay.classList.remove('active'); };
-
-            document.addEventListener('DOMContentLoaded', () => {
-                initVars();
-                const rim = document.getElementById('sw-led-container');
-                for (let i = 0; i < 16; i++) {
-                    const led = document.createElement('div');
-                    led.className = 'sw-led';
-                    led.style.transform = `rotate(${i * 22.5}deg)`;
-                    led.style.setProperty('--delay', `${i * 0.1}s`);
-                    rim.appendChild(led);
-                }
-                updateUI();
-            });
-        })();
-    </script>
-
-    <div class="spin-trigger-btn" onclick="openSpinWin()" title="Spin & Win Rewards!">
-        <i class="fas fa-dharmachakra"></i>
-    </div>
-
-    <!-- UI STRUCTURE -->
-    <div id="spin-win-modal">
-        <button class="sw-close-x" onclick="closeSpinWin()">&times;</button>
-        <div class="sw-container">
-            <h2 class="sw-title">Spin & Win</h2>
-
-            <div class="sw-actions" id="sw-auth-box">
-                <input type="text" id="sw-luxury-input" class="sw-code-input" placeholder="ENTER SECRET CODE">
-                <button class="sw-spin-btn" style="padding: 10px 25px; font-size: 1rem;"
-                    onclick="verifySWCode()">VERIFY</button>
-            </div>
-
-            <div class="sw-wheel-wrapper">
-                <div class="sw-led-rim" id="sw-led-container"></div>
-                <div class="sw-pointer"></div>
-                <div class="sw-hub"></div>
-                <div class="sw-wheel-canvas" id="sw-wheel-canvas">
-                    <div class="sw-segments-layer">
-                        <div class="sw-segment"></div>
-                        <div class="sw-segment"></div>
-                        <div class="sw-segment"></div>
-                        <div class="sw-segment"></div>
-                    </div>
-                    <div class="sw-labels">
-                        <div class="sw-label-item" style="--idx:0"><span>FREE BILL</span></div>
-                        <div class="sw-label-item" style="--idx:1"><span>10% OFF</span></div>
-                        <div class="sw-label-item" style="--idx:2"><span>20% OFF</span></div>
-                        <div class="sw-label-item" style="--idx:3"><span>TRY AGAIN</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="sw-spin-btn" id="sw-spin-btn" onclick="swSpin()" disabled>SPIN NOW</button>
-        </div>
-
-        <div class="sw-result-overlay" id="sw-result-overlay">
-            <div id="sw-confetti-v3"
-                style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none;">
-            </div>
-            <div class="sw-result-card">
-                <div class="sw-res-icon" id="sw-res-icon">🎁</div>
-                <h3 class="sw-res-title" id="sw-res-title">WINNER!</h3>
-                <p class="sw-res-text" id="sw-res-text"></p>
-                <button class="sw-spin-btn" style="padding: 12px 40px; font-size:1rem;"
-                    onclick="closeWinModal()">COLLECT</button>
-            </div>
-        </div>
-    </div>
-
-    <style>
-        @keyframes sw-fall {
-            to {
-                transform: translateY(600px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-    </style>
 </body>
 
 </html>
