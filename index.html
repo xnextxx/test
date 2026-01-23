@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-mode">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="-5DVEpIpmk8eTZ8O0iN20xTsrb1R0ToAjHGyL3HgUTA" />
     <title>KhurjaX - Khurja ka Digital Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
@@ -1346,6 +1347,50 @@
             color: #f8fafc;
             margin-bottom: 30px;
         }
+
+        /* LOAD MORE BUTTON */
+        .load-more-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0 40px 0;
+        }
+
+        .load-more-btn {
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: none;
+            /* Hidden by default until JS runs */
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        .load-more-btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -1400,22 +1445,7 @@
                     <div class="loading-text">Loading content...</div>
                 </div>
 
-                <!-- SPIN & WIN CARD -->
-                <div class="card" onclick="openSpinWin()" data-main="Special" data-sub="Rewards" data-pin="on"
-                    data-title="Spin & Win"
-                    data-desc="Spin the wheel and win exciting rewards like FREE BILL and Discounts!">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:linear-gradient(135deg, #ff4d4d, #ffcc00);">LIVE
-                            EVENT</span>
-                        <div class="card-slider">
-                            <img src="https://freefood.com.ng/logo.png" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">🎡 Spin & Win!</h3>
-                        <p class="card-desc">WIN FREE FOOD</p>
-                    </div>
-                </div>
+
 
                 <div id="card-abhinav" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="BGMI"
                     data-pin="on" data-title="ABHINAV YADAV" data-desc="GAME ID 55613751771, GAME NAME A7ALLGAME"
@@ -1617,110 +1647,17 @@
                     </div>
                 </div>
 
-                <div id="card-12" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="BGMI" data-pin=""
-                    data-title="ABHINAV YADAV - BGMI Thuuuuuu"
-                    data-desc="Weekly BGMI tournaments with cash prizes. Register now for next tournament."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#ef4444;">Tournament</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">ABHINAV YADAV - BGMI Thuuuuuu</h3>
-                        <p class="card-desc">Weekly BGMI tournaments with cash prizes. Register now for next tournament.
-                        </p>
-                    </div>
-                </div>
 
-                <div id="card-13" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="FREE FIRE"
-                    data-pin="" data-title="Khurja Free Fire Club"
-                    data-desc="Free Fire gaming club organizing tournaments and practice sessions."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#ef4444;">Gaming</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja Free Fire Club</h3>
-                        <p class="card-desc">Free Fire gaming club organizing tournaments and practice sessions.</p>
-                    </div>
-                </div>
 
-                <div id="card-14" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="Gaming Cafe"
-                    data-pin="" data-title="Cyber Zone Gaming Cafe"
-                    data-desc="High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Cafe</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Cyber Zone Gaming Cafe</h3>
-                        <p class="card-desc">High-end gaming cafe with latest games, tournaments, and snacks. 24/7 WiFi.
-                        </p>
-                    </div>
-                </div>
 
-                <div id="card-15" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="PC Games"
-                    data-pin="" data-title="Game World PC Cafe"
-                    data-desc="PC gaming center with high-end systems, latest games, and esports tournaments."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">PC Gaming</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Game World PC Cafe</h3>
-                        <p class="card-desc">PC gaming center with high-end systems, latest games, and esports
-                            tournaments.</p>
-                    </div>
-                </div>
 
-                <div id="card-16" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="Mobile Games"
-                    data-pin="" data-title="Mobile Gaming Hub"
-                    data-desc="Mobile gaming center with latest games, tournaments, and charging stations."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Mobile</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Mobile Gaming Hub</h3>
-                        <p class="card-desc">Mobile gaming center with latest games, tournaments, and charging stations.
-                        </p>
-                    </div>
-                </div>
 
-                <div id="card-17" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="Console Games"
-                    data-pin="" data-title="PlayStation Zone"
-                    data-desc="Console gaming center with PS4, PS5, Xbox, and Nintendo games." data-phone="9876543210"
-                    data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Console</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">PlayStation Zone</h3>
-                        <p class="card-desc">Console gaming center with PS4, PS5, Xbox, and Nintendo games.</p>
-                    </div>
-                </div>
+
+
+
+
+
+
 
 
 
@@ -1936,6 +1873,11 @@
                 </div>
 
             </div>
+
+            <!-- Load More Button -->
+            <div id="loadMoreContainer" class="load-more-container">
+                <button id="loadMoreBtn" class="load-more-btn" onclick="loadMore()">Load More</button>
+            </div>
         </div>
     </div>
 
@@ -1980,7 +1922,7 @@
             'More': ['All Categories', 'Market', 'Food', 'Services', 'Health', 'Education', 'Property', 'Special', 'Travel', 'Khurja Special', 'Content Creators', 'Gaming', 'Events', 'Emergency', 'Religion'],
             'Trending': ['This Week', 'All Time'],
             'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
-            'Food': ['Restaurant', 'Sweets', 'Cafe', 'Bakery', 'Fast Food', 'Sweet Shop'],
+            'Food': ['Restaurant', 'Bakery', 'Fast Food'],
             'Services': ['Makeup', 'Barber/Hair salon', 'Electrician', 'Plumber', 'ACRepair'],
             'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
             'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
@@ -1994,6 +1936,66 @@
             'Emergency & Help': ['Police', 'Fire Station', 'Blood Donors'],
             'Religion & Places': ['Hindu Temple', 'Islamic Mosque', 'Christian Church', 'Other']
         };
+
+        // PAGINATION CONFIG
+        const ITEMS_PER_PAGE = 12;
+        let currentPage = 1;
+
+        // Initialize Pagination
+        function renderPagination() {
+            const cards = Array.from(document.querySelectorAll('.card'));
+
+            // Filter eligible cards (those that match current search/filter)
+            // If data-visible-filter is missing, assume it matches (initial state)
+            const visibleCards = cards.filter(card => {
+                const attr = card.getAttribute('data-visible-filter');
+                return attr === null || attr === 'true';
+            });
+
+            // Calculate range to show
+            const showLimit = currentPage * ITEMS_PER_PAGE;
+
+            // Apply visibility
+            visibleCards.forEach((card, index) => {
+                if (index < showLimit) {
+                    card.style.display = 'block';
+                    // Animation for new items
+                    if (index >= (currentPage - 1) * ITEMS_PER_PAGE && currentPage > 1) {
+                        card.style.animation = 'fadeInUp 0.5s ease backwards';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide cards that don't match filter
+            cards.forEach(card => {
+                const attr = card.getAttribute('data-visible-filter');
+                if (attr === 'false') {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Manage Button Visibility
+            const btn = document.getElementById('loadMoreBtn');
+            if (visibleCards.length > showLimit) {
+                btn.style.display = 'block';
+                btn.innerText = `Load More (${visibleCards.length - showLimit} remaining)`;
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+
+        function loadMore() {
+            currentPage++;
+            renderPagination();
+        }
+
+        // Initialize on load to handle static content
+        document.addEventListener('DOMContentLoaded', () => {
+            // Delay slightly to ensure elements are parsed
+            setTimeout(renderPagination, 50);
+        });
 
         // CATEGORY FILTER
         function setCategory(mainCat) {
@@ -2046,21 +2048,24 @@
             cards.forEach(card => {
                 const cMain = card.getAttribute('data-main');
                 const cSub = card.getAttribute('data-sub');
+                let isMatch = false;
 
                 if (main === 'All') {
-                    // Show all cards
-                    card.style.display = 'block';
+                    isMatch = true;
                 } else if (main === 'More') {
-                    // For More category, show all cards (browse mode)
-                    card.style.display = 'block';
+                    isMatch = true;
                 } else if (sub === 'All') {
-                    // Show all cards from main category
-                    card.style.display = (cMain === main) ? 'block' : 'none';
+                    isMatch = (cMain === main);
                 } else {
-                    // Show cards matching both main and sub category
-                    card.style.display = (cMain === main && cSub === sub) ? 'block' : 'none';
+                    isMatch = (cMain === main && cSub === sub);
                 }
+
+                card.setAttribute('data-visible-filter', isMatch);
             });
+
+            // Reset to page 1
+            currentPage = 1;
+            renderPagination();
 
             // Hide loading indicator after filtering is complete
             setTimeout(() => {
@@ -2081,8 +2086,12 @@
             window.searchTimeout = setTimeout(() => {
                 document.querySelectorAll('.card').forEach(card => {
                     const text = card.innerText.toLowerCase() + card.getAttribute('data-desc').toLowerCase();
-                    card.style.display = text.includes(input) ? 'block' : 'none';
+                    const isMatch = text.includes(input);
+                    card.setAttribute('data-visible-filter', isMatch);
                 });
+
+                currentPage = 1;
+                renderPagination();
 
                 // Hide loading indicator after search is complete
                 setTimeout(() => {
@@ -2124,6 +2133,14 @@
             // Append in order: Pinned items first, then Shuffled others
             pinned.forEach(c => grid.appendChild(c));
             others.forEach(c => grid.appendChild(c));
+
+            // Mark all as visible filter if not set (init)
+            cards.forEach(c => {
+                if (!c.hasAttribute('data-visible-filter')) c.setAttribute('data-visible-filter', 'true');
+            });
+
+            // Re-render pagination
+            renderPagination();
         }
 
         // OPEN DETAIL PAGE
@@ -2618,7 +2635,7 @@
                 const allContentFiles = [
                     'trending.html', 'gaming.html', 'content-creators.html', 'market.html',
                     'food.html', 'services.html', 'health.html', 'education.html',
-                    'property.html', 'special.html', 'travel.html', 'khurja-special.html',
+                    'property.html', 'travel.html', 'khurja-special.html',
                     'events.html', 'emergency.html', 'religion.html', 'businesses.html', 'jobs.html'
                 ];
 
@@ -2638,216 +2655,778 @@
             });
         })();
 
-        // --- PREMIUM SPIN & WIN SYSTEM ---
-        (function () {
-            let spinModal, resultOverlay, wheel, spinBtn, pointer;
-            const rewards = [
-                { text: "FREE BILL", type: "win", icon: "☕" },
-                { text: "10% OFF", type: "win", icon: "🏷️" },
-                { text: "20% OFF", type: "win", icon: "🔥" },
-                { text: "TRY AGAIN", type: "lose", icon: "🍀" }
-            ];
 
-            let rotation = 0;
-            let spinning = false;
-            let isVerified = false;
-
-            function initVars() {
-                spinModal = document.getElementById('spin-win-modal');
-                resultOverlay = document.getElementById('sw-result-overlay');
-                wheel = document.getElementById('sw-wheel-canvas');
-                spinBtn = document.getElementById('sw-spin-btn');
-                pointer = document.querySelector('.sw-pointer');
-            }
-
-            function getRemainingCooldown() {
-                const last = localStorage.getItem('sw_last_spin_v2');
-                if (!last) return 0;
-                const diff = Date.now() - parseInt(last);
-                return Math.max(0, (5 * 60 * 1000) - diff);
-            }
-
-            function updateUI() {
-                const remaining = getRemainingCooldown();
-                const authBox = document.getElementById('sw-auth-box');
-
-                if (remaining > 0) {
-                    spinBtn.disabled = true;
-                    authBox.style.display = 'none';
-                    const mins = Math.floor(remaining / 60000);
-                    const secs = Math.floor((remaining % 60000) / 1000);
-                    spinBtn.innerText = `WAIT ${mins}:${secs < 10 ? '0' : ''}${secs}`;
-                    setTimeout(updateUI, 1000);
-                } else {
-                    if (isVerified) {
-                        spinBtn.disabled = false;
-                        spinBtn.innerText = "SPIN NOW";
-                        authBox.style.display = 'none';
-                    } else {
-                        spinBtn.disabled = true;
-                        spinBtn.innerText = "ENTER CODE";
-                        authBox.style.display = 'flex';
-                    }
-                }
-            }
-
-            window.verifySWCode = () => {
-                const input = document.getElementById('sw-luxury-input');
-                const valid = ['KHURJA123', 'SHOP786', 'WINBIG', 'FREEFOOD'];
-                if (valid.includes(input.value.toUpperCase())) {
-                    isVerified = true;
-                    updateUI();
-                } else {
-                    input.style.borderColor = '#ef4444';
-                    setTimeout(() => input.style.borderColor = 'rgba(251,191,36,0.2)', 1000);
-                }
-            };
-
-            window.swSpin = () => {
-                if (spinning) return;
-                spinning = true;
-                spinBtn.disabled = true;
-                isVerified = false;
-
-                const winIdx = 3; // RESULT: TRY AGAIN
-                const extraSpins = 10 + Math.floor(Math.random() * 5); // More spins for momentum
-
-                // Target: Index 3 (Center is 315deg on wheel)
-                // Rot to index calculation: (360 - 315) = 45
-                const targetDeg = 45;
-
-                const curActual = rotation % 360;
-                let add = (targetDeg - curActual + 360) % 360;
-                add += (extraSpins * 360);
-                rotation += add;
-
-                // Slow down duration for 'Near Miss' effect
-                const finalDuration = 10000; // 10 seconds spin
-                wheel.style.transition = `transform ${finalDuration}ms cubic-bezier(0.15, 0, 0, 1)`;
-
-                // Physics Sync: Tick animation
-                let start = null;
-                function tick(timestamp) {
-                    if (!start) start = timestamp;
-                    const progress = timestamp - start;
-                    if (progress < finalDuration) {
-                        const eased = 1 - Math.pow(1 - progress / finalDuration, 4);
-                        const curRot = rotation - add + (add * eased);
-                        if (Math.floor(curRot / 90) !== Math.floor((curRot - 2) / 90)) {
-                            pointer.classList.add('ticking');
-                            setTimeout(() => pointer.classList.remove('ticking'), 50);
-                        }
-                        requestAnimationFrame(tick);
-                    }
-                }
-                requestAnimationFrame(tick);
-
-                localStorage.setItem('sw_last_spin_v2', Date.now().toString());
-                wheel.style.transform = `rotate(${rotation}deg)`;
-
-                setTimeout(() => {
-                    const win = rewards[winIdx];
-                    document.getElementById('sw-res-icon').innerText = win.icon;
-                    document.getElementById('sw-res-title').innerText = win.type === 'win' ? "CONGRATULATIONS!" : "BETTER luck next time!";
-                    document.getElementById('sw-res-text').innerText = win.type === 'win' ? `YOU WON: ${win.text}` : "DON'T GIVE UP!";
-
-                    resultOverlay.classList.add('active');
-                    if (win.type === 'win') createSWConfetti();
-                    spinning = false;
-                    updateUI();
-                }, finalDuration + 100);
-            };
-
-            function createSWConfetti() {
-                const wrap = document.getElementById('sw-confetti-v3');
-                wrap.innerHTML = '';
-                for (let i = 0; i < 80; i++) {
-                    const c = document.createElement('div');
-                    c.style.cssText = `position:absolute; width:8px; height:8px; background:${['#fbbf24', '#ef4444', '#3b82f6', '#fff'][Math.floor(Math.random() * 4)]}; left:${Math.random() * 100}%; top:-10px; border-radius:2px; animation:sw-fall ${2 + Math.random() * 2}s linear forwards; animation-delay:${Math.random()}s;`;
-                    wrap.appendChild(c);
-                }
-            }
-
-            window.openSpinWin = () => { if (!spinModal) initVars(); spinModal.classList.add('show'); updateUI(); };
-            window.closeSpinWin = () => { spinModal.classList.remove('show'); resultOverlay.classList.remove('active'); };
-            window.closeWinModal = () => { resultOverlay.classList.remove('active'); };
-
-            document.addEventListener('DOMContentLoaded', () => {
-                initVars();
-                const rim = document.getElementById('sw-led-container');
-                for (let i = 0; i < 16; i++) {
-                    const led = document.createElement('div');
-                    led.className = 'sw-led';
-                    led.style.transform = `rotate(${i * 22.5}deg)`;
-                    led.style.setProperty('--delay', `${i * 0.1}s`);
-                    rim.appendChild(led);
-                }
-                updateUI();
-            });
-        })();
     </script>
 
-    <div class="spin-trigger-btn" onclick="openSpinWin()" title="Spin & Win Rewards!">
+
+
+    <!-- SPIN & WIN BUTTON -->
+    <div class="spin-trigger-btn" onclick="openSpinWin()">
         <i class="fas fa-dharmachakra"></i>
     </div>
 
-    <!-- UI STRUCTURE -->
-    <div id="spin-win-modal">
-        <button class="sw-close-x" onclick="closeSpinWin()">&times;</button>
-        <div class="sw-container">
-            <h2 class="sw-title">Spin & Win</h2>
+    <!-- SPIN MODAL (PREMIUM) -->
+    <div id="spin-win-modal" class="sw-modal">
+        <div class="sw-content scale-in">
+            <button class="sw-close" onclick="closeSpinWin()">&times;</button>
+            <h2 class="sw-title">SPIN & WIN BIG</h2>
 
-            <div class="sw-actions" id="sw-auth-box">
-                <input type="text" id="sw-luxury-input" class="sw-code-input" placeholder="ENTER SECRET CODE">
-                <button class="sw-spin-btn" style="padding: 10px 25px; font-size: 1rem;"
-                    onclick="verifySWCode()">VERIFY</button>
-            </div>
+            <div class="sw-game-area">
 
-            <div class="sw-wheel-wrapper">
-                <div class="sw-led-rim" id="sw-led-container"></div>
-                <div class="sw-pointer"></div>
-                <div class="sw-hub"></div>
-                <div class="sw-wheel-canvas" id="sw-wheel-canvas">
-                    <div class="sw-segments-layer">
-                        <div class="sw-segment"></div>
-                        <div class="sw-segment"></div>
-                        <div class="sw-segment"></div>
-                        <div class="sw-segment"></div>
+                <!-- SETTINGS BUTTON -->
+                <div class="sw-settings-btn" onclick="toggleProbabilities()">
+                    <i class="fas fa-cog"></i>
+                </div>
+
+                <!-- PROBABILITY MODAL OVERLAY -->
+                <div id="sw-prob-modal" class="sw-prob-modal">
+                    <div class="sw-prob-title">Win Probability</div>
+
+                    <div class="sw-prob-row">
+                        <span class="sw-prob-label">FREE BILL</span>
+                        <span class="sw-prob-val rare">10%</span>
                     </div>
-                    <div class="sw-labels">
-                        <div class="sw-label-item" style="--idx:0"><span>FREE BILL</span></div>
-                        <div class="sw-label-item" style="--idx:1"><span>10% OFF</span></div>
-                        <div class="sw-label-item" style="--idx:2"><span>20% OFF</span></div>
-                        <div class="sw-label-item" style="--idx:3"><span>TRY AGAIN</span></div>
+                    <div class="sw-prob-row">
+                        <span class="sw-prob-label">50% OFF</span>
+                        <span class="sw-prob-val">15%</span>
+                    </div>
+                    <div class="sw-prob-row">
+                        <span class="sw-prob-label">10% OFF</span>
+                        <span class="sw-prob-val">25%</span>
+                    </div>
+                    <div class="sw-prob-row">
+                        <span class="sw-prob-label">TRY AGAIN</span>
+                        <span class="sw-prob-val common">50%</span>
+                    </div>
+
+                    <div style="margin-top: 15px; font-size: 0.8rem; color: #888;">
+                        *System verified fair play algorithm.
+                    </div>
+
+                    <button class="sw-prob-close" onclick="toggleProbabilities()">CLOSE</button>
+                </div>
+                <div class="sw-pointer-wrapper">
+                    <div class="sw-pointer"></div>
+                </div>
+
+                <!-- OUTER BEZEL -->
+                <div class="sw-wheel-outer">
+                    <!-- LIGHTS -->
+                    <div class="sw-dot" style="--d:0"></div>
+                    <div class="sw-dot" style="--d:1"></div>
+                    <div class="sw-dot" style="--d:2"></div>
+                    <div class="sw-dot" style="--d:3"></div>
+                    <div class="sw-dot" style="--d:4"></div>
+                    <div class="sw-dot" style="--d:5"></div>
+                    <div class="sw-dot" style="--d:6"></div>
+                    <div class="sw-dot" style="--d:7"></div>
+
+                    <!-- INNER WHEEL -->
+                    <div class="sw-wheel" id="sw-wheel">
+                        <!-- 4 SEGMENTS (90deg each) -->
+                        <div class="sw-seg" style="--i:0;"><span>FREE<br>BILL</span></div>
+                        <div class="sw-seg" style="--i:1;"><span>50%<br>OFF</span></div>
+                        <div class="sw-seg" style="--i:2;"><span>10%<br>OFF</span></div>
+                        <div class="sw-seg" style="--i:3;"><span>TRY<br>AGAIN</span></div>
+                    </div>
+
+                    <!-- CENTER CAP -->
+                    <div class="sw-center-hub">
+                        <div class="sw-center-star">★</div>
                     </div>
                 </div>
             </div>
 
-            <button class="sw-spin-btn" id="sw-spin-btn" onclick="swSpin()" disabled>SPIN NOW</button>
-        </div>
+            <!-- REDEEM SECTION -->
+            <div id="sw-redeem-section" class="sw-redeem-box">
+                <!-- DYNAMIC CONTENT -->
+            </div>
 
-        <div class="sw-result-overlay" id="sw-result-overlay">
-            <div id="sw-confetti-v3"
-                style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none;">
-            </div>
-            <div class="sw-result-card">
-                <div class="sw-res-icon" id="sw-res-icon">🎁</div>
-                <h3 class="sw-res-title" id="sw-res-title">WINNER!</h3>
-                <p class="sw-res-text" id="sw-res-text"></p>
-                <button class="sw-spin-btn" style="padding: 12px 40px; font-size:1rem;"
-                    onclick="closeWinModal()">COLLECT</button>
-            </div>
+            <div id="sw-result" class="sw-result"></div>
         </div>
     </div>
 
     <style>
-        @keyframes sw-fall {
-            to {
-                transform: translateY(600px) rotate(720deg);
-                opacity: 0;
+        /* TRIGGER BUTTON */
+        .spin-trigger-btn {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #f59e0b);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b45309;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            z-index: 1000;
+            animation: float-btn 3s ease-in-out infinite;
+        }
+
+        @keyframes float-btn {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
             }
         }
+
+        /* MODAL */
+        .sw-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .sw-modal.show {
+            display: flex;
+        }
+
+        .sw-content {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            width: 95%;
+            max-width: 380px;
+            border-radius: 24px;
+            padding: 25px 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .sw-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #eee;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sw-title {
+            margin-bottom: 25px;
+            font-weight: 900;
+            background: linear-gradient(to right, #cf0000, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* WHEEL CONTAINER */
+        .sw-game-area {
+            position: relative;
+            margin: 0 auto 20px;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* BEZEL (Outer Ring) */
+        .sw-wheel-outer {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #444 60%, #222 100%);
+            padding: 12px;
+            /* Rim thickness */
+            position: relative;
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 15px rgba(0, 0, 0, 0.8);
+            border: 4px solid #f59e0b;
+            /* Gold trim */
+        }
+
+        /* DECORATIVE DOTS */
+        .sw-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            margin-top: -5px;
+            margin-left: -5px;
+            box-shadow: 0 0 5px #fff, 0 0 10px #f59e0b;
+            transform: rotate(calc(45deg * var(--d))) translate(132px) rotate(calc(-45deg * var(--d)));
+            /* Place on rim */
+            animation: blink 1s infinite alternate;
+            animation-delay: calc(0.1s * var(--d));
+        }
+
+        @keyframes blink {
+            from {
+                opacity: 0.3;
+            }
+
+            to {
+                opacity: 1;
+                transform: rotate(calc(45deg * var(--d))) translate(132px) scale(1.2);
+            }
+        }
+
+        /* THE ROTATING WHEEL */
+        .sw-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            /* Conic Gradient for 4 segments */
+            background: conic-gradient(#ef4444 0% 25%,
+                    /* Red */
+                    #3b82f6 25% 50%,
+                    /* Blue */
+                    #10b981 50% 75%,
+                    /* Green */
+                    #f59e0b 75% 100%
+                    /* Orange */
+                );
+            transition: transform 8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        /* SEGMENTS TEXT */
+        .sw-seg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: none;
+            text-align: center;
+        }
+
+        .sw-seg span {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+        }
+
+        /* Rotate text for each quadrant */
+        /* Rotate text for each quadrant (Center of wedge) */
+        .sw-seg span {
+            transform: translate(-50%, -50%) rotate(calc(90deg * var(--i) + 45deg)) translate(0, -85px);
+            /* Reset top/left to center for the transform to work from */
+            top: 50%;
+            left: 50%;
+        }
+
+        /* Left Orange */
+
+        /* CENTER HUB */
+        .sw-center-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .sw-center-star {
+            color: #f59e0b;
+            font-size: 1.5rem;
+        }
+
+        /* POINTER */
+        .sw-pointer-wrapper {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.3));
+        }
+
+        .sw-pointer {
+            width: 30px;
+            height: 40px;
+            background: #333;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+        }
+
+        /* SETTINGS BUTTON CODE BLOCK */
+        /* Note: Styles are already added */
+
+
+        /* INPUT BOX */
+        .sw-redeem-box {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            margin-top: 15px;
+            padding: 20px;
+            border-radius: 16px;
+            position: relative;
+            z-index: 50;
+        }
+
+        /* SETTINGS BUTTON */
+        .sw-settings-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: 0.3s;
+        }
+
+        .sw-settings-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(90deg);
+        }
+
+        /* PROBABILITY MODAL OVERLAY */
+        #sw-prob-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 200;
+            display: none;
+            /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #sw-prob-modal.show {
+            display: flex;
+        }
+
+        .sw-input {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+            z-index: 60;
+        }
+
+        .sw-input:focus {
+            border-color: #f59e0b;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+        }
+
+        .sw-btn {
+            background: linear-gradient(to right, #2563eb, #1d4ed8);
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 0 #1e40af;
+        }
+
+        .sw-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #1e40af;
+        }
+
+        .sw-btn:disabled {
+            background: #9ca3af;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* Active State */
+        .sw-status-active {
+            color: #10b981;
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .sw-timer {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4b5563;
+            background: #f3f4f6;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        /* SETTINGS BUTTON & MODAL */
+        .sw-settings-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: 0.3s;
+        }
+
+        .sw-settings-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(90deg);
+        }
+
+        .sw-prob-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 200;
+            display: none;
+            /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sw-prob-modal.show {
+            display: flex;
+        }
+
+        .sw-prob-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #f59e0b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #f59e0b;
+            padding-bottom: 10px;
+        }
+
+        .sw-prob-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+        }
+
+        .sw-prob-label {
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .sw-prob-val {
+            font-weight: 800;
+            color: #10b981;
+            font-family: 'Courier New', monospace;
+        }
+
+        .sw-prob-val.rare {
+            color: #f59e0b;
+        }
+
+        .sw-prob-val.common {
+            color: #ef4444;
+        }
+
+        .sw-prob-close {
+            margin-top: 30px;
+            padding: 10px 30px;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+        }
     </style>
+
+    <script>
+        // --- SPIN & WIN LOGIC ---
+        (function () {
+            const LOCK_DURATION = 10 * 1000; // 10 Seconds (User Request)
+            let spinInterval;
+            window.isCodeVisible = false; // Visibility state for Eye Button
+
+            window.toggleProbabilities = () => {
+                const modal = document.getElementById('sw-prob-modal');
+                modal.classList.toggle('show');
+            };
+
+            window.toggleCodeVisibility = (code) => {
+                window.isCodeVisible = !window.isCodeVisible;
+                // Re-render only if modal is open, or it will auto-update on next interval
+                _checkRedeemStatus();
+            };
+
+            window.openSpinWin = () => {
+                document.getElementById('spin-win-modal').classList.add('show');
+                _checkRedeemStatus();
+                // Check status every second while modal is open
+                spinInterval = setInterval(_checkRedeemStatus, 1000);
+            };
+
+            window.closeSpinWin = () => {
+                document.getElementById('spin-win-modal').classList.remove('show');
+                clearInterval(spinInterval);
+            };
+
+            // 1. Check Status
+            window._checkRedeemStatus = () => {
+                const lastRedeem = localStorage.getItem('sw_last_redeem_v3');
+                const lastCode = localStorage.getItem('sw_active_code_v3');
+                const now = Date.now();
+                let isActive = false;
+                let timeLeft = 0;
+
+                if (lastRedeem) {
+                    const diff = now - parseInt(lastRedeem);
+                    if (diff < LOCK_DURATION) {
+                        isActive = true;
+                        timeLeft = LOCK_DURATION - diff;
+                    } else {
+                        // Expired
+                        localStorage.removeItem('sw_active_code_v3');
+                        localStorage.removeItem('sw_last_result_v3'); // Clear saved result
+                        document.getElementById('sw-result').innerText = ""; // Clear visual result text
+                    }
+                }
+
+                _buildRedeemCodeSection(isActive, timeLeft, lastCode);
+            };
+
+            // 2. Build UI
+            function _buildRedeemCodeSection(isActive, timeLeft, lastCode) {
+                const container = document.getElementById('sw-redeem-section');
+
+                // OPTIMIZATION: Prevent re-rendering input if already exists (fixes focus loss)
+                const existingInput = document.getElementById('sw-code-input');
+
+                if (isActive) {
+                    // Update timer UI every second
+                    // Calculate Hours, Mins, Secs
+                    const h = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    container.innerHTML = `
+                        <div class="sw-status-active">Code Active <i class="fas fa-check-circle"></i></div>
+                        <div class="sw-timer">Refresh within: ${h}h ${m}m ${s}s</div>
+                        <div style="margin-top:10px; font-size:0.9rem; color:#666; display:flex; align-items:center; justify-content:center; gap:8px;">
+                            Active Code: 
+                            <strong id="sw-active-code-display">${window.isCodeVisible ? lastCode : '*******'}</strong>
+                            <button onclick="toggleCodeVisibility('${lastCode}')" style="background:none; border:none; cursor:pointer; color:#666; padding:0; font-size:1rem;">
+                                <i class="fas ${window.isCodeVisible ? 'fa-eye-slash' : 'fa-eye'}"></i>
+                            </button>
+                        </div>
+                        <div style="margin-top:8px; font-size:0.9rem; font-weight:bold; color:#333;">
+                            Your Reward: <span style="color:#d97706;">${localStorage.getItem('sw_last_result_v3') || 'Spinning...'}</span>
+                        </div>
+                        <button class="sw-btn" disabled style="margin-top:10px; background:#9ca3af; cursor: not-allowed;">LOCKED (Wait for Timer)</button>
+                    `;
+                } else {
+                    // If not active, show input form
+                    // Only render if input doesn't exist to prevent overwriting focus
+                    if (!existingInput) {
+                        container.innerHTML = `
+                            <input type="text" id="sw-code-input" class="sw-input" placeholder="Enter Code">
+                            <button class="sw-btn" onclick="_redeemCode()">REDEEM CODE</button>
+                            <p id="sw-err-msg" style="color:red; font-size:0.8rem; margin-top:5px; display:none;"></p>
+                        `;
+                    }
+                }
+            }
+
+            // 3. Redeem Logic
+            window._redeemCode = () => {
+                const input = document.getElementById('sw-code-input');
+                const errMsg = document.getElementById('sw-err-msg');
+                const code = input.value.trim().toUpperCase();
+
+                // Validation: Must contain KHURJAX followed by 4 digits
+                // User Example: FOOKHURJAX1234. Logic: Search for KHURJAX(\d{4})
+                const match = code.match(/KHURJAX(\d{4})/);
+
+                if (!match) {
+                    showError("Invalid Code"); // Generic error (User Request: "YE NAHI BATAYE")
+                    return;
+                }
+
+                const num = parseInt(match[1]); // The 4 digits
+
+                // Number Range Check: 1000 - 9999 (User Request)
+                if (num >= 1000 && num <= 9999) {
+                    // Valid!
+                    // Activation
+                    localStorage.setItem('sw_last_redeem_v3', Date.now().toString());
+                    localStorage.setItem('sw_active_code_v3', code);
+
+                    // Trigger "Spin" visual as feedback (Optional per request, but good UX)
+                    // The user said "Chahe user jeete ya haare... Active mark ho jata hai"
+                    // We will just active it and show the UI update.
+
+                    _checkRedeemStatus(); // Update UI immediately
+
+                    // Auto-spin or let user spin? I added a Spin button in Active UI.
+                    // Let's auto-spin for effect.
+                    triggerSpin();
+
+                } else {
+                    showError("Invalid Code"); // Generic error for range mismatch too
+                }
+
+                function showError(msg) {
+                    errMsg.innerText = msg;
+                    errMsg.style.display = 'block';
+                    input.style.borderColor = 'red';
+                    // Clear any previous result
+                    document.getElementById('sw-result').innerText = "";
+                }
+            };
+
+            window.triggerSpin = () => {
+                const wheel = document.getElementById('sw-wheel');
+                const res = document.getElementById('sw-result');
+                res.innerText = "Spinning...";
+
+                let targetAngle;
+                let resultText;
+
+                // ALWAYS LOSE (User Request: "SAB REMOVE KARO HAR BAAR LOSE HI HO")
+                // NEAR MISS EFFECT (User Request: "AESA LAGE KI WAH FREE BILL PAR RUKEGA LEKIN WAH TRY AGYEN PAR RUKE")
+                // Strategy: Land on "TRY AGAIN" (Segment 3: 270-360) but close to "FREE BILL" (Segment 0: 0-90).
+                // The Boundary is 0/360.
+                // If we rotate +15 degrees: 
+                // The pointer (Top) effectively lands on 345 degrees (Inside "TRY AGAIN").
+                // "FREE BILL" starts at 0, so it's just 15 degrees away. Visually very close.
+
+                targetAngle = 15;
+                resultText = "Result: SO CLOSE! BETTER LUCK NEXT TIME!";
+
+                // Get current rotation or default to 0
+                let currentRot = parseFloat(wheel.getAttribute('data-rotation')) || 0;
+
+                // Add random full spins (Increased base spins for 8s duration)
+                const extraSpins = 3600 + (Math.floor(Math.random() * 5) * 360);
+
+                // Add jitter (+/- 5deg) to make it look less robotic, but stay within wedge
+                const jitter = Math.floor(Math.random() * 5);
+
+                // Calculate spin to land on target:
+                // We want (finalRot % 360) ≈ targetAngle.
+                // Let base = currentRot + 1800 (min spins).
+
+                const minSpins = 10 * 360; // minimum spin distance for 8s
+                let newRot = currentRot + minSpins;
+                const remainder = newRot % 360;
+                // We want remainder to be targetAngle.
+                const diff = targetAngle - remainder;
+                newRot += diff;
+
+                // Ensure it's always positive forward spin
+                if (newRot <= currentRot) newRot += 360;
+
+                newRot += jitter;
+
+                wheel.style.transform = `rotate(${newRot}deg)`;
+                wheel.setAttribute('data-rotation', newRot);
+
+                setTimeout(() => {
+                    res.innerText = resultText;
+
+                    // Save result for persistence
+                    const cleanResult = resultText.replace("Result: ", "");
+                    localStorage.setItem('sw_last_result_v3', cleanResult);
+
+                    if (resultText.includes("CONGRATULATIONS")) {
+                        // Optional: confetti or celebration effect here
+                        res.style.color = "#10b981";
+                    } else {
+                        res.style.color = "#ef4444";
+                    }
+
+                    // Update UI to show saved result in the redeem box
+                    _checkRedeemStatus();
+
+                }, 8000); // 8 Seconds (User Request)
+            };
+        })();
+    </script>
 </body>
 
 </html>
