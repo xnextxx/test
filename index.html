@@ -1430,10 +1430,9 @@
                     style="width: 50px; height: 50px; border-radius: 50%;">
             </div>
 
-            <div class="main-cats">
-                <button class="cat-btn all-btn active" onclick="setCategory('All')"><i class="fas fa-th-large"></i>
-                    Home</button>
-                <button class="cat-btn" onclick="setCategory('More')"><i class="fas fa-ellipsis-h"></i> More ➕</button>
+            <div class="main-cats" style="display: none;">
+                <button class="cat-btn all-btn active" onclick="setCategory('Food')"><i class="fas fa-th-large"></i>
+                    Food</button>
             </div>
 
             <div class="sub-cats" id="subCatContainer"><small>Showing All Listings</small></div>
@@ -1451,58 +1450,12 @@
 
 
 
-                <div id="card-abhinav" class="card" onclick="openDetail(this)" data-main="Gaming" data-sub="BGMI"
-                    data-pin="on" data-title="ABHINAV YADAV" data-desc="GAME ID 55613751771, GAME NAME A7ALLGAME"
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">BGMI</span>
-                        <div class="card-slider"><img src="https://i.ibb.co/B2TgMmHT/4.jpg" class="card-img"><img
-                                src="https://i.ibb.co/bg31vk89/5.jpg" class="card-img"><img
-                                src="https://i.ibb.co/vCKbj9pb/6.jpg" class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">ABHINAV YADAV</h3>
-                        <p class="card-desc">GAME ID 55613751771, GAME NAME A7ALLGAME</p>
-                    </div>
-                </div>
 
 
-                <div id="card-1" class="card" onclick="openDetail(this)" data-main="Services" data-sub="Makeup"
-                    data-pin="on" data-title="Glamour Beauty Parlour"
-                    data-desc="Bridal Makeup, Party Makeup, Hair Spa, Facial, Mehendi. Ladies Only."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#db2777;">Makeup</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600"
-                                class="card-img"><img
-                                src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Glamour Beauty Parlour</h3>
-                        <p class="card-desc">Bridal Makeup & Spa.</p>
-                    </div>
-                </div>
 
-                <div id="card-2" class="card" onclick="openDetail(this)" data-main="Education" data-sub="Schools"
-                    data-pin="" data-title="Khurja Public School"
-                    data-desc="CBSE Board School. Nursery to 12th. Smart Classes & Transport." data-phone="9876543210"
-                    data-whatsapp="9876543210" data-insta="" data-fb="https://facebook.com"
-                    data-website="https://kps.com">
-                    <div class="slider-wrapper">
-                        <span class="card-badge">School</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja Public School</h3>
-                        <p class="card-desc">CBSE Board, Nursery to 12th.</p>
-                    </div>
-                </div>
+
+
+
 
                 <div id="card-3" class="card" onclick="openDetail(this)" data-main="Food" data-sub="Restaurant"
                     data-pin="" data-title="The Spicy Bite"
@@ -1521,135 +1474,21 @@
                     </div>
                 </div>
 
-                <div id="card-4" class="card" onclick="openDetail(this)" data-main="Services" data-sub="Electrician"
-                    data-pin="" data-title="Raju Electrician"
-                    data-desc="24/7 Home Service for Fan, AC, Wiring, Inverter." data-phone="9876543210"
-                    data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Service</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Raju Electrician</h3>
-                        <p class="card-desc">Home Repair Service.</p>
-                    </div>
-                </div>
 
-                <div id="card-5" class="card" onclick="openDetail(this)" data-main="Special" data-sub="Pottery"
-                    data-pin="" data-title="Khurja Ceramic Works"
-                    data-desc="Manufacturer & Exporter of Ceramic Pots, Planters, Mugs. Wholesale prices."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb=""
-                    data-website="https://khurjaceramic.com">
-                    <div class="slider-wrapper">
-                        <span class="card-badge">Pottery</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja Ceramic Works</h3>
-                        <p class="card-desc">Factory Outlet.</p>
-                    </div>
-                </div>
 
-                <div id="card-6" class="card" onclick="openDetail(this)" data-main="Special" data-sub="Pottery"
-                    data-pin="" data-title="Khurja Ceramic Works" data-desc="Wholesale Ceramic Items."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge">Pottery</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1565193566173-7a64b27876e9?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja Ceramic Works</h3>
-                        <p class="card-desc">Wholesale Ceramic Items.</p>
-                    </div>
-                </div>
 
-                <div id="card-7" class="card" onclick="openDetail(this)" data-main="Updates" data-sub="Jobs" data-pin=""
-                    data-title="Salesman Required"
-                    data-desc="Need Salesman for Cloth Shop in Gandhi Market. Salary 10k-15k. Full Time."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:red;">Hiring</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Salesman Required</h3>
-                        <p class="card-desc">Urgent Job Vacancy.</p>
-                    </div>
-                </div>
 
-                <div id="card-8" class="card" onclick="openDetail(this)" data-main="Services" data-sub="MarriageHall"
-                    data-pin="" data-title="Royal Palace Banquet"
-                    data-desc="Luxury AC Banquet Hall for Weddings, Parties. Big Lawn and Catering available."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#8b5cf6;">Banquet</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Royal Palace Banquet</h3>
-                        <p class="card-desc">Wedding Hall & Lawn.</p>
-                    </div>
-                </div>
 
-                <div id="card-9" class="card" onclick="openDetail(this)" data-main="Services" data-sub="Transport"
-                    data-pin="" data-title="Sonu E-Rickshaw"
-                    data-desc="Available for City Ride, Railway Station drop, Market visit. Call for booking."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#333;">Transport</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1596525996025-a134a6259468?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Sonu E-Rickshaw</h3>
-                        <p class="card-desc">Call for City Ride.</p>
-                    </div>
-                </div>
 
-                <div id="card-10" class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="Iron Fitness Gym"
-                    data-desc="Cardio, Weight Training, Personal Trainer. Ladies Batch Available."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="https://instagram.com" data-fb=""
-                    data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Iron Fitness Gym</h3>
-                        <p class="card-desc">Unisex Gym & Cardio.</p>
-                    </div>
-                </div>
 
-                <div id="card-11" class="card" onclick="openDetail(this)" data-main="Property" data-sub="RentHouse"
-                    data-pin="" data-title="2 BHK House for Rent"
-                    data-desc="Semi-furnished house near Bus Stand. 2 Rooms, Kitchen, Bathroom. Rent 6000."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper">
-                        <span class="card-badge" style="background:#10b981;">To Let</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">2 BHK House</h3>
-                        <p class="card-desc">Rent: ₹6000/month.</p>
-                    </div>
-                </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1666,215 +1505,34 @@
 
 
                 <!-- JOBS & CAREERS -->
-                <div class="card" onclick="openDetail(this)" data-main="Market" data-sub="Jobs" data-pin=""
-                    data-title="Factory Worker"
-                    data-desc="Pottery factory worker position. Experience preferred. Salary ₹12,000 - ₹15,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#333;">Factory</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Factory Worker</h3>
-                        <p class="card-desc">Pottery factory worker. ₹12,000 - ₹15,000/month.</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Market" data-sub="Jobs" data-pin=""
-                    data-title="Accountant"
-                    data-desc="ABC Trading Company looking for accountant. Experience required. Salary ₹18,000 - ₹25,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Office</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Accountant</h3>
-                        <p class="card-desc">ABC Trading Company. ₹18,000 - ₹25,000/month.</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="Delivery Boy"
-                    data-desc="Local Kirana Store hiring delivery boy. Own vehicle required. Salary ₹8,000 - ₹10,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#f59e0b;">Delivery</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1596525912800-158092104704?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Delivery Boy</h3>
-                        <p class="card-desc">Local Kirana Store. ₹8,000 - ₹10,000/month.</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="General Helper"
-                    data-desc="Hardware Store looking for general helper. Flexible hours. Salary ₹9,000 - ₹12,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#333;">Helper</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">General Helper</h3>
-                        <p class="card-desc">Hardware Store. ₹9,000 - ₹12,000/month.</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="Marketing Executive"
-                    data-desc="Local Business Group hiring marketing executive. Experience preferred. Salary ₹15,000 - ₹20,000/month."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Marketing</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Marketing Executive</h3>
-                        <p class="card-desc">Local Business Group. ₹15,000 - ₹20,000/month.</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Services" data-sub="Jobs" data-pin=""
-                    data-title="Freelance Designer"
-                    data-desc="Creative Solutions looking for freelance designer. Project basis. ₹500 - ₹1000 per project."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#db2777;">Freelance</span>
-                        <div class="card-slider"><img
-                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600" class="card-img">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Freelance Designer</h3>
-                        <p class="card-desc">Creative Solutions. ₹500 - ₹1000 per project.</p>
-                    </div>
-                </div>
+
+
+
+
+
+
 
                 <!-- HEALTH & FITNESS -->
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Hospitals" data-pin=""
-                    data-title="Khurja District Hospital"
-                    data-desc="Government hospital providing general and specialized medical care."
-                    data-phone="9876543210" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Hospital</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Khurja District Hospital</h3>
-                        <p class="card-desc">Government hospital providing general and specialized medical care.</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Clinics" data-pin=""
-                    data-title="MediCare Clinic"
-                    data-desc="Multi-specialty clinic with experienced doctors and diagnostic services."
-                    data-phone="9876543210" data-whatsapp="9876543210" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Clinic</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">MediCare Clinic</h3>
-                        <p class="card-desc">Multi-specialty clinic with experienced doctors and diagnostic services.
-                        </p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="Fitness 52"
-                    data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga. Trainer Available."
-                    data-phone="08971400663" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Fitness 52</h3>
-                        <p class="card-desc">Fit raho, strong bano daily! • Yamunapuram</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="ICONIQ Gym"
-                    data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga. Modern gym."
-                    data-phone="09008403170" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">ICONIQ Gym</h3>
-                        <p class="card-desc">Modern gym, top results! • DM Colony</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="The Royal Gym" data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga."
-                    data-phone="" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">The Royal Gym</h3>
-                        <p class="card-desc">Royal fitness, royal body! • Balmiki Chowk</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Gym" data-pin=""
-                    data-title="Fit X Gym" data-desc="Weight Training, Cardio, Personal Training, Zumba / Yoga."
-                    data-phone="" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Gym</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Fit X Gym</h3>
-                        <p class="card-desc">Fit body, X-tra power! • GT Road</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Pharmacy" data-pin=""
-                    data-title="Sunrise Pharmacy"
-                    data-desc="Pharmacy providing prescription medicines and general medical items."
-                    data-phone="09897139397" data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Pharmacy</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Sunrise Pharmacy</h3>
-                        <p class="card-desc">Medical Store • GT Road, Khurja</p>
-                    </div>
-                </div>
 
-                <div class="card" onclick="openDetail(this)" data-main="Health" data-sub="Pharmacy" data-pin=""
-                    data-title="New Singhal Medical Store"
-                    data-desc="Medical store with medicines and healthcare products." data-phone="09045190250"
-                    data-whatsapp="" data-insta="" data-fb="" data-website="">
-                    <div class="slider-wrapper"><span class="card-badge" style="background:#10b981;">Pharmacy</span>
-                        <div class="card-slider"><img
-                                src="https://i.pinimg.com/736x/2b/92/e3/2b92e3453f4e10412e7af0ba6d649adc.jpg"
-                                class="card-img"></div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">New Singhal Medical Store</h3>
-                        <p class="card-desc">Medical Store • Jewar Adda Chauraha</p>
-                    </div>
-                </div>
+
+
+
+
+
+
+
+
 
             </div>
 
@@ -1921,24 +1579,9 @@
     </div>
 
     <script>
-        // DATA CATEGORIES
+        // DATA CATEGORIES (Restricted to Food Only)
         const subCategories = {
-            'More': ['All Categories', 'Market', 'Food', 'Services', 'Health', 'Education', 'Property', 'Special', 'Travel', 'Khurja Special', 'Content Creators', 'Gaming', 'Events', 'Emergency', 'Religion'],
-            'Trending': ['This Week', 'All Time'],
-            'Market': ['Kirana', 'MobileShop', 'Clothes', 'Jewellery', 'Medical store', 'Gift store'],
-            'Food': ['Restaurant', 'Bakery', 'Fast Food'],
-            'Services': ['Makeup', 'Barber/Hair salon', 'Electrician', 'Plumber', 'ACRepair'],
-            'Health': ['Hospitals', 'Clinics', 'Gym', 'Pharmacy', 'Government Hospital', 'Private Hospital'],
-            'Education': ['Schools', 'Colleges', 'Coaching', 'Play School', 'Library', 'Computer Institute'],
-            'Property': ['RentHouse', 'BuySell', 'Plots', 'Rent House', 'Buy/Sell'],
-            'Special': ['Pottery', 'Handicrafts', 'Ceramic Factories', 'Ceramic Wholesale'],
-            'Travel': ['Hotels', 'Restaurants', 'E-Rickshaw'],
-            'Khurja Special': ['Pottery', 'Ceramic Factories', 'Ceramic Wholesale'],
-            'Content Creators': ['YouTubers', 'Instagram Influencers'],
-            'Gaming': ['BGMI', 'FREE FIRE'],
-            'Events': ['Local News', 'Festivals', 'New Openings'],
-            'Emergency & Help': ['Police', 'Fire Station', 'Blood Donors'],
-            'Religion & Places': ['Hindu Temple', 'Islamic Mosque', 'Christian Church', 'Other']
+            'Food': ['Restaurant', 'Bakery', 'Fast Food']
         };
 
         // PAGINATION CONFIG
@@ -1998,43 +1641,31 @@
         // Initialize on load to handle static content
         document.addEventListener('DOMContentLoaded', () => {
             // Delay slightly to ensure elements are parsed
-            setTimeout(renderPagination, 50);
+            setTimeout(() => {
+                setCategory('Food');
+            }, 50);
         });
 
         // CATEGORY FILTER
         function setCategory(mainCat) {
+            // Always enforce Food category
+            const targetCat = 'Food';
+
             // Show loading indicator
             document.getElementById('loadingIndicator').style.display = 'flex';
 
-            // Clear previous active state
-            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-            // Try to set active button robustly (don't rely on global `event` which may be undefined)
-            const btns = Array.from(document.querySelectorAll('.cat-btn'));
-            const matchedBtn = btns.find(b => b.textContent.trim().toLowerCase().includes(mainCat.toLowerCase()));
-            if (matchedBtn) matchedBtn.classList.add('active');
             const subContainer = document.getElementById('subCatContainer');
             subContainer.innerHTML = '';
 
-            if (mainCat === 'All') {
-                subContainer.innerHTML = '<small>Showing All Listings</small>';
-                filterGrid('All', 'All');
-            } else if (mainCat === 'More') {
-                subContainer.innerHTML = '<button class="sub-btn active" onclick="setCategory(\'All\')">All Categories</button>';
-                subCategories['More'].forEach(sub => {
-                    if (sub !== 'All Categories') {
-                        subContainer.innerHTML += `<button class="sub-btn" onclick="setCategory('${sub}')">${sub}</button>`;
-                    }
+            // Render sub-categories for Food
+            if (subCategories[targetCat]) {
+                subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${targetCat}', 'All')">All</button>`;
+                subCategories[targetCat].forEach(sub => {
+                    subContainer.innerHTML += `<button class="sub-btn" onclick="filterGrid('${targetCat}', '${sub}')">${sub}</button>`;
                 });
-                filterGrid('More', 'All');
-            } else {
-                if (subCategories[mainCat]) {
-                    subContainer.innerHTML += `<button class="sub-btn active" onclick="filterGrid('${mainCat}', 'All')">All</button>`;
-                    subCategories[mainCat].forEach(sub => {
-                        subContainer.innerHTML += `<button class="sub-btn" onclick="filterGrid('${mainCat}', '${sub}')">${sub}</button>`;
-                    });
-                }
-                filterGrid(mainCat, 'All');
             }
+
+            filterGrid(targetCat, 'All');
         }
 
         // GRID FILTER
@@ -2636,11 +2267,9 @@
 
             document.addEventListener('DOMContentLoaded', async function () {
                 // List of ALL external files
+                // List of ALL external files (Restricted to Food Only)
                 const allContentFiles = [
-                    'trending.html', 'gaming.html', 'content-creators.html', 'market.html',
-                    'food.html', 'services.html', 'health.html', 'education.html',
-                    'property.html', 'travel.html', 'khurja-special.html',
-                    'events.html', 'emergency.html', 'religion.html', 'businesses.html', 'jobs.html'
+                    'food.html'
                 ];
 
                 if (window.loadExternalCards) {
