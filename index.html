@@ -108,7 +108,9 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            padding-bottom: 20px;
+            padding-bottom: 80px;
+            /* Space for bottom nav */
+            -webkit-overflow-scrolling: touch;
         }
 
         /* HEADER */
@@ -832,6 +834,88 @@
                 padding: 6px 10px;
                 font-size: 1rem;
             }
+
+            /* BOTTOM NAV BAR */
+            .bottom-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px 0;
+                z-index: 1000;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                color: #64748b;
+                text-decoration: none;
+                font-size: 0.7rem;
+                font-weight: 700;
+                flex: 1;
+                transition: color 0.3s;
+            }
+
+            .nav-item i {
+                font-size: 1.2rem;
+            }
+
+            .nav-item.active {
+                color: var(--primary);
+            }
+
+            .nav-item.spin-nav-item {
+                position: relative;
+                top: -20px;
+                background: var(--primary);
+                color: white;
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                justify-content: center;
+                box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+                border: 4px solid var(--white);
+                flex: none;
+            }
+
+            .nav-item.spin-nav-item i {
+                color: white;
+            }
+
+            .nav-item.spin-nav-item span {
+                display: none;
+            }
+
+            /* DETAIL VIEW MOBILE ANIMATION */
+            #detail-view {
+                transform: translateY(100%);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                background: var(--white);
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+
+            #detail-view.show {
+                transform: translateY(0);
+                display: block;
+            }
+
+            .dt-handle {
+                display: block;
+                width: 40px;
+                height: 5px;
+                background: #e2e8f0;
+                border-radius: 10px;
+                margin: 10px auto 0 auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -930,6 +1014,13 @@
 
         .spin-trigger-btn:hover {
             transform: scale(1.1) rotate(15deg);
+        }
+
+        /* Hide on mobile as it's now in bottom nav */
+        @media (max-width: 600px) {
+            .spin-trigger-btn {
+                display: none;
+            }
         }
 
         #spin-win-modal {
@@ -1055,6 +1146,7 @@
             letter-spacing: 3px;
             background: linear-gradient(to bottom, #fff 0%, #fbbf24 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
@@ -1529,6 +1621,7 @@
     </div>
 
     <div id="detail-view">
+        <div class="dt-handle"></div>
         <div class="dt-header">
             <button class="back-btn" onclick="closeDetail()"><i class="fas fa-arrow-left"></i></button>
             <div class="dt-title-head" id="dt-head-title">Title</div>
@@ -1883,8 +1976,14 @@
             }, 100);
 
             // Show
+            const dv = document.getElementById('detail-view');
+            dv.style.display = 'block';
+            setTimeout(() => dv.classList.add('show'), 10);
+
             document.getElementById('home-view').style.display = 'none';
-            document.getElementById('detail-view').style.display = 'block';
+            // Hide bottom nav in detail view for immersive feel
+            document.querySelector('.bottom-nav').style.display = 'none';
+
             window.scrollTo(0, 0);
             // setup gesture handling for multi-directional image swipe
             try { currentImageIndex = 0; setupDetailSliderGestures(); } catch (e) { /* ignore */ }
@@ -1893,8 +1992,18 @@
         }
 
         function closeDetail() {
-            document.getElementById('detail-view').style.display = 'none';
-            document.getElementById('home-view').style.display = 'block';
+            const dv = document.getElementById('detail-view');
+            dv.classList.remove('show');
+
+            setTimeout(() => {
+                dv.style.display = 'none';
+                document.getElementById('home-view').style.display = 'block';
+                document.querySelector('.bottom-nav').style.display = 'flex';
+            }, 400); // Wait for animation
+
+            // Update bottom nav active state
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelector('.nav-item i.fa-home').parentElement.classList.add('active');
         }
 
         // Toggle like in detail view
@@ -2451,6 +2560,7 @@
             font-weight: 900;
             background: linear-gradient(to right, #cf0000, #ff0000);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 1.8rem;
             text-transform: uppercase;
@@ -3027,6 +3137,9 @@
                 setTimeout(() => {
                     res.innerText = resultText;
 
+                    // Mobile Vibrate Feedback
+                    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+
                     // Save result for persistence
                     const cleanResult = resultText.replace("Result: ", "");
                     localStorage.setItem('sw_last_result_v3', cleanResult);
@@ -3044,6 +3157,40 @@
                 }, 8000); // 8 Seconds (User Request)
             };
         })();
+    </script>
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="javascript:void(0)" class="nav-item active"
+            onclick="handleNavClick(this, () => { closeDetail(); window.scrollTo(0,0); })">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item"
+            onclick="handleNavClick(this, () => { closeDetail(); document.getElementById('searchInput').focus(); document.getElementById('searchInput').scrollIntoView({behavior:'smooth'}); })">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item spin-nav-item" onclick="openSpinWin()">
+            <i class="fas fa-dharmachakra"></i>
+            <span>Spin</span>
+        </a>
+        <a href="https://www.instagram.com/xloyalteam?igsh=MWY3OTI0b2xlazV4dA==" target="_blank" class="nav-item"
+            onclick="handleNavClick(this)">
+            <i class="fab fa-instagram"></i>
+            <span>Updates</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item"
+            onclick="handleNavClick(this, () => alert('Liked items coming soon!'))">
+            <i class="fas fa-heart"></i>
+            <span>Liked</span>
+        </a>
+    </nav>
+    <script>
+        function handleNavClick(el, callback) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            if (callback) callback();
+        }
     </script>
 </body>
 
