@@ -1487,6 +1487,179 @@
                 transform: translateY(0);
             }
         }
+
+        /* --- PROFILE VIEW CSS --- */
+        #profile-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 1001;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #profile-view.show {
+            display: block;
+            transform: translateY(0);
+        }
+
+        .profile-content {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-avatar-setup {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 25px;
+        }
+
+        .profile-avatar-setup img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-form {
+            width: 100%;
+            max-width: 350px;
+            margin-top: 20px;
+        }
+
+        .profile-input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .profile-input-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .profile-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .profile-input:focus {
+            border-color: var(--primary);
+        }
+
+        .save-profile-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s;
+        }
+
+        .save-profile-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid currentColor;
+        }
+
+        /* --- DAILY COLLECT CSS --- */
+        .daily-reward-box {
+            margin-top: 30px;
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 350px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .streak-counter {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .streak-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .collect-btn {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);
+        }
+
+        .collect-btn:disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .collect-btn:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(245, 158, 11, 0.3);
+        }
     </style>
 </head>
 
@@ -1610,7 +1783,8 @@
                     <a id="lnk-fb" href="#" class="soc-btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
                     <a id="lnk-web" href="#" class="soc-btn btn-web"><i class="fas fa-globe"></i> Visit Website</a>
                     <button id="lnk-like" class="soc-btn btn-like" onclick="toggleDetailLike(event)"><i
-                            class="fas fa-heart"></i> <span id="like-text">Like</span></button>
+                            class="fas fa-heart"></i> <span id="like-text">Like</span> <small id="like-timer"
+                            style="margin-left:5px; opacity:0.8; display:none;"></small></button>
                 </div>
 
                 <div class="related-box">
@@ -1621,10 +1795,54 @@
         </div>
     </div>
 
+    <!-- PROFILE VIEW -->
+    <div id="profile-view">
+        <div class="dt-handle"></div>
+        <div class="dt-header">
+            <button class="back-btn" onclick="closeProfile()"><i class="fas fa-arrow-left"></i></button>
+            <div class="dt-title-head">Profile Setup</div>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-avatar-setup">
+                <img id="profile-preview" src="https://i.ibb.co/Rkdm6570/Chat-GPT-Image-Dec-25-2025-11-41-40-PM.png"
+                    alt="Profile Picture">
+                <label for="profile-upload" class="photo-upload-btn">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="profile-upload" accept="image/*" style="display: none;"
+                    onchange="previewProfileImage(this)">
+            </div>
+
+            <h2 id="display-name" style="margin-bottom: 5px;">Khurja User</h2>
+            <p id="display-bio" style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px;">Digital Citizen</p>
+
+            <div class="daily-reward-box">
+                <div class="streak-counter" id="streak-days">0</div>
+                <div class="streak-label">DAYS CONTINUOUS STREAK</div>
+                <button id="daily-collect-btn" class="collect-btn" onclick="collectDailyReward()">Collect Today's
+                    Reward</button>
+                <div id="collect-status" style="margin-top: 10px; font-size: 0.8rem; color: #64748b;"></div>
+            </div>
+
+            <div class="profile-form">
+                <div class="profile-input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profile-name-input" class="profile-input" placeholder="Your Name">
+                </div>
+                <div class="profile-input-group">
+                    <label>Bio / Status</label>
+                    <input type="text" id="profile-bio-input" class="profile-input" placeholder="e.g. Food Lover">
+                </div>
+                <button class="save-profile-btn" onclick="saveProfile()">Save Profile</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // DATA CATEGORIES (Restricted to Food Only)
         const subCategories = {
-            'Food': ['Restaurant', 'Bakery', 'Fast Food']
+            'Food': ['Restaurant', 'Bakery', 'Fast Food', 'Instagram']
         };
 
         // PAGINATION CONFIG
@@ -1957,6 +2175,7 @@
         }
 
         function closeDetail() {
+            if (likeTimerInterval) clearInterval(likeTimerInterval);
             const dv = document.getElementById('detail-view');
             dv.classList.remove('show');
 
@@ -1978,7 +2197,6 @@
             const likeText = document.getElementById('like-text');
             const detailView = document.getElementById('detail-view');
 
-            // Use a unique key: combination of main category + title
             const mainAttr = detailView.querySelector('[data-main]')?.getAttribute('data-main') || 'Unknown';
             const currentTitle = document.getElementById('dt-title').innerText;
             const uniqueKey = `${mainAttr}::${currentTitle}`;
@@ -1986,15 +2204,14 @@
             let likes = JSON.parse(localStorage.getItem('likes') || '{}');
 
             if (likes[uniqueKey]) {
-                delete likes[uniqueKey];
-                likeBtn.style.opacity = '0.8';
-                likeText.textContent = 'Like';
+                // If already liked, don't allow disliking (user request)
+                return;
             } else {
-                likes[uniqueKey] = true;
+                likes[uniqueKey] = Date.now(); // Store timestamp
                 likeBtn.style.opacity = '1';
                 likeText.textContent = 'Liked ✓';
-                // Play heart animation
                 createFloatingHeart(event);
+                startLikeTimer(); // Start the countdown
             }
 
             localStorage.setItem('likes', JSON.stringify(likes));
@@ -2031,14 +2248,62 @@
             let likes = JSON.parse(localStorage.getItem('likes') || '{}');
             const likeBtn = document.getElementById('lnk-like');
             const likeText = document.getElementById('like-text');
+            const likeTimer = document.getElementById('like-timer');
+
+            // Clean up old likes (past midnight)
+            const now = new Date();
+            const midnight = new Date(now).setHours(24, 0, 0, 0);
+
+            let changed = false;
+            for (let key in likes) {
+                const likedTime = new Date(likes[key]);
+                const likedDay = likedTime.setHours(0, 0, 0, 0);
+                const today = new Date().setHours(0, 0, 0, 0);
+                if (likedDay < today) {
+                    delete likes[key];
+                    changed = true;
+                }
+            }
+            if (changed) localStorage.setItem('likes', JSON.stringify(likes));
 
             if (likes[uniqueKey]) {
                 likeBtn.style.opacity = '1';
                 likeText.textContent = 'Liked ✓';
+                startLikeTimer();
             } else {
                 likeBtn.style.opacity = '0.8';
                 likeText.textContent = 'Like';
+                likeTimer.style.display = 'none';
             }
+        }
+
+        let likeTimerInterval = null;
+        function startLikeTimer() {
+            if (likeTimerInterval) clearInterval(likeTimerInterval);
+
+            const timerEl = document.getElementById('like-timer');
+            timerEl.style.display = 'inline-block';
+
+            function update() {
+                const now = new Date();
+                const midnight = new Date(now).setHours(24, 0, 0, 0);
+                const diff = midnight - now.getTime();
+
+                if (diff <= 0) {
+                    clearInterval(likeTimerInterval);
+                    updateDetailLikeButton(); // This will clear the like
+                    return;
+                }
+
+                const h = Math.floor(diff / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                timerEl.innerText = `${h}h ${m}m ${s}s`;
+            }
+
+            update();
+            likeTimerInterval = setInterval(update, 1000);
         }
 
         // Handle swipe gestures in detail view slider (all 4 directions)
@@ -3149,12 +3414,166 @@
             <i class="fab fa-whatsapp"></i>
             <span>Channel</span>
         </a>
+        <a href="javascript:void(0)" class="nav-item" onclick="handleNavClick(this, () => openProfile())">
+            <img id="nav-profile-img" class="nav-avatar"
+                src="https://i.ibb.co/Rkdm6570/Chat-GPT-Image-Dec-25-2025-11-41-40-PM.png" alt="Profile">
+            <span>Profile</span>
+        </a>
     </nav>
     <script>
         function handleNavClick(el, callback) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             el.classList.add('active');
             if (callback) callback();
+        }
+
+        // --- PROFILE LOGIC ---
+        function openProfile() {
+            const pv = document.getElementById('profile-view');
+            pv.style.display = 'block';
+            setTimeout(() => pv.classList.add('show'), 10);
+
+            document.getElementById('home-view').style.display = 'none';
+            document.querySelector('.bottom-nav').style.display = 'none';
+        }
+
+        function closeProfile() {
+            const pv = document.getElementById('profile-view');
+            pv.classList.remove('show');
+
+            setTimeout(() => {
+                pv.style.display = 'none';
+                document.getElementById('home-view').style.display = 'block';
+                document.querySelector('.bottom-nav').style.display = 'flex';
+            }, 400);
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelector('.nav-item i.fa-home').parentElement.classList.add('active');
+        }
+
+        function previewProfileImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profile-preview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('profile-name-input').value.trim();
+            const bio = document.getElementById('profile-bio-input').value.trim();
+            const img = document.getElementById('profile-preview').src;
+
+            if (!name) {
+                alert('Please enter your name');
+                return;
+            }
+
+            localStorage.setItem('userProfile', JSON.stringify({ name, bio, img }));
+
+            // Update UI
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('display-bio').innerText = bio || 'Digital Citizen';
+            document.getElementById('nav-profile-img').src = img;
+
+            // Lock the profile
+            lockProfileFields();
+
+            alert('Profile Saved & Locked!');
+            closeProfile();
+        }
+
+        function lockProfileFields() {
+            document.querySelector('.profile-form').style.display = 'none';
+            document.getElementById('profile-upload').disabled = true;
+            document.querySelector('.photo-upload-btn').style.display = 'none';
+        }
+
+        function loadProfile() {
+            const profileData = localStorage.getItem('userProfile');
+            if (profileData) {
+                const { name, bio, img } = JSON.parse(profileData);
+                if (name) {
+                    document.getElementById('display-name').innerText = name;
+                    document.getElementById('profile-name-input').value = name;
+                }
+                if (bio) {
+                    document.getElementById('display-bio').innerText = bio;
+                    document.getElementById('profile-bio-input').value = bio;
+                }
+                if (img) {
+                    document.getElementById('profile-preview').src = img;
+                    document.getElementById('nav-profile-img').src = img;
+                }
+                // Lock fields if profile exists
+                lockProfileFields();
+            }
+        }
+
+        // Initialize profile on load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfile();
+            updateDailyUI();
+        });
+
+        // --- DAILY COLLECT LOGIC ---
+        function collectDailyReward() {
+            const now = Date.now();
+            const lastCollected = parseInt(localStorage.getItem('dailyLastCollected') || '0');
+            const dayMillis = 24 * 60 * 60 * 1000;
+
+            let streak = parseInt(localStorage.getItem('dailyStreak') || '0');
+
+            if (now - lastCollected < dayMillis) {
+                alert('Already collected! Come back tomorrow.');
+                return;
+            }
+
+            // Streak check (collected within 48 hours to continue streak)
+            if (now - lastCollected < dayMillis * 2) {
+                streak++;
+            } else {
+                streak = 1;
+            }
+
+            localStorage.setItem('dailyLastCollected', now.toString());
+            localStorage.setItem('dailyStreak', streak.toString());
+
+            // Haptic Feedback
+            if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+
+            updateDailyUI();
+            alert('Claimed! Your streak is now ' + streak + ' days!');
+        }
+
+        function updateDailyUI() {
+            const streak = localStorage.getItem('dailyStreak') || '0';
+            const lastCollected = parseInt(localStorage.getItem('dailyLastCollected') || '0');
+            const now = Date.now();
+            const btn = document.getElementById('daily-collect-btn');
+            const status = document.getElementById('collect-status');
+            const streakDisplay = document.getElementById('streak-days');
+
+            streakDisplay.innerText = streak;
+
+            const dayMillis = 24 * 60 * 60 * 1000;
+            const diff = now - lastCollected;
+
+            if (diff < dayMillis) {
+                btn.disabled = true;
+                btn.innerText = 'Collected Today';
+
+                const remaining = dayMillis - diff;
+                const hours = Math.floor(remaining / (1000 * 60 * 60));
+                const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                status.innerText = `Next collection in ${hours}h ${mins}m`;
+            } else {
+                btn.disabled = false;
+                btn.innerText = "Collect Today's Reward";
+                status.innerText = "Ready to collect!";
+            }
         }
     </script>
 </body>
